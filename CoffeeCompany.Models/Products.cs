@@ -10,9 +10,14 @@
         [MaxLength(100)]
         public string Name { get; set; }
 
-        // In dollars
+        [Required]
         public decimal PricePerKgInDollars { get; set; }
 
+        [Required]
         public CoffeeTypes TypeOfCoffee { get; set; }
+
+        public int OrderId { get; set; }
+
+        public virtual Order Order { get; set; }
     }
 }
