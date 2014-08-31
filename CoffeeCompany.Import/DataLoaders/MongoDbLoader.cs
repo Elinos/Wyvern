@@ -1,4 +1,4 @@
-﻿namespace CoffeeCompany.MongoDb.Loader
+﻿namespace CoffeeCompany.Import.DataLoaders
 {
     using System;
     using System.Collections.Generic;
@@ -13,24 +13,24 @@
 
     using Models;
 
-    public class MongoDbLoader : IDbLoader
+    public class MongoDbLoader : IDbLoader<ClientCompany>
     {
-        private const string ConnectionString = "mongodb://wyvern:coffee@kahana.mongohq.com:10019/CoffeeWyvern";
-        private const string DbName = "CoffeeWyvern";
         private const string CompanyCollectionName = "Companies";
 
+        private string dbName;
         private MongoDatabase mongoDb;
 
-        public MongoDbLoader()
+        public MongoDbLoader(string connectionString, string dbName)
         {
-            this.mongoDb = GetDatabase();
+            this.dbName = dbName;
+            this.mongoDb = GetDatabase(connectionString);
         }
 
-        private MongoDatabase GetDatabase()
+        private MongoDatabase GetDatabase(string connectionString)
         {
-            var mongoClient = new MongoClient(ConnectionString);
+            var mongoClient = new MongoClient(connectionString);
             var mongoServer = mongoClient.GetServer();
-            var database = mongoServer.GetDatabase(DbName);
+            var database = mongoServer.GetDatabase(dbName);
 
             return database;
         }

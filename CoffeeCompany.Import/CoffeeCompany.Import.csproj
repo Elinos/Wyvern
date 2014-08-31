@@ -7,8 +7,8 @@
     <ProjectGuid>{8D2D1249-1441-4755-A967-42EFFAA166FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CoffeeCompany.MongoDb.Loader</RootNamespace>
-    <AssemblyName>CoffeeCompany.MongoDb.Loader</AssemblyName>
+    <RootNamespace>CoffeeCompany.Import</RootNamespace>
+    <AssemblyName>CoffeeCompany.Import</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -35,6 +35,12 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MongoDB.Bson">
       <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -42,6 +48,7 @@
       <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Driver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -50,15 +57,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDbLoader.cs" />
-    <Compile Include="MongoDbLoader.cs" />
+    <Compile Include="DataLoaders\ExcelLoader.cs" />
+    <Compile Include="DataLoaders\IDbLoader.cs" />
+    <Compile Include="IDataImport.cs" />
+    <Compile Include="DataImport.cs" />
+    <Compile Include="DataLoaders\MongoDbLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataLoaders\XmlLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoffeeCompany.Data\CoffeeCompany.Data.csproj">
+      <Project>{7bdb818e-05b9-4bbf-b39c-571571950937}</Project>
+      <Name>CoffeeCompany.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoffeeCompany.Models\CoffeeCompany.Models.csproj">
       <Project>{483473d9-f9fa-40db-bf74-52808a9214ae}</Project>
       <Name>CoffeeCompany.Models</Name>

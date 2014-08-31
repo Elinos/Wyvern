@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoffeeCompanyConsoleClient.cs" />
-    <Compile Include="DataImport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,13 +60,13 @@
       <Project>{7bdb818e-05b9-4bbf-b39c-571571950937}</Project>
       <Name>CoffeeCompany.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.Import\CoffeeCompany.Import.csproj">
+      <Project>{8d2d1249-1441-4755-a967-42effaa166fd}</Project>
+      <Name>CoffeeCompany.Import</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoffeeCompany.Models\CoffeeCompany.Models.csproj">
       <Project>{483473d9-f9fa-40db-bf74-52808a9214ae}</Project>
       <Name>CoffeeCompany.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CoffeeCompany.MongoDb.Loader\CoffeeCompany.MongoDb.Loader.csproj">
-      <Project>{8d2d1249-1441-4755-a967-42effaa166fd}</Project>
-      <Name>CoffeeCompany.MongoDb.Loader</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,13 +5,15 @@
 
     using CoffeeCompany.Data;
     using CoffeeCompany.Models;
-    using CoffeeCompany.MongoDb.Loader;
+    using CoffeeCompany.Import;
 
-    class CoffeeCompanyConsoleClient
+    public class CoffeeCompanyConsoleClient
     {
         static void Main(string[] args)
         {
-            DataImport.ImportFromMongoDb();
+            var dataImport = new DataImport();
+
+            dataImport.ImportFromMongoDb();
         }
     }
 }
