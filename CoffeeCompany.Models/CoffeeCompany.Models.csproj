@@ -47,7 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientCompanies.cs" />
+    <Compile Include="CoffeeTypes.cs" />
+    <Compile Include="Orders.cs" />
     <Compile Include="OrderStatus.cs" />
+    <Compile Include="Products.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
