@@ -28,6 +28,7 @@
         public string Name { get; set; }
         public string CountryOfOrigin { get; set; }
 
+        [BsonIgnore]
         public virtual ICollection<Order> Orders { 
             get
             {

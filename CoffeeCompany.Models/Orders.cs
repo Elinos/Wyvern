@@ -15,12 +15,7 @@
             this.products = new HashSet<Product>();
         }
 
-        [BsonIgnore]
         public int ID { get; set; }
-
-        [BsonId]
-        [NotMapped]
-        public ObjectId MongoId { get; set; }
 
         [Required]
         public int QuantityInKg { get; set; }

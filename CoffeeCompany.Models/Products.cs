@@ -26,8 +26,10 @@
         [Required]
         public CoffeeTypes TypeOfCoffee { get; set; }
 
+        [BsonIgnore]
         public int OrderId { get; set; }
 
+        [BsonIgnore]
         public virtual Order Order { get; set; }
     }
 }

@@ -5,6 +5,8 @@
 
     using CoffeeCompany.Data;
     using CoffeeCompany.Models;
+    using CoffeeCompany.MongoDb.Loader;
+
     class CoffeeCompanyConsoleClient
     {
         static void Main(string[] args)
@@ -21,6 +23,9 @@
 
             var savedCompany= context.Companies.First();
             Console.WriteLine("ID {0}: {1}", savedCompany.ID, savedCompany.Name);
+
+            var mongoDbLoader = new MongoDbLoader();
+            mongoDbLoader.MongoDbSeed();
         }
     }
 }

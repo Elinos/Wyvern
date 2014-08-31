@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IMongoDbLoader.cs" />
+    <Compile Include="IDbLoader.cs" />
     <Compile Include="MongoDbLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

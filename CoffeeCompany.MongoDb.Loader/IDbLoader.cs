@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using Models;
 
-    interface IMongoDbLoader
+    interface IDbLoader
     {
         ICollection<ClientCompany> ImportCompanies();
     }
