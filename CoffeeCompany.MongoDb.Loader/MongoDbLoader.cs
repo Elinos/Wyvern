@@ -42,7 +42,20 @@
 
             var companies = companyCollection.FindAll().ToList();
 
-            return companies;
+            var sanitizedCompanies = new List<ClientCompany>();
+
+            foreach (var company in companies)
+            {
+                var newCompany = new ClientCompany
+                {
+                    Name = company.Name,
+                    CountryOfOrigin = company.CountryOfOrigin,
+                };
+
+                sanitizedCompanies.Add(newCompany);
+            }
+
+            return sanitizedCompanies;
         }
 
         public ICollection<Product> retrieveProducts()
@@ -51,7 +64,21 @@
 
             var products = productCollection.FindAll().ToList();
 
-            return products;
+            var sanitizedProducts = new List<Product>();
+
+            foreach (var product in products)
+            {
+                var newProduct = new Product
+                {
+                    Name = product.Name,
+                    PricePerKgInDollars = product.PricePerKgInDollars,
+                    TypeOfCoffee = product.TypeOfCoffee
+                };
+
+                sanitizedProducts.Add(newProduct);
+            }
+
+            return sanitizedProducts;
         }
 
         public void MongoDbSeed()

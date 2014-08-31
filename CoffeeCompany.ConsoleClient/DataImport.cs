@@ -14,6 +14,11 @@
             var context = new CoffeeCompanyDbContext();
             var mongoDbLoader = new MongoDbLoader();
 
+            if (mongoDbLoader.retrieveCompanies().Count == 0 || mongoDbLoader.retrieveProducts().Count == 0)
+            {
+                mongoDbLoader.MongoDbSeed();
+            }
+
             var companies = mongoDbLoader.retrieveCompanies();
             var products = mongoDbLoader.retrieveProducts();
 
