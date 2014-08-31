@@ -1,9 +1,19 @@
 ﻿namespace CoffeeCompany.Models
 {
     using System.ComponentModel.DataAnnotations;
+
+    using MongoDB.Bson.Serialization.Attributes;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using MongoDB.Bson;
+
     public class Product
     {
+        [BsonIgnore]
         public int ID { get; set; }
+
+        [BsonId]
+        [NotMapped]
+        public ObjectId MongoId { get; set; }
 
         [Required]
         [MinLength(2)]
@@ -16,8 +26,10 @@
         [Required]
         public CoffeeTypes TypeOfCoffee { get; set; }
 
+        [BsonIgnore]
         public int OrderId { get; set; }
 
+        [BsonIgnore]
         public virtual Order Order { get; set; }
     }
 }
