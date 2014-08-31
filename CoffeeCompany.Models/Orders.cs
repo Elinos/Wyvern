@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Order
     {
@@ -12,13 +13,17 @@
             this.products = new HashSet<Product>();
         }
         public int ID { get; set; }
+
+        [Required]
         public int QuantityInKg { get; set; }
 
-        // In dollars
+        [NotMapped]
         public decimal OrderTotalPrice { get; set; }
 
+        [Required]
         public OrderStatus Status { get; set; }
 
+        [Required]
         public virtual ICollection<Product> Products
         {
             get
@@ -30,5 +35,9 @@
                 this.products = value;
             }
         }
+
+        public int ClientCompanyId { get; set; }
+
+        public virtual ClientCompany ClientCompany { get; set; }
     }
 }
