@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityDiagrams>
+  <entityDiagramsDiagram dslVersion="2.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MySQLEntitiesModel" isDefault="true">
+    <DomainModelMoniker name="/MySQLEntitiesModel" />
+    <nestedChildShapes>
+      <classShape Id="6f800c33-6839-4cb0-8223-eaaaa9b8ce82" absoluteBounds="0.5, 1.5, 1.5, 2.3396761067708334">
+        <DomainClassMoniker name="/MySQLEntitiesModel/Reports" />
+        <nestedChildShapes>
+          <elementListCompartment Id="12a7e404-970b-4460-9ccb-4dca0ec4d8f1" absoluteBounds="0.515, 2.01, 1.4700000000000002, 1.2108968098958333" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="36f32080-4aed-4be4-9291-bf1e3aacee63" absoluteBounds="0.515, 3.2308968098958335, 1.4700000000000002, 0.2493896484375" name="ImplementationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          <elementListCompartment Id="525838ce-add5-4bc1-bbf4-011513502a85" absoluteBounds="0.515, 3.4902864583333333, 1.4700000000000002, 0.2493896484375" name="NavigationCompartment" titleTextColor="Black" itemTextColor="Black" />
+        </nestedChildShapes>
+      </classShape>
+    </nestedChildShapes>
+  </entityDiagramsDiagram>
+</EntityDiagrams>

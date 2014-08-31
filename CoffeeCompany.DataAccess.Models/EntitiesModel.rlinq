@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="MySQLEntitiesModel" namespace="CoffeeCompany.DataAccess.Models" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="MySQLEntitiesModel" backend="mysql" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="CoffeeCompany.DataAccess.Models" default="true">
+      <orm:class name="Reports" uniqueId="12f252a4-6446-4b4d-860f-1bdcc454242a">
+        <orm:table name="reports" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="ReportID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_reportID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_reportID" property="ReportID" behavior="readwrite" uniqueId="b20e5ba1-aa45-4fa3-8a08-ce3e61d5efb2" type="System.Int32">
+          <orm:column name="ReportID" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_productName" property="ProductName" behavior="readwrite" uniqueId="3db9ac5a-8765-489b-aceb-d193fec8b24c" type="System.String">
+          <orm:column name="ProductName" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        </orm:field>
+        <orm:field name="_price" property="Price" behavior="readwrite" uniqueId="8e87fb40-8e7b-488c-a19a-42f3070d7316" type="System.Int32">
+          <orm:column name="Price" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_numberOfOrders" property="NumberOfOrders" behavior="readwrite" uniqueId="7d6513c2-c795-4512-9453-072a55d231d5" type="System.Int32">
+          <orm:column name="NumberOfOrders" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_totalRevenue" property="TotalRevenue" behavior="readwrite" uniqueId="5c5403fc-bf26-4792-964b-42889c0b6a94" type="System.Int32">
+          <orm:column name="TotalRevenue" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="Reports">
+        <orm:column name="ReportID" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" ado-type="" />
+        <orm:column name="ProductName" sql-type="nvarchar" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="Price" sql-type="integer" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="TotalRevenue" sql-type="integer" nullable="false" length="0" scale="0" ado-type="" />
+        <orm:column name="NumberOfOrders" sql-type="integer" nullable="false" length="0" scale="0" ado-type="" />
+      </orm:table>
+      <orm:table name="reports">
+        <orm:column name="ReportID" sql-type="integer" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="ProductName" sql-type="varchar" nullable="false" length="50" scale="0" ado-type="StringVariableLength" />
+        <orm:column name="Price" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="NumberOfOrders" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="TotalRevenue" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:source-strategy>Property</orm:source-strategy>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <AppConfigConnectionPropertyName>MySQLConnection</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>server=localhost;database=coffeecompanyreports;uid=root</AppConfigConnectionString>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <PluralizationMode>Singularize</PluralizationMode>
+      </ClassRules>
+      <FieldRules>
+        <AddPrefix>_</AddPrefix>
+        <CaseMode>CamelCase</CaseMode>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>PascalCase</CaseMode>
+      </PropertyRules>
+      <NavigationPropertyRules />
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <OutputProjectName>CoffeeCompany.DataAccess.Models</OutputProjectName>
+      <MappingDefinitionType>Xml</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings>
+      <ExecuteScript>true</ExecuteScript>
+      <DeploymentProject>CoffeeCompany.DataAccess.Models</DeploymentProject>
+    </SchemaUpdateSettings>
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>MySql</Backend>
+        <ProviderName>MySql.Data.MySqlClient</ProviderName>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="12f252a4-6446-4b4d-860f-1bdcc454242a" name="Reports" namespace="CoffeeCompany.DataAccess.Models" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ReportID">
+      <Property Id="b20e5ba1-aa45-4fa3-8a08-ce3e61d5efb2" name="ReportID" type="Int32" label="ReportID : Int32" kind="Persistent" identity="true" fieldName="_reportID" />
+      <Property Id="7d6513c2-c795-4512-9453-072a55d231d5" name="NumberOfOrders" type="Int32" label="NumberOfOrders : Int32" kind="Persistent" fieldName="_numberOfOrders" />
+      <Property Id="8e87fb40-8e7b-488c-a19a-42f3070d7316" name="Price" type="Int32" label="Price : Int32" kind="Persistent" fieldName="_price" />
+      <Property Id="3db9ac5a-8765-489b-aceb-d193fec8b24c" name="ProductName" label="ProductName : String" kind="Persistent" fieldName="_productName" />
+      <Property Id="5c5403fc-bf26-4792-964b-42889c0b6a94" name="TotalRevenue" type="Int32" label="TotalRevenue : Int32" kind="Persistent" fieldName="_totalRevenue" />
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="16be5d99-0306-4ef0-8b33-74f20a066b37">
+      <domainContainer name="MySQLEntitiesModel" namespace="CoffeeCompany.DataAccess.Models" showPropertiesCompartment="true">
+        <entitySetProperty name="Reports" namespace="CoffeeCompany.DataAccess.Models" type="Reports" label="Reports : IQueryable&lt;CoffeeCompany.DataAccess.Models.Reports&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>
