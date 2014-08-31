@@ -10,9 +10,12 @@
     public class ClientCompany
     {
         private ICollection<Order> orders;
+        private ICollection<Product> products;
+
         public ClientCompany()
         {
             this.orders = new HashSet<Order>();
+            this.products = new HashSet<Product>();
         }
 
         [BsonIgnore]
@@ -37,6 +40,18 @@
             set
             {
                 this.orders = value;
+            }
+        }
+
+        public virtual ICollection<Product> Products
+        {
+            get
+            {
+                return this.products;
+            }
+            set
+            {
+                this.products = value;
             }
         }
     }

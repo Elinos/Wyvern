@@ -38,9 +38,5 @@
                 this.products = value;
             }
         }
-
-        public int ClientCompanyId { get; set; }
-
-        public virtual ClientCompany ClientCompany { get; set; }
     }
 }

@@ -6,6 +6,5 @@
     interface IDbLoader
     {
         ICollection<ClientCompany> retrieveCompanies();
-        ICollection<Product> retrieveProducts();
     }
 }
