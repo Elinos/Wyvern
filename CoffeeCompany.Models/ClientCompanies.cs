@@ -2,6 +2,10 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
+    using MongoDB.Bson.Serialization.Attributes;
+    using MongoDB.Bson;
 
     public class ClientCompany
     {
@@ -10,7 +14,13 @@
         {
             this.orders = new HashSet<Order>();
         }
+
+        [BsonIgnore]
         public int ID { get; set; }
+
+        [BsonId]
+        [NotMapped]
+        public ObjectId MongoId { get; set; }
 
         [Required]
         [MinLength(2)]

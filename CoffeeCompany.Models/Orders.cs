@@ -1,5 +1,7 @@
 ﻿namespace CoffeeCompany.Models
 {
+    using MongoDB.Bson;
+    using MongoDB.Bson.Serialization.Attributes;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -12,7 +14,13 @@
         {
             this.products = new HashSet<Product>();
         }
+
+        [BsonIgnore]
         public int ID { get; set; }
+
+        [BsonId]
+        [NotMapped]
+        public ObjectId MongoId { get; set; }
 
         [Required]
         public int QuantityInKg { get; set; }
