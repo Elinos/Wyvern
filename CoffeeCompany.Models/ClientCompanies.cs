@@ -15,8 +15,9 @@
         [Required]
         [MinLength(2)]
         [MaxLength(100)]
+
         public string Name { get; set; }
-        public string CountryOfOrigin { get; set; }
+        public int CountryOfOrigin { get; set; }
 
         public virtual ICollection<Order> Orders { 
             get
