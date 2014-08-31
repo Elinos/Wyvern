@@ -15,7 +15,7 @@
 
     public class MongoDbLoader : IDbLoader
     {
-        private const string ConnectionString = "mongodb://localhost/";
+        private const string ConnectionString = "mongodb://wyvern:coffee@kahana.mongohq.com:10019/CoffeeWyvern";
         private const string DbName = "CoffeeWyvern";
         private const string CompanyCollectionName = "Companies";
         private const string ProductCollectionName = "Products";
@@ -36,13 +36,22 @@
             return database;
         }
 
-        public ICollection<ClientCompany> ImportCompanies()
+        public ICollection<ClientCompany> retrieveCompanies()
         {
             var companyCollection = this.mongoDb.GetCollection<ClientCompany>(CompanyCollectionName);
 
             var companies = companyCollection.FindAll().ToList();
 
             return companies;
+        }
+
+        public ICollection<Product> retrieveProducts()
+        {
+            var productCollection = this.mongoDb.GetCollection<Product>(ProductCollectionName);
+
+            var products = productCollection.FindAll().ToList();
+
+            return products;
         }
 
         public void MongoDbSeed()

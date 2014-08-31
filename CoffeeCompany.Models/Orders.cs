@@ -26,7 +26,7 @@
         [Required]
         public OrderStatus Status { get; set; }
 
-        [Required]
+        //[Required]
         public virtual ICollection<Product> Products
         {
             get

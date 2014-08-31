@@ -5,6 +5,7 @@
 
     interface IDbLoader
     {
-        ICollection<ClientCompany> ImportCompanies();
+        ICollection<ClientCompany> retrieveCompanies();
+        ICollection<Product> retrieveProducts();
     }
 }
