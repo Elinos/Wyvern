@@ -35,7 +35,7 @@
             return database;
         }
 
-        public ICollection<ClientCompany> retrieveCompanies()
+        public ICollection<ClientCompany> retrieveData()
         {
             var companyCollection = this.mongoDb.GetCollection<ClientCompany>(CompanyCollectionName);
 
@@ -91,6 +91,30 @@
                 CountryOfOrigin = "Canada"
             };
 
+            var company2 = new ClientCompany
+            {
+                Name = "Coffee Monkey",
+                CountryOfOrigin = "Zamunda"
+            };
+
+            var company3 = new ClientCompany
+            {
+                Name = "Energizer",
+                CountryOfOrigin = "USA"
+            };
+
+            var company4 = new ClientCompany
+            {
+                Name = "Morning Starter",
+                CountryOfOrigin = "Italy"
+            };
+
+            var company5 = new ClientCompany
+            {
+                Name = "StarBuzz",
+                CountryOfOrigin = "USA"
+            };
+
             var product1 = new Product
             {
                 Name = "Blue",
@@ -105,28 +129,11 @@
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
 
-            company1.Products.Add(product1);
-            company1.Products.Add(product2);
-
-            var company2 = new ClientCompany
-            {
-                Name = "Coffee Monkey",
-                CountryOfOrigin = "Zamunda"
-            };
-
             var product3 = new Product
             {
                 Name = "CheepCoffee",
                 PricePerKgInDollars = 12.98m,
                 TypeOfCoffee = CoffeeTypes.Hybrid
-            };
-
-            company2.Products.Add(product3);
-
-            var company3 = new ClientCompany
-            {
-                Name = "Energizer",
-                CountryOfOrigin = "USA"
             };
 
             var product4 = new Product
@@ -136,27 +143,11 @@
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
 
-            company3.Products.Add(product4);
-
-            var company4 = new ClientCompany
-            {
-                Name = "Morning Starter",
-                CountryOfOrigin = "Italy"
-            };
-
             var product5 = new Product
             {
                 Name = "Special",
                 PricePerKgInDollars = 19.30m,
                 TypeOfCoffee = CoffeeTypes.Arabica
-            };
-
-            company4.Products.Add(product5);
-
-            var company5 = new ClientCompany
-            {
-                Name = "StarBuzz",
-                CountryOfOrigin = "USA"
             };
 
             var product6 = new Product
@@ -166,6 +157,11 @@
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
 
+            company1.Products.Add(product1);
+            company1.Products.Add(product2);
+            company2.Products.Add(product3);
+            company3.Products.Add(product4);
+            company4.Products.Add(product5);
             company5.Products.Add(product6);
 
             companyCollection.Insert(company1);

@@ -17,12 +17,12 @@
 
             ICollection<ClientCompany> companies;
 
-            if (mongoDbLoader.retrieveCompanies().Count == 0)
+            if (mongoDbLoader.retrieveData().Count == 0)
             {
                 mongoDbLoader.MongoDbSeed();
             }
 
-            companies = mongoDbLoader.retrieveCompanies();
+            companies = mongoDbLoader.retrieveData();
 
             foreach (var company in companies)
             {
