@@ -64,9 +64,7 @@
       <DependentUpon>EntitiesModel.rlinq</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SQL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Condition="Exists('$(MSBuildExtensionsPath)\OpenAccess.targets')" Project="$(MSBuildExtensionsPath)\OpenAccess.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

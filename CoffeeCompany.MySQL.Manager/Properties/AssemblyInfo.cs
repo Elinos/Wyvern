@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CoffeeCompany.DataAccess.DataManager")]
+[assembly: AssemblyTitle("CoffeeCompany.MySQL.Manager")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CoffeeCompany.DataAccess.DataManager")]
+[assembly: AssemblyProduct("CoffeeCompany.MySQL.Manager")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("cf30297b-4d35-455e-8f5e-7b4ae1211e5f")]
+[assembly: Guid("ef200b75-c67e-4c67-bd6f-2afd982b13ce")]
 
 // Version information for an assembly consists of the following four values:
 //
