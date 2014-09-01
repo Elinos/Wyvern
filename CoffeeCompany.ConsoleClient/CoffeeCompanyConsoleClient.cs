@@ -14,6 +14,7 @@
             var dataImport = new DataImport();
 
             dataImport.ImportFromMongoDb();
+
         }
     }
 }

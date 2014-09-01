@@ -13,9 +13,9 @@
 
     using Models;
 
-    public class MongoDbLoader : IDbLoader<ClientCompany>
+    public class MongoDbLoader : IDbLoader<Order>
     {
-        private const string CompanyCollectionName = "Companies";
+        private const string OrderCollectionName = "Orders";
 
         private string dbName;
         private MongoDatabase mongoDb;
@@ -35,31 +35,32 @@
             return database;
         }
 
-        public ICollection<ClientCompany> retrieveData()
+        public ICollection<Order> retrieveData()
         {
-            var companyCollection = this.mongoDb.GetCollection<ClientCompany>(CompanyCollectionName);
+            var orderCollection = this.mongoDb.GetCollection<Order>(OrderCollectionName);
 
-            var companies = companyCollection.FindAll().ToList();
+            var orders = orderCollection.FindAll().ToList();
 
-            var sanitizedCompanies = new List<ClientCompany>();
+            var sanitizedOrders = new HashSet<Order>();
 
-            foreach (var company in companies)
+            foreach (var company in orders)
             {
-                sanitizedCompanies.Add(Sanitize(company));
+                sanitizedOrders.Add(Sanitize(company));
             }
 
-            return sanitizedCompanies;
+            return sanitizedOrders;
         }
 
-        private ClientCompany Sanitize(ClientCompany company)
+        private Order Sanitize(Order order)
         {
-            var sanitizedCompany = new ClientCompany
+            var sanitizedOrder = new Order
             {
-                Name = company.Name,
-                CountryOfOrigin = company.CountryOfOrigin
+                ClientCompany = order.ClientCompany,
+                QuantityInKg = order.QuantityInKg,
+                Status = order.Status
             };
 
-            var products = company.Products;
+            var products = order.Products;
 
             foreach (var product in products)
             {
@@ -70,105 +71,140 @@
                     TypeOfCoffee = product.TypeOfCoffee
                 };
 
-                sanitizedCompany.Products.Add(sanitizedProduct);
+                sanitizedOrder.Products.Add(sanitizedProduct);
             }
 
-            return sanitizedCompany;
+            return sanitizedOrder;
         }
 
         public void MongoDbSeed()
         {
-            var companyCollection = this.mongoDb.GetCollection<ClientCompany>(CompanyCollectionName);
+            var orderCollection = this.mongoDb.GetCollection<Order>(OrderCollectionName);
 
-            CompaniesSeed(companyCollection);
-        }
-
-        private void CompaniesSeed(MongoCollection companyCollection)
-        {
-            var company1 = new ClientCompany
+            var company1 = new
             {
                 Name = "Coffee King",
                 CountryOfOrigin = "Canada"
             };
 
-            var company2 = new ClientCompany
+            var company2 = new
             {
                 Name = "Coffee Monkey",
                 CountryOfOrigin = "Zamunda"
             };
 
-            var company3 = new ClientCompany
+            var company3 = new
             {
                 Name = "Energizer",
                 CountryOfOrigin = "USA"
             };
 
-            var company4 = new ClientCompany
+            var company4 = new
             {
                 Name = "Morning Starter",
                 CountryOfOrigin = "Italy"
             };
 
-            var company5 = new ClientCompany
+            var company5 = new
             {
                 Name = "StarBuzz",
                 CountryOfOrigin = "USA"
             };
 
-            var product1 = new Product
+            var product1 = new
             {
                 Name = "Blue",
                 PricePerKgInDollars = 17.50m,
                 TypeOfCoffee = CoffeeTypes.Robusta
             };
 
-            var product2 = new Product
+            var product2 = new
             {
                 Name = "Gold",
                 PricePerKgInDollars = 20.12m,
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
 
-            var product3 = new Product
+            var product3 = new
             {
                 Name = "CheepCoffee",
                 PricePerKgInDollars = 12.98m,
                 TypeOfCoffee = CoffeeTypes.Hybrid
             };
 
-            var product4 = new Product
+            var product4 = new
             {
                 Name = "Special",
                 PricePerKgInDollars = 19.30m,
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
 
-            var product5 = new Product
+            var product5 = new
             {
                 Name = "Special",
                 PricePerKgInDollars = 19.30m,
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
 
-            var product6 = new Product
+            var product6 = new
             {
                 Name = "Special II",
                 PricePerKgInDollars = 23.30m,
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
 
-            company1.Products.Add(product1);
-            company1.Products.Add(product2);
-            company2.Products.Add(product3);
-            company3.Products.Add(product4);
-            company4.Products.Add(product5);
-            company5.Products.Add(product6);
+            var order1 = new
+            {
+                ClientCompany = company1,
+                Products = new HashSet<object>(),
+                QuantityInKg = 100,
+                Status = OrderStatus.Pending
+            };
 
-            companyCollection.Insert(company1);
-            companyCollection.Insert(company2);
-            companyCollection.Insert(company3);
-            companyCollection.Insert(company4);
-            companyCollection.Insert(company5);
+            var order2 = new
+            {
+                ClientCompany = company2,
+                Products = new HashSet<object>(),
+                QuantityInKg = 500,
+                Status = OrderStatus.Processed
+            };
+
+            var order3 = new
+            {
+                ClientCompany = company3,
+                Products = new HashSet<object>(),
+                QuantityInKg = 240,
+                Status = OrderStatus.Shipped
+            };
+
+            var order4 = new
+            {
+                ClientCompany = company4,
+                Products = new HashSet<object>(),
+                QuantityInKg = 410,
+                Status = OrderStatus.Returned
+            };
+
+            var order5 = new
+            {
+                ClientCompany = company5,
+                Products = new HashSet<object>(),
+                QuantityInKg = 220,
+                Status = OrderStatus.Returned
+            };
+
+            order1.Products.Add(product1);
+            order1.Products.Add(product2);
+            order2.Products.Add(product3);
+            order3.Products.Add(product4);
+            order4.Products.Add(product5);
+            order5.Products.Add(product6);
+
+            orderCollection.Insert(order1);
+            orderCollection.Insert(order2);
+            orderCollection.Insert(order3);
+            orderCollection.Insert(order4);
+            orderCollection.Insert(order5);
         }
     }
 }

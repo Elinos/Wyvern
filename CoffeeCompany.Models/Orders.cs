@@ -15,7 +15,12 @@
             this.products = new HashSet<Product>();
         }
 
+        [BsonIgnore]
         public int ID { get; set; }
+
+        [BsonId]
+        [NotMapped]
+        public ObjectId MongoId { get; set; }
 
         [Required]
         public int QuantityInKg { get; set; }
@@ -25,6 +30,12 @@
 
         [Required]
         public OrderStatus Status { get; set; }
+
+        [Required]
+        public int ClientCompanyId { get; set; }
+
+        [Required]
+        public virtual ClientCompany ClientCompany { get; set; }
 
         [Required]
         public virtual ICollection<Product> Products

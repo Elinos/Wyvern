@@ -34,10 +34,6 @@
         [Required]
         public CoffeeTypes TypeOfCoffee { get; set; }
 
-        public int ClientCompanyId { get; set; }
-
-        public virtual ClientCompany ClientCompany { get; set; }
-
         [BsonIgnore]
         public virtual ICollection<Order> Orders 
         {

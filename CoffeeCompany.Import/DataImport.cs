@@ -21,18 +21,18 @@
             var context = new CoffeeCompanyDbContext();
             var mongoDbLoader = new MongoDbLoader(MongoDbConnectionString, MongoDbName);
 
-            ICollection<ClientCompany> companies;
+            ICollection<Order> orders;
 
             if (mongoDbLoader.retrieveData().Count == 0)
             {
                 mongoDbLoader.MongoDbSeed();
             }
 
-            companies = mongoDbLoader.retrieveData();
+            orders = mongoDbLoader.retrieveData();
 
-            foreach (var company in companies)
+            foreach (var order in orders)
             {
-                context.Companies.Add(company);
+                context.Orders.Add(order);
             }
 
             context.SaveChanges();
