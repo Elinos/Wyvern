@@ -8,9 +8,9 @@
 
     using CoffeeCompany.Models;
 
-    internal class XmlLoader : IDbLoader<ClientCompany>
+    internal class XmlLoader
     {
-        public ICollection<ClientCompany> retrieveData()
+        public ICollection<Order> retrieveData()
         {
             throw new NotImplementedException();
         }

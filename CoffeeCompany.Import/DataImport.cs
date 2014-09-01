@@ -19,6 +19,9 @@
         private const string DefaultMongoDbConnectionString = "mongodb://localhost/";
         private const string DefaultMongoDbName = "CoffeeWyvern";
 
+        private const string DefaultZipToUnpack = "";
+        private const string DefaultUnpackDirectory = "";
+
         public static void ImportFromMongoDb(
             string connectionString = DefaultMongoDbConnectionString,
             string dbName = DefaultMongoDbName)
@@ -31,6 +34,7 @@
 
                 ICollection<Order> orders;
 
+                //Seed to mongodb database, if there're no data
                 if (mongoDbLoader.retrieveData().Count == 0)
                 {
                     mongoDbLoader.MongoDbSeed();
@@ -51,11 +55,28 @@
             }
         }
 
-        public static void ImportFromExcel()
+        public static void ImportFromExcel(
+            string zipToUnpack = DefaultZipToUnpack,
+            string unpackDirectory = DefaultUnpackDirectory)
         {
             var context = new CoffeeCompanyDbContext();
 
-            var excelLoader = new ExcelLoader();
+            var excelLoader = new ExcelLoader(zipToUnpack, unpackDirectory);
+
+            var companies = excelLoader.retrieveCompaniesData();
+            var products = excelLoader.retrieveProductData();
+
+            foreach (var company in companies)
+            {
+                context.Companies.Add(company);
+            }
+
+            foreach (var product in products)
+            {
+                context.Products.Add(product);
+            }
+
+            context.SaveChanges();
         }
 
         public static void ImportFromXml()
