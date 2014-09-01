@@ -10,8 +10,19 @@
 
     using CoffeeCompany.Models;
 
-    internal class ExcelLoader : IDbLoader<ClientCompany>
+    internal class ExcelLoader
     {
+        private string zipToUnpack;
+        private string unpackDirectory;
+
+        public ExcelLoader(string zipToUnpack, string unpackDirectory)
+        {
+            this.zipToUnpack = zipToUnpack;
+            this.unpackDirectory = unpackDirectory;
+
+            this.ExtractFilesFromZip(zipToUnpack, unpackDirectory);
+        }
+
         private void ExtractFilesFromZip(string zipToUnpack, string unpackDirectory)
         {
             using (ZipFile zipEntries = ZipFile.Read(zipToUnpack))
@@ -23,7 +34,12 @@
             }
         }
 
-        public ICollection<ClientCompany> retrieveData()
+        public ICollection<ClientCompany> retrieveCompaniesData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<Product> retrieveProductData()
         {
             throw new NotImplementedException();
         }
