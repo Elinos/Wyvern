@@ -38,6 +38,13 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\MySql.ConnectorNET.Data.6.8.3.2\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.ConnectorNET.Entity.6.8.3.2\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -67,6 +74,14 @@
     <ProjectReference Include="..\CoffeeCompany.Models\CoffeeCompany.Models.csproj">
       <Project>{483473d9-f9fa-40db-bf74-52808a9214ae}</Project>
       <Name>CoffeeCompany.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.MySQL.Manager\CoffeeCompany.MySQL.Manager.csproj">
+      <Project>{19924908-d38d-4d3d-bff5-735939b995a5}</Project>
+      <Name>CoffeeCompany.MySQL.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.SQLite.Loader\CoffeeCompany.SQLite.Loader.csproj">
+      <Project>{3e7583c6-3b99-4aad-83ff-f860e949b3ba}</Project>
+      <Name>CoffeeCompany.SQLite.Loader</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
