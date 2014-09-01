@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public interface IDbLoader<T>
+    internal interface IDbLoader<T>
     {
         ICollection<T> retrieveData();
     }

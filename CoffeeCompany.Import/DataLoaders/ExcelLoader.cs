@@ -8,7 +8,7 @@
 
     using CoffeeCompany.Models;
 
-    public class ExcelLoader : IDbLoader<ClientCompany>
+    internal class ExcelLoader : IDbLoader<ClientCompany>
     {
         public ICollection<ClientCompany> retrieveData()
         {

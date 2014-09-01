@@ -12,6 +12,8 @@
         static void Main(string[] args)
         {
             DataImport.ImportFromMongoDb();
+
+           
         }
     }
 }

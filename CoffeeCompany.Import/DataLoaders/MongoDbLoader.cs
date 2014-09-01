@@ -13,7 +13,7 @@
 
     using Models;
 
-    public class MongoDbLoader : IDbLoader<Order>
+    internal class MongoDbLoader : IDbLoader<Order>
     {
         private const string OrderCollectionName = "Orders";
 

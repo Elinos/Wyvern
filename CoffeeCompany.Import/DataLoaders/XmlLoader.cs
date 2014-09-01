@@ -8,7 +8,7 @@
 
     using CoffeeCompany.Models;
 
-    class XmlLoader : IDbLoader<ClientCompany>
+    internal class XmlLoader : IDbLoader<ClientCompany>
     {
         public ICollection<ClientCompany> retrieveData()
         {
