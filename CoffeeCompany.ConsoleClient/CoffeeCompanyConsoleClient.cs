@@ -13,11 +13,12 @@
     {
         static void Main(string[] args)
         {
-            DataImport.ImportFromMongoDb();
-            var mySQLManager = new MySQLManager();
-            mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
-            var sqliteLoader = new SQLiteLoader();
-            sqliteLoader.LoadData();
+            DataImport.ImportFromExcel();
+            //DataImport.ImportFromMongoDb();
+            //var mySQLManager = new MySQLManager();
+            //mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
+            //var sqliteLoader = new SQLiteLoader();
+            //sqliteLoader.LoadData();
         }
     }
 }
