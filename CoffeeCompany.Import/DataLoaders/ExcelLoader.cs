@@ -9,19 +9,16 @@
     using Ionic.Zip;
 
     using CoffeeCompany.Models;
-    
 
     internal class ExcelLoader : IDbLoader<ClientCompany>
     {
-        private void ExtractFilesFromZip(string zipPath, string extractPath)
+        private void ExtractFilesFromZip(string zipToUnpack, string unpackDirectory)
         {
-            string zipToUnpack = zipPath;
-            string unpackDirectory = extractPath;
-            using (ZipFile zip1 = ZipFile.Read(zipToUnpack))
+            using (ZipFile zipEntries = ZipFile.Read(zipToUnpack))
             {
-                foreach (ZipEntry e in zip1)
+                foreach (ZipEntry zipEntry in zipEntries)
                 {
-                    e.Extract(unpackDirectory, ExtractExistingFileAction.OverwriteSilently);
+                    zipEntry.Extract(unpackDirectory, ExtractExistingFileAction.OverwriteSilently);
                 }
             }
         }
