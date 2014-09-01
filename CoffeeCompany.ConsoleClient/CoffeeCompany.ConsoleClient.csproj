@@ -77,6 +77,10 @@
       <Project>{7bdb818e-05b9-4bbf-b39c-571571950937}</Project>
       <Name>CoffeeCompany.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.Excel.Manager\CoffeeCompany.Excel.Manager.csproj">
+      <Project>{024c986c-94ff-4458-a7fc-2a1fe5a0a954}</Project>
+      <Name>CoffeeCompany.Excel.Manager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoffeeCompany.Import\CoffeeCompany.Import.csproj">
       <Project>{8d2d1249-1441-4755-a967-42effaa166fd}</Project>
       <Name>CoffeeCompany.Import</Name>

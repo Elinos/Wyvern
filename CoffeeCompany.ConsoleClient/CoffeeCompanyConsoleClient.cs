@@ -8,17 +8,20 @@
     using CoffeeCompany.Import;
     using CoffeeCompany.MySQL.Manager;
     using CoffeeCompany.SQLite.Loader;
+    using CoffeeCompany.Excel.Manager;
 
     public class CoffeeCompanyConsoleClient
     {
         static void Main(string[] args)
         {
-            DataImport.ImportFromExcel();
+            //DataImport.ImportFromExcel();
             //DataImport.ImportFromMongoDb();
             //var mySQLManager = new MySQLManager();
             //mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
             //var sqliteLoader = new SQLiteLoader();
             //sqliteLoader.LoadData();
+            var excelManager = new ExcelManager();
+            excelManager.CreateExcelReport();
         }
     }
 }

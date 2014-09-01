@@ -47,12 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="ExcelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoffeeCompany.MySQL.Manager\CoffeeCompany.MySQL.Manager.csproj">
+      <Project>{19924908-d38d-4d3d-bff5-735939b995a5}</Project>
+      <Name>CoffeeCompany.MySQL.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.MySQL.Models\CoffeeCompany.MySQL.Models.csproj">
+      <Project>{5a2d6ee4-deb0-4ff6-a8c8-34ad48ea4de4}</Project>
+      <Name>CoffeeCompany.MySQL.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

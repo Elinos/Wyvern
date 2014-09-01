@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.MySQL.Manager
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.MySQL.Models", "CoffeeCompany.MySQL.Models\CoffeeCompany.MySQL.Models.csproj", "{5A2D6EE4-DEB0-4FF6-A8C8-34AD48EA4DE4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.Excel.Manager", "CoffeeCompany.Excel.Manager\CoffeeCompany.Excel.Manager.csproj", "{024C986C-94FF-4458-A7FC-2A1FE5A0A954}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{5A2D6EE4-DEB0-4FF6-A8C8-34AD48EA4DE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A2D6EE4-DEB0-4FF6-A8C8-34AD48EA4DE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A2D6EE4-DEB0-4FF6-A8C8-34AD48EA4DE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{024C986C-94FF-4458-A7FC-2A1FE5A0A954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024C986C-94FF-4458-A7FC-2A1FE5A0A954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024C986C-94FF-4458-A7FC-2A1FE5A0A954}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024C986C-94FF-4458-A7FC-2A1FE5A0A954}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

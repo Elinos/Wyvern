@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CoffeeCompany.MySQL.Models;
+using System.Collections.Generic;
 
 namespace CoffeeCompany.MySQL.Manager
 {
@@ -26,6 +27,11 @@ namespace CoffeeCompany.MySQL.Manager
             var reportToDelete = mySQLDb.Reports1.Find(reportID);
             mySQLDb.Reports1.Remove(reportToDelete);
             mySQLDb.SaveChanges();
+        }
+        public List<Report> GetAllReports()
+        {
+            var reports = mySQLDb.Reports1.ToList();
+            return reports;
         }
     }
 }
