@@ -60,6 +60,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoffeeCompany.MySQL.Models\CoffeeCompany.MySQL.Models.csproj">
+      <Project>{5a2d6ee4-deb0-4ff6-a8c8-34ad48ea4de4}</Project>
+      <Name>CoffeeCompany.MySQL.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

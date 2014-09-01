@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.Models", "CoffeeCompany.Models\CoffeeCompany.Models.csproj", "{483473D9-F9FA-40DB-BF74-52808A9214AE}"
 EndProject
@@ -15,11 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.SQLite.Loader
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.SQLite.Models", "CoffeeCompany.SQLite.Models\CoffeeCompany.SQLite.Models.csproj", "{9556A9F7-0970-4E4F-BB7B-D7A21CC5EB78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.Import", "CoffeeCompany.Import\CoffeeCompany.Import.csproj", "{8D2D1249-1441-4755-A967-42EFFAA166FD}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.MySQL.Manager", "CoffeeCompany.MySQL.Manager\CoffeeCompany.MySQL.Manager.csproj", "{19924908-D38D-4D3D-BFF5-735939B995A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.MySQL.Models", "CoffeeCompany.MySQL.Models\CoffeeCompany.MySQL.Models.csproj", "{5A2D6EE4-DEB0-4FF6-A8C8-34AD48EA4DE4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.Import", "CoffeeCompany.Import\CoffeeCompany.Import.csproj", "{8D2D1249-1441-4755-A967-42EFFAA166FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +51,10 @@ Global
 		{9556A9F7-0970-4E4F-BB7B-D7A21CC5EB78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9556A9F7-0970-4E4F-BB7B-D7A21CC5EB78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9556A9F7-0970-4E4F-BB7B-D7A21CC5EB78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D2D1249-1441-4755-A967-42EFFAA166FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D2D1249-1441-4755-A967-42EFFAA166FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D2D1249-1441-4755-A967-42EFFAA166FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D2D1249-1441-4755-A967-42EFFAA166FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19924908-D38D-4D3D-BFF5-735939B995A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19924908-D38D-4D3D-BFF5-735939B995A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19924908-D38D-4D3D-BFF5-735939B995A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,10 +63,6 @@ Global
 		{5A2D6EE4-DEB0-4FF6-A8C8-34AD48EA4DE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A2D6EE4-DEB0-4FF6-A8C8-34AD48EA4DE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A2D6EE4-DEB0-4FF6-A8C8-34AD48EA4DE4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D2D1249-1441-4755-A967-42EFFAA166FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D2D1249-1441-4755-A967-42EFFAA166FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D2D1249-1441-4755-A967-42EFFAA166FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D2D1249-1441-4755-A967-42EFFAA166FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

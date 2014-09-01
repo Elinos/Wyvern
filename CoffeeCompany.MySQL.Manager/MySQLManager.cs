@@ -1,15 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using MySql.Data.MySqlClient;
+using CoffeeCompany.MySQL.Models;
 
 namespace CoffeeCompany.MySQL.Manager
 {
     public class MySQLManager
     {
-        MySqlConnection dbCon = new MySqlConnection(@"Server=localhost;Port=3306; Database=books;Uid=root;Pwd=test;");
+        coffeecompanyreportsEntities mySQLDb = new coffeecompanyreportsEntities();
+
+        public void AddReport(string productName, decimal price, int numberOfOrders, decimal totalRevenue)
+        {
+            var report = new Report
+            {
+                ProductName = productName,
+                Price = price,
+                NumberOfOrders = numberOfOrders,
+                TotalRevenue = totalRevenue
+            };
+            mySQLDb.Reports1.Add(report);
+            mySQLDb.SaveChanges();
+        }
+
+        public void DeleteReport(int reportID)
+        {
+            var reportToDelete = mySQLDb.Reports1.Find(reportID);
+            mySQLDb.Reports1.Remove(reportToDelete);
+            mySQLDb.SaveChanges();
+        }
     }
 }
