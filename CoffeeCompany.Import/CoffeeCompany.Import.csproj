@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="DataLoaders\ExcelLoader.cs" />
     <Compile Include="DataLoaders\IDbLoader.cs" />
-    <Compile Include="IDataImport.cs" />
     <Compile Include="DataImport.cs" />
     <Compile Include="DataLoaders\MongoDbLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

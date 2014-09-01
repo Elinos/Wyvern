@@ -43,9 +43,9 @@
 
             var sanitizedOrders = new HashSet<Order>();
 
-            foreach (var company in orders)
+            foreach (var order in orders)
             {
-                sanitizedOrders.Add(Sanitize(company));
+                sanitizedOrders.Add(Sanitize(order));
             }
 
             return sanitizedOrders;

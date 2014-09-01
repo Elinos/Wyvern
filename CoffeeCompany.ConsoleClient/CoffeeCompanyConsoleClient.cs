@@ -11,10 +11,7 @@
     {
         static void Main(string[] args)
         {
-            var dataImport = new DataImport();
-
-            dataImport.ImportFromMongoDb();
-
+            DataImport.ImportFromMongoDb();
         }
     }
 }

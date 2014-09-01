@@ -6,46 +6,58 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using MongoDB.Driver;
+
     using CoffeeCompany.Data;
     using CoffeeCompany.Models;
     using CoffeeCompany.Import.DataLoaders;
 
-    public class DataImport : IDataImport
+    public class DataImport
     {
         //private const string MongoDbConnectionString = "mongodb://wyvern:coffee@kahana.mongohq.com:10019/CoffeeWyvern";
         private const string MongoDbConnectionString = "mongodb://wyvern:coffee@ds051368.mongolab.com:51368/coffeewyvern";
         private const string MongoDbName = "coffeewyvern";
 
-        public void ImportFromMongoDb()
+        public static void ImportFromMongoDb()
         {
             var context = new CoffeeCompanyDbContext();
-            var mongoDbLoader = new MongoDbLoader(MongoDbConnectionString, MongoDbName);
 
-            ICollection<Order> orders;
-
-            if (mongoDbLoader.retrieveData().Count == 0)
+            try
             {
-                mongoDbLoader.MongoDbSeed();
+                var mongoDbLoader = new MongoDbLoader(MongoDbConnectionString, MongoDbName);
+
+                ICollection<Order> orders;
+
+                if (mongoDbLoader.retrieveData().Count == 0)
+                {
+                    mongoDbLoader.MongoDbSeed();
+                }
+
+                orders = mongoDbLoader.retrieveData();
+
+                foreach (var order in orders)
+                {
+                    context.Orders.Add(order);
+                }
+
+                context.SaveChanges();
             }
-
-            orders = mongoDbLoader.retrieveData();
-
-            foreach (var order in orders)
+            catch (MongoConnectionException e)
             {
-                context.Orders.Add(order);
+                Console.WriteLine(e.Message);
             }
-
-            context.SaveChanges();
         }
 
-        public void ImportFromExcel()
+        public static void ImportFromExcel()
         {
-            throw new NotImplementedException();
+            var context = new CoffeeCompanyDbContext();
+
         }
 
-        public void ImportFromXml()
+        public static void ImportFromXml()
         {
-            throw new NotImplementedException();
+            var context = new CoffeeCompanyDbContext();
+
         }
     }
 }
