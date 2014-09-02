@@ -16,13 +16,13 @@
         {
             //DataImport.ImportFromExcel();
             //DataImport.ImportFromMongoDb();
-            DataImport.ImportFromXml();
-            //var mySQLManager = new MySQLManager();
-            //mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
-            //var sqliteLoader = new SQLiteLoader();
-            //sqliteLoader.LoadData();
-            //var excelManager = new ExcelManager();
-            //excelManager.CreateExcelReport();
+            //DataImport.ImportFromXml();
+            var mySQLManager = new MySQLManager();
+            mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
+            var sqliteLoader = new SQLiteLoader();
+            sqliteLoader.LoadData();
+            var excelManager = new ExcelManager();
+            excelManager.CreateExcelReport();
         }
     }
 }
