@@ -1,10 +1,12 @@
-﻿namespace EntityFrameworkHomework.Client
+﻿namespace CoffeeCompany.ReportGenerator
 {
     using System;
     using System.IO;
     using iTextSharp.text;
     using iTextSharp.text.pdf;
     using System.Data.SqlClient;
+    using System.Collections.Generic;
+    using System.Collections;
 
     public class PDFExporter
     {
@@ -12,73 +14,53 @@
         public string Path { get; set; }
         public string Connection { get; set; }
 
-        public PDFExporter()
+        public PDFExporter(string connection)
         {
             this.document = new Document(PageSize.A4);
-            this.Path = "Doc1.pdf";
-        }
-
-        public PDFExporter(string path)
-            : this()
-        {
-            this.Path = path;
-        }
-
-        public PDFExporter(float width, float height)
-            : this()
-        {
-            this.document = new Document(new Rectangle(width, height));
-        }
-
-        public PDFExporter(string connection)
-            : this()
-        {
             this.Connection = connection;
         }
 
-        public void SaveToDisk()
+        private void SaveToDisk(string path)
         {
+            this.Path = path;
             PdfWriter.GetInstance(document, new FileStream(Path, FileMode.Create));
         }
 
-        public void WriteLine(string line)
+        public void GetPDF(List<List<string>> items, string title, IList<string> cells, string path)
         {
-            this.document.Open();
-            this.document.Add(new Paragraph(line));
-            this.document.Close();
-        }
+            this.SaveToDisk(path);
 
-        public void SaveTable(int colls,string query,string title)
-        {
-            PdfPTable table = new PdfPTable(colls);
-            PdfPCell cell = new PdfPCell(new Phrase(title));
+            PdfPTable table = new PdfPTable(cells.Count);
+            BaseFont bfTimes = BaseFont.CreateFont(BaseFont.COURIER, BaseFont.CP1252, false);
+            Font headerFont = new Font(bfTimes, 16, Font.BOLD);
+            PdfPCell cell = new PdfPCell(new Phrase(title, headerFont));
+            cell.Colspan = cells.Count;
+            cell.HorizontalAlignment = 1;
+            cell.Border = 0;
             table.AddCell(cell);
 
-            using (SqlConnection conn = new SqlConnection(Connection))
-            {
-                //string query = "SELECT ProductID, ProductName FROM Products";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                try
-                {
-                    conn.Open();
-                    using (SqlDataReader rdr = cmd.ExecuteReader())
-                    {
-                        while (rdr.Read())
-                        {
-                            table.AddCell(rdr[0].ToString());
-                            table.AddCell(rdr[1].ToString());
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                this.document.Open();
-                this.document.Add(table);
-                this.document.Close();
-            }
-        }
+            PdfPCell empty = new PdfPCell(new Phrase(" "));
+            empty.Border = 0;
+            empty.Colspan = cells.Count;
+            table.AddCell(empty);
 
+            Font bold = new Font(bfTimes, 12, Font.BOLD);
+            foreach (var cellTitle in cells)
+            {
+                table.AddCell(new PdfPCell(new Phrase(cellTitle, bold)));
+            }
+
+            foreach (List<string> rowCells in items)
+            {
+                for (int i = 0; i < cells.Count; i++)
+                {
+                    table.AddCell(rowCells[i]);                    
+                }
+            }
+
+            this.document.Open();
+            this.document.Add(table);
+            this.document.Close();
+        }
     }
 }
