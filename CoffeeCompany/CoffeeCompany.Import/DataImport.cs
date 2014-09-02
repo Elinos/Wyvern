@@ -22,6 +22,8 @@
         private const string DefaultZipToUnpack = @"..\..\..\..\dbData\ExcelData.zip";
         private const string DefaultUnpackDirectory = @"..\..\..\..\dbData\ExcelData";
 
+        private const string DefaultXMLDataFileName = @"..\..\..\..\dbData\CoffeeCompanyData.xml";
+
         public static void ImportFromMongoDb(
             string connectionString = DefaultMongoDbConnectionString,
             string dbName = DefaultMongoDbName)
@@ -82,14 +84,32 @@
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine(e.Message);
             }
         }
 
-        public static void ImportFromXml()
+        public static void ImportFromXml(
+            string xmlFilePath = DefaultXMLDataFileName)
         {
             var context = new CoffeeCompanyDbContext();
 
+            try
+            {
+                var xmlLoader = new XmlLoader(xmlFilePath);
+
+                var orders = xmlLoader.retrieveData();
+
+                foreach (var order in orders)
+                {
+                    context.Orders.Add(order);
+                }
+
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

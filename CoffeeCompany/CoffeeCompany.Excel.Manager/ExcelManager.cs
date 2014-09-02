@@ -16,7 +16,7 @@ namespace CoffeeCompany.Excel.Manager
         {
             MySQLManager mySQLManager = new MySQLManager();
             var reports = mySQLManager.GetAllReports();
-            var file = CrateDirAndFile();
+            var file = CreateDirAndFile();
             LoadReportDataToFile(file, reports);
         }
 
@@ -68,7 +68,7 @@ namespace CoffeeCompany.Excel.Manager
             }
         }
 
-        private FileInfo CrateDirAndFile()
+        private FileInfo CreateDirAndFile()
         {
             var fileName = "Report" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
             var outputDir = @"../../../../ExcelReports/";

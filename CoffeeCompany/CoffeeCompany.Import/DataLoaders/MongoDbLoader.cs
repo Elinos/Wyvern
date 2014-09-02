@@ -41,40 +41,7 @@
 
             var orders = orderCollection.FindAll().ToList();
 
-            var sanitizedOrders = new HashSet<Order>();
-
-            foreach (var order in orders)
-            {
-                sanitizedOrders.Add(Sanitize(order));
-            }
-
-            return sanitizedOrders;
-        }
-
-        private Order Sanitize(Order order)
-        {
-            var sanitizedOrder = new Order
-            {
-                ClientCompany = order.ClientCompany,
-                QuantityInKg = order.QuantityInKg,
-                Status = order.Status
-            };
-
-            var products = order.Products;
-
-            foreach (var product in products)
-            {
-                var sanitizedProduct = new Product
-                {
-                    Name = product.Name,
-                    PricePerKgInDollars = product.PricePerKgInDollars,
-                    TypeOfCoffee = product.TypeOfCoffee
-                };
-
-                sanitizedOrder.Products.Add(sanitizedProduct);
-            }
-
-            return sanitizedOrder;
+            return orders;
         }
 
         public void MongoDbSeed()
