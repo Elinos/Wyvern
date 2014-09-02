@@ -14,14 +14,14 @@
     {
         static void Main(string[] args)
         {
-            DataImport.ImportFromExcel();
+            //DataImport.ImportFromExcel();
             //DataImport.ImportFromMongoDb();
             //var mySQLManager = new MySQLManager();
             //mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
             //var sqliteLoader = new SQLiteLoader();
             //sqliteLoader.LoadData();
-            //var excelManager = new ExcelManager();
-            //excelManager.CreateExcelReport();
+            var excelManager = new ExcelManager();
+            excelManager.CreateExcelReport();
         }
     }
 }
