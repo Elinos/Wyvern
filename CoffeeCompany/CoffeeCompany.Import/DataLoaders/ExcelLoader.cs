@@ -1,13 +1,15 @@
 ﻿namespace CoffeeCompany.Import.DataLoaders
 {
+    using System;
     using System.Collections.Generic;
 
     using Ionic.Zip;
 
     using CoffeeCompany.Excel.Manager;
     using CoffeeCompany.Models;
+    using CoffeeCompany.Import.DataLoaders.Contracts;
 
-    internal class ExcelLoader
+    internal class ExcelLoader : IDataLoader
     {
         private const string ClientCompanyFileName = "ClientCompany.xlsx";
         private const string ProductFileName = "Product.xlsx";
@@ -41,12 +43,17 @@
             return excelManager.ReadClientCompanyExcelFile(filePath);
         }
 
-        public ICollection<Product> retrieveProductData()
+        public ICollection<Product> retrieveProductsData()
         {
             var excelManager = new ExcelManager();
             var filePath = this.unpackDirectory + "/" + ProductFileName;
 
             return excelManager.ReadProductExcelFile(filePath);
+        }
+
+        public ICollection<Order> retrieveOrdersData()
+        {
+            throw new NotImplementedException();
         }
     }
 }

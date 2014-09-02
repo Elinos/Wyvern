@@ -10,7 +10,7 @@
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<CoffeeCompanyDbContext, Configuration>());
         }
-        public IDbSet<ClientCompany> Companies { get; set; }
+        public IDbSet<ClientCompany> ClientCompanies { get; set; }
 
         public IDbSet<Product> Products { get; set; }
 

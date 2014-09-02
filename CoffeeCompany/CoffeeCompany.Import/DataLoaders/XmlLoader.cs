@@ -4,8 +4,9 @@
     using System.Xml;
 
     using CoffeeCompany.Models;
+    using CoffeeCompany.Import.DataLoaders.Contracts;
 
-    internal class XmlLoader
+    internal class XmlLoader : IDataLoader
     {
         private string xmlFilePath;
 
@@ -14,7 +15,7 @@
             this.xmlFilePath = xmlFilePath;
         }
 
-        public ICollection<Order> retrieveData()
+        public ICollection<Order> retrieveOrdersData()
         {
             ICollection<Order> orders = new HashSet<Order>();
 
@@ -29,6 +30,16 @@
             }
 
             return orders;
+        }
+
+        public ICollection<ClientCompany> retrieveCompaniesData()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ICollection<Product> retrieveProductsData()
+        {
+            throw new System.NotImplementedException();
         }
 
         private Order OrderFromXMLBuilder(XmlNode node)
@@ -59,6 +70,5 @@
 
             return order;
         }
-
     }
 }

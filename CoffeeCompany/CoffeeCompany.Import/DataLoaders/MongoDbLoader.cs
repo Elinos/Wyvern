@@ -1,13 +1,15 @@
 ﻿namespace CoffeeCompany.Import.DataLoaders
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
     using MongoDB.Driver;
 
     using Models;
+    using CoffeeCompany.Import.DataLoaders.Contracts;
 
-    internal class MongoDbLoader
+    internal class MongoDbLoader : IDataLoader
     {
         private const string OrderCollectionName = "Orders";
 
@@ -29,13 +31,23 @@
             return database;
         }
 
-        public ICollection<Order> retrieveData()
+        public ICollection<Order> retrieveOrdersData()
         {
             var orderCollection = this.mongoDb.GetCollection<Order>(OrderCollectionName);
 
             var orders = orderCollection.FindAll().ToList();
 
             return orders;
+        }
+
+        public ICollection<ClientCompany> retrieveCompaniesData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<Product> retrieveProductsData()
+        {
+            throw new NotImplementedException();
         }
 
         public void MongoDbSeed()

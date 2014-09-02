@@ -14,15 +14,17 @@
     {
         static void Main(string[] args)
         {
-            //DataImport.ImportFromExcel();
-            //DataImport.ImportFromMongoDb();
-            //DataImport.ImportFromXml();
-            var mySQLManager = new MySQLManager();
-            mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
-            var sqliteLoader = new SQLiteLoader();
-            sqliteLoader.LoadData();
-            var excelManager = new ExcelManager();
-            excelManager.CreateExcelReport();
+            var dataImport = new DataImport();
+            dataImport.ImportFromXml();
+            dataImport.ImportFromExcel();
+            //dataImport.ImportFromMongoDb();
+
+            //var mySQLManager = new MySQLManager();
+            //mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
+            //var sqliteLoader = new SQLiteLoader();
+            //sqliteLoader.LoadData();
+            //var excelManager = new ExcelManager();
+            //excelManager.CreateExcelReport();
         }
     }
 }

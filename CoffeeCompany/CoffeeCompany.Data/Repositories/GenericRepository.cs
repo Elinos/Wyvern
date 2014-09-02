@@ -29,6 +29,11 @@
             return this.All().Where(conditions);
         }
 
+        public bool Any(Expression<Func<T, bool>> conditions)
+        {
+            return this.All().Any(conditions);
+        }
+
         public void Add(T entity)
         {
             var entry = AttachIfDetached(entity);
@@ -62,6 +67,11 @@
             }
 
             return entry;
+        }
+
+        public void SaveChanges()
+        {
+            this.context.SaveChanges();
         }
     }
 }

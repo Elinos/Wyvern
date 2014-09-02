@@ -7,7 +7,7 @@
 
     public interface ICoffeeCompanyDbContext
     {
-        IDbSet<ClientCompany> Companies { get; set; }
+        IDbSet<ClientCompany> ClientCompanies { get; set; }
 
         IDbSet<Product> Products { get; set; }
 
