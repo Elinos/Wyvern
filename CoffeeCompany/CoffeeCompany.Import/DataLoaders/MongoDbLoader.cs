@@ -1,15 +1,9 @@
 ﻿namespace CoffeeCompany.Import.DataLoaders
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Configuration;
 
     using MongoDB.Driver;
-    using MongoDB.Driver.Linq;
-    using MongoDB.Driver.Builders;
 
     using Models;
 

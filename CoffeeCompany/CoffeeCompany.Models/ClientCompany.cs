@@ -30,7 +30,8 @@
         public string CountryOfOrigin { get; set; }
 
         [BsonIgnore]
-        public virtual ICollection<Order> Orders { 
+        public virtual ICollection<Order> Orders 
+        { 
             get
             {
                 return this.orders;

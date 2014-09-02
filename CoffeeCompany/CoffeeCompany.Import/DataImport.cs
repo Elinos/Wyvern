@@ -2,9 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     using MongoDB.Driver;
 
@@ -34,15 +31,14 @@
             {
                 var mongoDbLoader = new MongoDbLoader(connectionString, dbName);
 
-                ICollection<Order> orders;
+                var orders = mongoDbLoader.retrieveData();
 
                 //Seed to mongodb database, if there're no data
-                if (mongoDbLoader.retrieveData().Count == 0)
+                if (orders.Count == 0)
                 {
                     mongoDbLoader.MongoDbSeed();
+                    orders = mongoDbLoader.retrieveData();
                 }
-
-                orders = mongoDbLoader.retrieveData();
 
                 foreach (var order in orders)
                 {
