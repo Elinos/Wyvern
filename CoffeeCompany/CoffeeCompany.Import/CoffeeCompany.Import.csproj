@@ -75,6 +75,10 @@
       <Project>{7bdb818e-05b9-4bbf-b39c-571571950937}</Project>
       <Name>CoffeeCompany.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.Excel.Manager\CoffeeCompany.Excel.Manager.csproj">
+      <Project>{024c986c-94ff-4458-a7fc-2a1fe5a0a954}</Project>
+      <Name>CoffeeCompany.Excel.Manager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoffeeCompany.Models\CoffeeCompany.Models.csproj">
       <Project>{483473d9-f9fa-40db-bf74-52808a9214ae}</Project>
       <Name>CoffeeCompany.Models</Name>

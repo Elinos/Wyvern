@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using CoffeeCompany.MySQL.Manager;
 using OfficeOpenXml;
+using System.Collections.Generic;
+using CoffeeCompany.Models;
 
 namespace CoffeeCompany.Excel.Manager
 {
@@ -35,6 +37,69 @@ namespace CoffeeCompany.Excel.Manager
                 }
                 pck.Save();
             }
+        }
+
+        public ICollection<ClientCompany> ReadClientCompanyExcelFile(string filePath)
+        {
+            var listOfData = new List<ClientCompany>();
+
+            var existingFile = new FileInfo(filePath);
+
+            using (var package = new ExcelPackage(existingFile))
+            {
+                ExcelWorkbook workBook = package.Workbook;
+
+                if (workBook != null)
+                {
+                    if (workBook.Worksheets.Count > 0)
+                    {
+                        ExcelWorksheet currentWorksheet = workBook.Worksheets.First();
+                        
+                        for (var i = 2; i < currentWorksheet.Dimension.End.Row; i ++)
+                        {
+                            listOfData.Add(new ClientCompany
+                            {
+                                Name = currentWorksheet.Cells[i, 1].Value.ToString(),
+                                CountryOfOrigin = currentWorksheet.Cells[i, 2].Value.ToString()
+                            });
+                        }
+                    }
+                }
+            }
+
+            return listOfData;
+        }
+
+        public ICollection<Product> ReadProductExcelFile(string filePath)
+        {
+            var listOfData = new List<Product>();
+
+            var existingFile = new FileInfo(filePath);
+
+            using (var package = new ExcelPackage(existingFile))
+            {
+                ExcelWorkbook workBook = package.Workbook;
+
+                if (workBook != null)
+                {
+                    if (workBook.Worksheets.Count > 0)
+                    {
+                        ExcelWorksheet currentWorksheet = workBook.Worksheets.First();
+
+                        for (var i = 2; i < currentWorksheet.Dimension.End.Row; i++)
+                        {
+                            listOfData.Add(new Product
+                            {
+                                Name = currentWorksheet.Cells[i, 1].Value.ToString(),
+                                PricePerKgInDollars = decimal.Parse(currentWorksheet.Cells[i, 2].Value.ToString()),
+                                TypeOfCoffee = (CoffeeTypes) int.Parse(currentWorksheet.Cells[i, 3].Value.ToString())
+                            });
+                        }
+                    }
+                }
+            }
+
+            return listOfData;
         }
     }
 }

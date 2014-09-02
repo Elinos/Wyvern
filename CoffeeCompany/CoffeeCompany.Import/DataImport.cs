@@ -19,8 +19,8 @@
         private const string DefaultMongoDbConnectionString = "mongodb://localhost/";
         private const string DefaultMongoDbName = "CoffeeWyvern";
 
-        private const string DefaultZipToUnpack = @"";
-        private const string DefaultUnpackDirectory = "";
+        private const string DefaultZipToUnpack = @"..\..\..\..\dbData\ExcelData.zip";
+        private const string DefaultUnpackDirectory = @"..\..\..\..\dbData\ExcelData";
 
         public static void ImportFromMongoDb(
             string connectionString = DefaultMongoDbConnectionString,
@@ -61,22 +61,29 @@
         {
             var context = new CoffeeCompanyDbContext();
 
-            var excelLoader = new ExcelLoader(zipToUnpack, unpackDirectory);
-
-            var companies = excelLoader.retrieveCompaniesData();
-            var products = excelLoader.retrieveProductData();
-
-            foreach (var company in companies)
+            try
             {
-                context.Companies.Add(company);
-            }
+                var excelLoader = new ExcelLoader(zipToUnpack, unpackDirectory);
 
-            foreach (var product in products)
+                var companies = excelLoader.retrieveCompaniesData();
+                var products = excelLoader.retrieveProductData();
+
+                foreach (var company in companies)
+                {
+                    context.Companies.Add(company);
+                }
+
+                foreach (var product in products)
+                {
+                    context.Products.Add(product);
+                }
+
+                context.SaveChanges();
+            }
+            catch (Exception e)
             {
-                context.Products.Add(product);
+                Console.WriteLine(e);
             }
-
-            context.SaveChanges();
         }
 
         public static void ImportFromXml()

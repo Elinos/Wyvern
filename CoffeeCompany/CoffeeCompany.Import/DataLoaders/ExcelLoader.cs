@@ -8,10 +8,13 @@
 
     using Ionic.Zip;
 
+    using CoffeeCompany.Excel.Manager;
     using CoffeeCompany.Models;
 
     internal class ExcelLoader
     {
+        private const string ClientCompanyFileName = "ClientCompany.xlsx";
+        private const string ProductFileName = "Product.xlsx";
         private string zipToUnpack;
         private string unpackDirectory;
 
@@ -36,12 +39,18 @@
 
         public ICollection<ClientCompany> retrieveCompaniesData()
         {
-            throw new NotImplementedException();
+            var excelManager = new ExcelManager();
+            var filePath = this.unpackDirectory + "/" + ClientCompanyFileName;
+
+            return excelManager.ReadClientCompanyExcelFile(filePath);
         }
 
         public ICollection<Product> retrieveProductData()
         {
-            throw new NotImplementedException();
+            var excelManager = new ExcelManager();
+            var filePath = this.unpackDirectory + "/" + ProductFileName;
+
+            return excelManager.ReadProductExcelFile(filePath);
         }
     }
 }

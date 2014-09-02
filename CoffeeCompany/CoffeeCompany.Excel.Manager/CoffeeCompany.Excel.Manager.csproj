@@ -55,6 +55,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoffeeCompany.Models\CoffeeCompany.Models.csproj">
+      <Project>{483473d9-f9fa-40db-bf74-52808a9214ae}</Project>
+      <Name>CoffeeCompany.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoffeeCompany.MySQL.Manager\CoffeeCompany.MySQL.Manager.csproj">
       <Project>{19924908-d38d-4d3d-bff5-735939b995a5}</Project>
       <Name>CoffeeCompany.MySQL.Manager</Name>
