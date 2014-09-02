@@ -20,8 +20,8 @@
             //mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
             //var sqliteLoader = new SQLiteLoader();
             //sqliteLoader.LoadData();
-            var excelManager = new ExcelManager();
-            excelManager.CreateExcelReport();
+            //var excelManager = new ExcelManager();
+            //excelManager.CreateExcelReport();
         }
     }
 }

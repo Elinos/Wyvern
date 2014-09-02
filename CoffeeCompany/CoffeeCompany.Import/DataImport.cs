@@ -19,7 +19,7 @@
         private const string DefaultMongoDbConnectionString = "mongodb://localhost/";
         private const string DefaultMongoDbName = "CoffeeWyvern";
 
-        private const string DefaultZipToUnpack = "";
+        private const string DefaultZipToUnpack = @"";
         private const string DefaultUnpackDirectory = "";
 
         public static void ImportFromMongoDb(
