@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B31A7F1E-B142-4567-BC4B-D9966AC294ED}</ProjectGuid>
+    <ProjectGuid>{C2C1B00A-B19F-4862-BC3C-C56685421B90}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CoffeeCompany.ReportGeneratorNew</RootNamespace>
