@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CoffeeCompany.ReportGenerator")]
+[assembly: AssemblyTitle("CoffeeCompany.ReportGeneratorNew")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("CoffeeCompany.ReportGenerator")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2014")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("CoffeeCompany.ReportGeneratorNew")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("57f16d7d-7fcb-4f3d-b6a7-d204e6f969d8")]
+[assembly: Guid("e334ce05-cc1f-4fdd-bcb2-dd0ca9f8aa24")]
 
 // Version information for an assembly consists of the following four values:
 //
