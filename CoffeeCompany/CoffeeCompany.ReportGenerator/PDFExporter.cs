@@ -12,14 +12,9 @@
     {
         public Document document;
         public string Path { get; set; }
-
-        public PDFExporter()
-        {
-            this.document = new Document(PageSize.A4);
-        }
-
         private void SaveToDisk(string path)
         {
+            this.document = new Document(PageSize.A4);
             this.Path = path;
             PdfWriter.GetInstance(document, new FileStream(Path, FileMode.Create));
         }

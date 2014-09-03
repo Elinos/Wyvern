@@ -31,6 +31,7 @@
             var reporter = new ReportsEngine(data);
 
             reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
+            reporter.GetOrderForCompany("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");
         }
     }
 }
