@@ -183,5 +183,58 @@ namespace CoffeeCompany.Excel.Manager
 
             return listOfData;
         }
+
+        public IEnumerable<Order> ReadOrderExcelFile(string filePath)
+        {
+            var listOfData = new List<Order>();
+
+            try
+            {
+                var existingFile = new FileInfo(filePath);
+
+                using (var package = new ExcelPackage(existingFile))
+                {
+                    ExcelWorkbook workBook = package.Workbook;
+
+                    if (workBook != null)
+                    {
+                        if (workBook.Worksheets.Count > 0)
+                        {
+                            ExcelWorksheet currentWorksheet = workBook.Worksheets.First();
+
+                            for (var i = 2; i < currentWorksheet.Dimension.End.Row; i++)
+                            {
+                                var products = new HashSet<Product>();
+                                products.Add(new Product
+                                    {
+                                        Name = currentWorksheet.Cells[i, 2].Value.ToString()
+                                    });
+
+                                var currentCompany = new ClientCompany
+                                    {
+                                        Name = currentWorksheet.Cells[i, 1].Value.ToString(),
+                                    };
+
+                                var currentOrder = new Order
+                                {
+                                    ClientCompany = currentCompany,
+                                    Products = products,
+                                    QuantityInKg = int.Parse(currentWorksheet.Cells[i, 4].Value.ToString())
+                                };
+
+                                listOfData.Add(currentOrder);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("File {0} doesn't exist", filePath);
+                Console.WriteLine(e.Message);
+            }
+
+            return listOfData;
+        }
     }
 }

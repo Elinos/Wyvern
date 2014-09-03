@@ -15,9 +15,9 @@
     {
         static void Main(string[] args)
         {
-            //var dataImport = new DataImport();
+            var dataImport = new DataImport();
             //dataImport.ImportFromXml();
-            //dataImport.ImportFromExcel();
+            dataImport.ImportFromExcel();
             //dataImport.ImportFromMongoDb();
 
             //var mySQLManager = new MySQLManager();
@@ -27,14 +27,14 @@
             //var excelManager = new ExcelManager();
             //excelManager.CreateExcelReport();
 
-            var data = new CoffeeCompanyData();
-            var reporter = new ReportsEngine(data);
+            //var data = new CoffeeCompanyData();
+            //var reporter = new ReportsEngine(data);
 
-            reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
-            reporter.GetOrderForCompanyPdfReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");
+            //reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
+            //reporter.GetOrderForCompanyPdfReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");
 
-            reporter.GetTotalRevenuesXmlReports(@"..\..\..\Reports\TotalRevenueXmlReport.xml");
-            reporter.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersXmlReport.xml");
+            //reporter.GetTotalRevenuesXmlReports(@"..\..\..\Reports\TotalRevenueXmlReport.xml");
+            //reporter.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersXmlReport.xml");
         }
     }
 }

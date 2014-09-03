@@ -17,8 +17,8 @@
         private const string DefaultMongoDbConnectionString = "mongodb://localhost/";
         private const string DefaultMongoDbName = "CoffeeWyvern";
 
-        private const string DefaultZipToUnpack = @"..\..\..\..\dbData\ExcelData.zip";
-        private const string DefaultUnpackDirectory = @"..\..\..\..\dbData\ExcelData";
+        private const string DefaultZipToUnpack = @"..\..\..\..\dbData\ExcelReports.zip";
+        private const string DefaultUnpackDirectory = @"..\..\..\..\dbData\ExcelReports";
 
         private const string DefaultXMLDataFileName = @"..\..\..\..\dbData\CoffeeCompanyData.xml";
 
@@ -71,11 +71,9 @@
             {
                 var excelLoader = new ExcelLoader(zipToUnpack, unpackDirectory);
 
-                var companies = excelLoader.retrieveCompaniesData();
-                var products = excelLoader.retrieveProductsData();
+                var orders = excelLoader.retrieveOrdersData();
 
-                ImportCompanies(companies);
-                ImportProducts(products);
+                ImportOrders(orders);
             }
             catch (Exception e)
             {

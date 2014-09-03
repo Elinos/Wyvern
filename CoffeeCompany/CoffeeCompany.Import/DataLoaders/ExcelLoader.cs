@@ -1,6 +1,7 @@
 ﻿namespace CoffeeCompany.Import.DataLoaders
 {
     using System;
+    using System.IO;
     using System.Collections.Generic;
 
     using Ionic.Zip;
@@ -53,7 +54,35 @@
 
         public ICollection<Order> retrieveOrdersData()
         {
-            throw new NotImplementedException();
+            var excelManager = new ExcelManager();
+            var orders = new List<Order>();
+
+            foreach (string file in Directory.GetFiles(this.unpackDirectory))
+            {
+                if (file.EndsWith(".xlsx"))
+                {
+                    orders.AddRange(excelManager.ReadOrderExcelFile(file));
+                }
+            }
+
+            return orders;
+        }
+
+        private static void TranverseDir(string dirPath, string fileExtension)
+        {
+            
+
+            foreach (string subDirectory in Directory.GetDirectories(dirPath))
+            {
+                try
+                {
+                    TranverseDir(subDirectory, fileExtension);
+                }
+                catch (UnauthorizedAccessException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
         }
     }
 }
