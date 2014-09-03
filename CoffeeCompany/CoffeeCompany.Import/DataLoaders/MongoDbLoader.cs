@@ -12,6 +12,8 @@
     internal class MongoDbLoader : IDataLoader
     {
         private const string OrderCollectionName = "Orders";
+        private const string ClientCompanyCollectionName = "Companies";
+        private const string ProductCollectionName = "Products";
 
         private string dbName;
         private MongoDatabase mongoDb;
@@ -42,17 +44,27 @@
 
         public ICollection<ClientCompany> retrieveCompaniesData()
         {
-            throw new NotImplementedException();
+            var clientCompanyCollection = this.mongoDb.GetCollection<ClientCompany>(ClientCompanyCollectionName);
+
+            var clientCompanies = clientCompanyCollection.FindAll().ToList();
+
+            return clientCompanies;
         }
 
         public ICollection<Product> retrieveProductsData()
         {
-            throw new NotImplementedException();
+            var productCollection = this.mongoDb.GetCollection<Product>(ProductCollectionName);
+
+            var produtcs = productCollection.FindAll().ToList();
+
+            return produtcs;
         }
 
         public void MongoDbSeed()
         {
             var orderCollection = this.mongoDb.GetCollection<Order>(OrderCollectionName);
+            var clientCompanyCollection = this.mongoDb.GetCollection<ClientCompany>(ClientCompanyCollectionName);
+            var productCollection = this.mongoDb.GetCollection<Product>(ProductCollectionName);
 
             var company1 = new
             {
@@ -178,6 +190,19 @@
             orderCollection.Insert(order3);
             orderCollection.Insert(order4);
             orderCollection.Insert(order5);
+
+            clientCompanyCollection.Insert(company1);
+            clientCompanyCollection.Insert(company2);
+            clientCompanyCollection.Insert(company3);
+            clientCompanyCollection.Insert(company4);
+            clientCompanyCollection.Insert(company5);
+
+            productCollection.Insert(product1);
+            productCollection.Insert(product2);
+            productCollection.Insert(product3);
+            productCollection.Insert(product4);
+            productCollection.Insert(product5);
+            productCollection.Insert(product6);
         }
     }
 }

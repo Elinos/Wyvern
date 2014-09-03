@@ -16,9 +16,14 @@
         static void Main(string[] args)
         {
             var dataImport = new DataImport();
-            dataImport.ImportFromXml();
-            dataImport.ImportFromExcel();
-            dataImport.ImportFromMongoDb();
+            //dataImport.ImportFromXml();
+            //dataImport.ImportFromExcel();
+            //dataImport.ImportFromMongoDb();
+
+            var sqliteLoader = new SQLiteLoader();
+            sqliteLoader.LoadData();
+            var excelManager = new ExcelManager();
+            excelManager.CreateExcelReport();
 
             //var mySQLManager = new MySQLManager();
             //mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
