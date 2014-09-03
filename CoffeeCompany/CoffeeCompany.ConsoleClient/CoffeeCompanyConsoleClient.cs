@@ -9,14 +9,15 @@
     using CoffeeCompany.MySQL.Manager;
     using CoffeeCompany.SQLite.Loader;
     using CoffeeCompany.Excel.Manager;
+    using CoffeeCompany.ReportGenerator;
 
     public class CoffeeCompanyConsoleClient
     {
         static void Main(string[] args)
         {
-            var dataImport = new DataImport();
-            dataImport.ImportFromXml();
-            dataImport.ImportFromExcel();
+            //var dataImport = new DataImport();
+            //dataImport.ImportFromXml();
+            //dataImport.ImportFromExcel();
             //dataImport.ImportFromMongoDb();
 
             //var mySQLManager = new MySQLManager();
@@ -25,6 +26,11 @@
             //sqliteLoader.LoadData();
             //var excelManager = new ExcelManager();
             //excelManager.CreateExcelReport();
+
+            var data = new CoffeeCompanyData();
+            var reporter = new ReportsEngine(data);
+
+            reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
         }
     }
 }

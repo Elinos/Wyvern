@@ -12,12 +12,10 @@
     {
         public Document document;
         public string Path { get; set; }
-        public string Connection { get; set; }
 
-        public PDFExporter(string connection)
+        public PDFExporter()
         {
             this.document = new Document(PageSize.A4);
-            this.Connection = connection;
         }
 
         private void SaveToDisk(string path)

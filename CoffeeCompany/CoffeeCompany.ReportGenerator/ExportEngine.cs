@@ -11,27 +11,28 @@
 
     public class ReportsEngine
     {
-        const string defaultServer = "Server=.\\SQLEXPRESS;Database=CoffeeCompanyConnection; Trusted_Connection=true;";
-        public ReportsEngine()
+        //const string defaultServer = "Server=.\\SQLEXPRESS;Database=CoffeeCompanyConnection; Trusted_Connection=true;";
+        public ReportsEngine(ICoffeeCompanyData data)
         {
-            this.ExportPdf = new PDFExporter(defaultServer);
+            this.ExportPdf = new PDFExporter();
+            this.Data = data;
         }
         public PDFExporter ExportPdf { get; set; }
 
-        public void GetTotalRevenuesPdfReports(string path)
+        private ICoffeeCompanyData Data { get; set; }
+
+        private List<List<string>> GetTotalRevenuesFromDatabase(string path)
         {
-            var data = new CoffeeCompanyData();
-            
             var products =
-                (from p in data.Products.All()
-                from o in p.Orders
-                select new
-                {
-                    Name = p.Name,
-                    Price = p.PricePerKgInDollars.ToString(),
-                    Quantity = o.QuantityInKg.ToString(), 
-                    Total = (p.PricePerKgInDollars * o.QuantityInKg).ToString()
-                }).ToList();
+                (from p in this.Data.Products.All()
+                 from o in p.Orders
+                 select new
+                 {
+                     Name = p.Name,
+                     Price = p.PricePerKgInDollars.ToString(),
+                     Quantity = o.QuantityInKg.ToString(),
+                     Total = (p.PricePerKgInDollars * o.QuantityInKg).ToString()
+                 }).ToList();
 
             var formattedProducts = new List<List<string>>();
             for (int i = 0; i < products.Count; i++)
@@ -43,10 +44,19 @@
                     products[i].Total,
                 });
             }
+
+            return formattedProducts;
+        }
+
+        public void GetTotalRevenuesPdfReports(string path)
+        {
+            var data = new CoffeeCompanyData();
+            
+            var products = GetTotalRevenuesFromDatabase(path);
             var title = "Total Revenue Report";
             var cellsTitles = new List<string> { "Product Name", "Product Price", "Number of orders", "Total Revenue" };
 
-            this.ExportPdf.GetPDF(formattedProducts, title, cellsTitles, path);
+            this.ExportPdf.GetPDF(products, title, cellsTitles, path);
         }
     }
 }
