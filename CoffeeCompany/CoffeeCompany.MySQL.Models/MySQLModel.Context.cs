@@ -16,7 +16,7 @@ namespace CoffeeCompany.MySQL.Models
     public partial class coffeecompanyreportsEntities : DbContext
     {
         public coffeecompanyreportsEntities()
-            : base("coffeecompanyreportsEntities")
+            : base("name=coffeecompanyreportsEntities")
         {
         }
     

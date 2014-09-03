@@ -14,9 +14,15 @@
         public ReportsEngine(ICoffeeCompanyData data)
         {
             this.ExportPdf = new PDFExporter();
+            this.ExportXml = new XMLExporter();
+            this.ExportJson = new JsonExporter();
             this.Data = data;
         }
         public PDFExporter ExportPdf { get; set; }
+
+        public XMLExporter ExportXml { get; set; }
+
+        public JsonExporter ExportJson { get; set; }
 
         private ICoffeeCompanyData Data { get; set; }
 
@@ -88,13 +94,31 @@
             this.ExportPdf.GetPDF(products, title, cellsTitles, path);
         }
 
-        public void GetOrderForCompany(string name, string path)
+        public void GetTotalRevenuesXmlReports(string path)
+        {
+            var products = GetTotalRevenuesFromDatabase(path);
+            var title = "Total Revenue Report";
+            var cellsTitles = new List<string> { "Product Name", "Product Price", "Number of orders", "Total Revenue" };
+
+            this.ExportXml.ExportDocument(products, title, cellsTitles, path);
+        }
+
+        public void GetOrderForCompanyPdfReport(string name, string path)
         {
             var products = GetOrdersForCompany(name);
             var title = string.Format("Orders' shipment details for company \"{0}\"", name);
             var cellsTitles = new List<string> { "Order ID", "Quantoty in kg", "Status", "Products"};
 
             this.ExportPdf.GetPDF(products, title, cellsTitles, path);
+        }
+
+        public void GetOrderForCompanyXmlReport(string name, string path)
+        {
+            var products = GetOrdersForCompany(name);
+            var title = string.Format("Orders' shipment details for company \"{0}\"", name);
+            var cellsTitles = new List<string> { "Order ID", "Quantoty in kg", "Status", "Products" };
+
+            this.ExportXml.ExportDocument(products, title, cellsTitles, path);
         }
     }
 }
