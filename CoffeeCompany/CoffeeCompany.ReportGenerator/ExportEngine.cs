@@ -118,7 +118,7 @@
             var title = string.Format("Orders' shipment details for company \"{0}\"", name);
             var cellsTitles = new List<string> { "Order ID", "Quantoty in kg", "Status", "Products" };
 
-            this.ExportXML.ExportDocument(products, title, cellsTitles, path);
+            this.ExportXml.ExportDocument(products, title, cellsTitles, path);
         }
     }
 }

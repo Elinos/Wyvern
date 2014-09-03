@@ -15,17 +15,17 @@
     {
         static void Main(string[] args)
         {
-            var dataImport = new DataImport();
-            dataImport.ImportFromXml();
-            dataImport.ImportFromExcel();
-            dataImport.ImportFromMongoDb();
+            //var dataImport = new DataImport();
+            //dataImport.ImportFromXml();
+            //dataImport.ImportFromExcel();
+            //dataImport.ImportFromMongoDb();
 
             //var mySQLManager = new MySQLManager();
-            //mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
-            //var sqliteLoader = new SQLiteLoader();
-            //sqliteLoader.LoadData();
-            //var excelManager = new ExcelManager();
-            //excelManager.CreateExcelReport();
+            //mySQLManager.AddReport(55, "NewCompany3", "ReportOne", 2.00m, 45, 5000m);
+            var sqliteLoader = new SQLiteLoader();
+            sqliteLoader.LoadData();
+            var excelManager = new ExcelManager();
+            excelManager.CreateExcelReport();
 
             //var data = new CoffeeCompanyData();
             //var reporter = new ReportsEngine(data);

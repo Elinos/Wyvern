@@ -1,41 +1,54 @@
-﻿namespace CoffeeCompany.Excel.Manager
+namespace CoffeeCompany.Excel.Manager
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-
-    using OfficeOpenXml;
-    using OfficeOpenXml.Style;
-
     using CoffeeCompany.Models;
     using CoffeeCompany.MySQL.Manager;
-    using CoffeeCompany.MySQL.Models;
+    using CoffeeCompany.SQLite.Loader;
+    using OfficeOpenXml;
+    using OfficeOpenXml.Style;
 
     public class ExcelManager
     {
         public void CreateExcelReport()
         {
-            MySQLManager mySQLManager = new MySQLManager();
+            var mySQLManager = new MySQLManager();
             var reports = mySQLManager.GetAllReports();
+            var sqliteManager = new SQLiteLoader();
+            var discountInformations = sqliteManager.GetDiscountPercentagesPerCompany();
+            var reportsWithDiscounts = from r in reports
+                                       join di in discountInformations on r.CompanyID equals di.CompanyID
+                                       select new DiscountedReport
+                                       {
+                                           CompanyName = r.CompanyName,
+                                           ProductName = r.ProductName,
+                                           Price = r.Price * (decimal)(1 - (di.DiscountPercent / 100.00)),
+                                           NumberOfOrders = r.NumberOfOrders,
+                                           TotalRevenue = r.TotalRevenue * (decimal)(1 - (di.DiscountPercent / 100.00)),
+                                           TotalDiscount = r.TotalRevenue * (decimal)(di.DiscountPercent / 100.00)
+                                       };
             var file = CreateDirAndFile();
-            LoadReportDataToFile(file, reports);
+            LoadReportDataToFile(file, reportsWithDiscounts);
         }
 
-        private void LoadReportDataToFile(FileInfo file, List<Report> reports)
+        private void LoadReportDataToFile(FileInfo file, IEnumerable<DiscountedReport> reportsWithDiscounts)
         {
             int currentRow = 2;
             using (ExcelPackage pck = new ExcelPackage(file))
             {
                 //Add worksheet and titles
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
-                ws.Cells[1, 1].Value = "Report name";
-                ws.Cells[1, 2].Value = "Price";
-                ws.Cells[1, 3].Value = "Number of orders";
-                ws.Cells[1, 4].Value = "Total Revenue";
+                ws.Cells[1, 1].Value = "Company name";
+                ws.Cells[1, 2].Value = "Product name";
+                ws.Cells[1, 3].Value = "Price";
+                ws.Cells[1, 4].Value = "Number of orders";
+                ws.Cells[1, 5].Value = "Total Revenue";
+                ws.Cells[1, 6].Value = "Total Discount";
 
                 //Style the titles
-                using (var titles = ws.Cells[1, 1, 1, 4])
+                using (var titles = ws.Cells[1, 1, 1, 6])
                 {
                     titles.Style.Font.Bold = true;
                     titles.Style.Font.Size = 14;
@@ -44,19 +57,23 @@
                 }
 
                 //Load Data
-                foreach (var report in reports)
+                foreach (var report in reportsWithDiscounts)
                 {
                     ws.Cells[currentRow, 1].Value = report.ProductName;
-                    ws.Cells[currentRow, 2].Value = report.Price;
-                    ws.Cells[currentRow, 2].Style.Numberformat.Format = "0.00";
-                    ws.Cells[currentRow, 3].Value = report.NumberOfOrders;
-                    ws.Cells[currentRow, 4].Value = report.TotalRevenue;
-                    ws.Cells[currentRow, 4].Style.Numberformat.Format = "0.00";
+                    ws.Cells[currentRow, 2].Value = report.CompanyName;
+                    ws.Cells[currentRow, 3].Value = report.Price;
+                    ws.Cells[currentRow, 3].Style.Numberformat.Format = "0.00";
+                    ws.Cells[currentRow, 4].Value = report.NumberOfOrders;
+                    ws.Cells[currentRow, 5].Value = report.TotalRevenue;
+                    ws.Cells[currentRow, 5].Style.Numberformat.Format = "0.00";
+                    ws.Cells[currentRow, 6].Value = report.TotalDiscount;
+                    ws.Cells[currentRow, 6].Style.Numberformat.Format = "0.00";
+
                     currentRow++;
                 }
 
                 //Style Data Cells
-                using (var data = ws.Cells[2,1, currentRow, 4])
+                using (var data = ws.Cells[2, 1, currentRow, 4])
                 {
                     data.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
                 }
@@ -65,6 +82,8 @@
                 ws.Column(2).AutoFit();
                 ws.Column(3).AutoFit();
                 ws.Column(4).AutoFit();
+                ws.Column(5).AutoFit();
+                ws.Column(6).AutoFit();
 
                 pck.Save();
             }
@@ -154,7 +173,7 @@
                 Console.WriteLine("File {0} doesn't exist", filePath);
                 Console.WriteLine(e.Message);
             }
-            
+
             return listOfData;
         }
     }

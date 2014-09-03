@@ -71,8 +71,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="db.sqlite" />
     <None Include="packages.config" />
-    <None Include="sqlitedb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoffeeCompany.SQLite.Models\CoffeeCompany.SQLite.Models.csproj">

@@ -8,7 +8,7 @@ namespace CoffeeCompany.SQLite.Data
 {
     public class SQLiteContext : DbContext
     {
-        const string ConnectionString = @"Data Source=..\..\..\CoffeeCompany.SQLite.Data\sqlitedb;";
+        const string ConnectionString = @"Data Source=..\..\..\CoffeeCompany.SQLite.Data\db.sqlite;";
 
         public SQLiteContext()
             : base(new SQLiteConnection() { ConnectionString = ConnectionString }, true)

@@ -16,7 +16,7 @@
         public void ExportProductReport(Product product)
         {
             string productJson = JsonConvert.SerializeObject(product);
-            string path = PATH + product.Id + ".json";
+            string path = PATH + product.ID + ".json";
             using (StreamWriter writer = new StreamWriter(path))
             {
                 writer.Write(productJson);
