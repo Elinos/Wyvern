@@ -26,49 +26,74 @@
 
         private ICoffeeCompanyData Data { get; set; }
 
-        private List<List<string>> GetTotalRevenuesFromDatabase(string path)
-        {                      
-            var products =
-                (from p in Data.Products.All()
-                from o in p.Orders
+        public List<List<string>> GetPendingOrdersReport()
+        {
+            var pendingOrders =
+                (from o in this.Data.Orders.Where(x => x.Status == 0)
+                join c in this.Data.ClientCompanies.All()
+                on o.ClientCompanyId equals c.ID
                 select new
                 {
-                    Name = p.Name,
-                    Price = p.PricePerKgInDollars.ToString(),
-                    Quantity = o.QuantityInKg.ToString(), 
-                    Total = (p.PricePerKgInDollars * o.QuantityInKg).ToString()
+                    o.ID,
+                    ProductName = o.Product.Name,
+                    CompanyName = c.Name,
+                    TotalRevenue = o.QuantityInKg * o.Product.PricePerKgInDollars
                 }).ToList();
+
 
             var formattedProducts = new List<List<string>>();
 
-            for (int i = 0; i < products.Count; i++)
+            for (int i = 0; i < pendingOrders.Count; i++)
             {
                 formattedProducts.Add(new List<string>() {
-                    products[i].Name,
-                    products[i].Price.ToString(),
-                    products[i].Quantity.ToString(),
-                    products[i].Total.ToString(),
+                    pendingOrders[i].ID.ToString(),
+                    pendingOrders[i].ProductName,
+                    pendingOrders[i].CompanyName,
+                    pendingOrders[i].TotalRevenue.ToString(),
                 });
             }
 
             return formattedProducts;
-        }    
+        }
+
+        public List<OrderInfo> GetOrderInfo()
+        {
+            var pendingOrders =
+                from o in this.Data.Orders.All()
+                join c in this.Data.ClientCompanies.All()
+                on o.ClientCompanyId equals c.ID
+                select new OrderInfo
+                {
+                    CompanyId = o.ClientCompanyId,
+                    CompanyName = c.Name,
+                    ProductName = o.Product.Name,
+                    ProductPrice = o.Product.PricePerKgInDollars,
+                    Quantity = o.QuantityInKg,
+                    RevenueFromOrder = o.QuantityInKg * o.Product.PricePerKgInDollars
+                };
+           var list= pendingOrders.ToList();
+           for (int i = 0; i < list.Count; i++)
+           {
+               Console.WriteLine(list[i].CompanyName + " " + list[i].ProductName);
+           }
+
+            return pendingOrders.ToList();
+        }
 
         private List<List<string>> GetOrdersForCompany(string companyName)
         {
-            int companyId = (from c in this.Data.ClientCompanies.All()
-                            where c.Name == companyName
-                            select c.ID).First();
-
             var orders =
-                (from o in this.Data.Orders.All()
-                 where o.ClientCompanyId == companyId
+                (from o in this.Data.Orders.Where(x => x.ClientCompany.Name == companyName)
                  select new
                  {
                      o.ID,
                      o.QuantityInKg,
                      o.Status,
-                     Product = o.Product,
+<<<<<<< HEAD
+                     ProductName = o.Product.Name,
+=======
+                     Product = o.Employee,
+>>>>>>> origin/master
                  }).ToList();
 
             var formattedOrderd = new List<List<string>>();
@@ -78,27 +103,27 @@
                     orders[i].ID.ToString(),
                     orders[i].QuantityInKg.ToString(),
                     orders[i].Status.ToString(),
-                    string.Join(", ", orders[i].Product),
+                    orders[i].ProductName
                 });
             }
 
             return formattedOrderd;
         }
 
-        public void GetTotalRevenuesPdfReports(string path)
+        public void GetPendingOrdersPdfReport(string path)
         {
-            var products = GetTotalRevenuesFromDatabase(path);
-            var title = "Total Revenue Report";
-            var cellsTitles = new List<string> { "Product Name", "Product Price", "Number of orders", "Total Revenue" };
+            var products = GetPendingOrdersReport();
+            var title = "Pending Orders Report";
+            var cellsTitles = new List<string> { "Order ID", "Product Name", "Company name", "Total Revenue" };
 
             this.ExportPdf.GetPDF(products, title, cellsTitles, path);
         }
 
-        public void GetTotalRevenuesXmlReports(string path)
+        public void GetPendingOrdersXmlReport(string path)
         {
-            var products = GetTotalRevenuesFromDatabase(path);
-            var title = "Total Revenue Report";
-            var cellsTitles = new List<string> { "Product Name", "Product Price", "Number of orders", "Total Revenue" };
+            var products = GetPendingOrdersReport();
+            var title = "Pending Orders Report";
+            var cellsTitles = new List<string> { "Order ID", "Product Name", "Company name", "Total Revenue" };
 
             this.ExportXml.ExportDocument(products, title, cellsTitles, path);
         }
@@ -107,16 +132,16 @@
         {
             var products = GetOrdersForCompany(name);
             var title = string.Format("Orders' shipment details for company \"{0}\"", name);
-            var cellsTitles = new List<string> { "Order ID", "Quantoty in kg", "Status", "Products"};
+            var cellsTitles = new List<string> { "Order ID", "Quantity in kg", "Status", "Product Name"};
 
             this.ExportPdf.GetPDF(products, title, cellsTitles, path);
         }
 
-        public void GetOrderForCompanyXmlReport(string name, string path)
+        public void GetOrderForCompanyXmlReportd(string name, string path)
         {
             var products = GetOrdersForCompany(name);
             var title = string.Format("Orders' shipment details for company \"{0}\"", name);
-            var cellsTitles = new List<string> { "Order ID", "Quantoty in kg", "Status", "Products" };
+            var cellsTitles = new List<string> { "Order ID", "Quantoty in kg", "Status", "Product Name" };
 
             this.ExportXml.ExportDocument(products, title, cellsTitles, path);
         }
