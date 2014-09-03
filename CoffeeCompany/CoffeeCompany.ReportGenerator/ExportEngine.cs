@@ -120,5 +120,12 @@
 
             this.ExportXml.ExportDocument(products, title, cellsTitles, path);
         }
+
+        public void GetJSONProductReport() 
+        {
+            var products = from p in this.Data.Products.All()
+                           select p;
+            ExportJson.ExportAllProductReports(products.ToList());       
+        }
     }
 }
