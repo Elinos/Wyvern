@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ProductsReports>
+  <Report title="Orders'shipmentdetailsforcompany&quot;CoffeeKing&quot;">
+    <ProductInfo>
+      <OrderID>1</OrderID>
+      <Quantotyinkg>100</Quantotyinkg>
+      <Status>Pending</Status>
+      <Products>Blue, Gold</Products>
+    </ProductInfo>
+  </Report>
+</ProductsReports>

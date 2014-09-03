@@ -22,16 +22,19 @@
 
             //var mySQLManager = new MySQLManager();
             //mySQLManager.AddReport(55, "NewCompany3", "ReportOne", 2.00m, 45, 5000m);
-            var sqliteLoader = new SQLiteLoader();
-            sqliteLoader.LoadData();
-            var excelManager = new ExcelManager();
-            excelManager.CreateExcelReport();
+            //var sqliteLoader = new SQLiteLoader();
+            //sqliteLoader.LoadData();
+            //var excelManager = new ExcelManager();
+            //excelManager.CreateExcelReport();
 
-            //var data = new CoffeeCompanyData();
-            //var reporter = new ReportsEngine(data);
+            var data = new CoffeeCompanyData();
+            var reporter = new ReportsEngine(data);
 
-            //reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
-            //reporter.GetOrderForCompany("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");
+            reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
+            reporter.GetOrderForCompanyPdfReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");
+
+            reporter.GetTotalRevenuesXmlReports(@"..\..\..\Reports\TotalRevenueXmlReport.xml");
+            reporter.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersXmlReport.xml");
         }
     }
 }
