@@ -6,7 +6,7 @@ namespace CoffeeCompany.Excel.Manager
     using System.Linq;
     using CoffeeCompany.Models;
     using CoffeeCompany.MySQL.Manager;
-    using CoffeeCompany.SQLite.Loader;
+    using CoffeeCompany.SQLite.Manager;
     using OfficeOpenXml;
     using OfficeOpenXml.Style;
     using System.Drawing;
@@ -17,7 +17,7 @@ namespace CoffeeCompany.Excel.Manager
         {
             var mySQLManager = new MySQLManager();
             var reports = mySQLManager.GetAllReports();
-            var sqliteManager = new SQLiteLoader();
+            var sqliteManager = new SQLiteManager();
             var discountInformations = sqliteManager.GetDiscountPercentagesPerCompany();
             var reportsWithDiscounts = from r in reports
                                        join di in discountInformations on r.CompanyID equals di.CompanyID

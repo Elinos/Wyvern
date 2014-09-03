@@ -7,7 +7,7 @@
     <ProjectGuid>{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CoffeeCompany.SQLite.Loader</RootNamespace>
+    <RootNamespace>CoffeeCompany.SQLite.Manager</RootNamespace>
     <AssemblyName>CoffeeCompany.SQLite.Loader</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DiscountInformation.cs" />
-    <Compile Include="SQLiteLoader.cs" />
+    <Compile Include="SQLiteManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

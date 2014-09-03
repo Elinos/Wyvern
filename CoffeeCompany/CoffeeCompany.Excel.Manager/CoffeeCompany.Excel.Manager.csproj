@@ -69,9 +69,9 @@
       <Project>{5a2d6ee4-deb0-4ff6-a8c8-34ad48ea4de4}</Project>
       <Name>CoffeeCompany.MySQL.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CoffeeCompany.SQLite.Loader\CoffeeCompany.SQLite.Loader.csproj">
+    <ProjectReference Include="..\CoffeeCompany.SQLite.Manager\CoffeeCompany.SQLite.Manager.csproj">
       <Project>{3e7583c6-3b99-4aad-83ff-f860e949b3ba}</Project>
-      <Name>CoffeeCompany.SQLite.Loader</Name>
+      <Name>CoffeeCompany.SQLite.Manager</Name>
     </ProjectReference>
     <ProjectReference Include="..\CoffeeCompany.SQLite.Models\CoffeeCompany.SQLite.Models.csproj">
       <Project>{9556a9f7-0970-4e4f-bb7b-d7a21cc5eb78}</Project>

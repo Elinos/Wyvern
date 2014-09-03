@@ -7,7 +7,7 @@
     using CoffeeCompany.Models;
     using CoffeeCompany.Import;
     using CoffeeCompany.MySQL.Manager;
-    using CoffeeCompany.SQLite.Loader;
+    using CoffeeCompany.SQLite.Manager;
     using CoffeeCompany.Excel.Manager;
     using CoffeeCompany.ReportGenerator;
     using CoffeeCompany.ConsoleClient.Renderer;
@@ -27,7 +27,7 @@
 
         private CoffeeCompanyData Data = new CoffeeCompanyData();
 
-        private SQLiteLoader sqliteLoader = new SQLiteLoader();
+        private SQLiteManager sqliteLoader = new SQLiteManager();
 
         public void InitiateCommandMenu() 
         {

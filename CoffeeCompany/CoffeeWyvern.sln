@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.ConsoleClient
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.SQLite.Data", "CoffeeCompany.SQLite.Data\CoffeeCompany.SQLite.Data.csproj", "{366635E3-0DE7-4F3F-BBAA-78E6FC465C82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.SQLite.Loader", "CoffeeCompany.SQLite.Loader\CoffeeCompany.SQLite.Loader.csproj", "{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.SQLite.Models", "CoffeeCompany.SQLite.Models\CoffeeCompany.SQLite.Models.csproj", "{9556A9F7-0970-4E4F-BB7B-D7A21CC5EB78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.Import", "CoffeeCompany.Import\CoffeeCompany.Import.csproj", "{8D2D1249-1441-4755-A967-42EFFAA166FD}"
@@ -24,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.Excel.Manager", "CoffeeCompany.Excel.Manager\CoffeeCompany.Excel.Manager.csproj", "{024C986C-94FF-4458-A7FC-2A1FE5A0A954}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.ReportGenerator", "CoffeeCompany.ReportGenerator\CoffeeCompany.ReportGenerator.csproj", "{C2C1B00A-B19F-4862-BC3C-C56685421B90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoffeeCompany.SQLite.Manager", "CoffeeCompany.SQLite.Manager\CoffeeCompany.SQLite.Manager.csproj", "{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +47,6 @@ Global
 		{366635E3-0DE7-4F3F-BBAA-78E6FC465C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{366635E3-0DE7-4F3F-BBAA-78E6FC465C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{366635E3-0DE7-4F3F-BBAA-78E6FC465C82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9556A9F7-0970-4E4F-BB7B-D7A21CC5EB78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9556A9F7-0970-4E4F-BB7B-D7A21CC5EB78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9556A9F7-0970-4E4F-BB7B-D7A21CC5EB78}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -75,6 +71,10 @@ Global
 		{C2C1B00A-B19F-4862-BC3C-C56685421B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2C1B00A-B19F-4862-BC3C-C56685421B90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2C1B00A-B19F-4862-BC3C-C56685421B90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E7583C6-3B99-4AAD-83FF-F860E949B3BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

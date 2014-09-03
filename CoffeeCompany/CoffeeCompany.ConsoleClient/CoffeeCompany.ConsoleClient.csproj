@@ -100,9 +100,9 @@
       <Project>{c2c1b00a-b19f-4862-bc3c-c56685421b90}</Project>
       <Name>CoffeeCompany.ReportGenerator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CoffeeCompany.SQLite.Loader\CoffeeCompany.SQLite.Loader.csproj">
+    <ProjectReference Include="..\CoffeeCompany.SQLite.Manager\CoffeeCompany.SQLite.Manager.csproj">
       <Project>{3e7583c6-3b99-4aad-83ff-f860e949b3ba}</Project>
-      <Name>CoffeeCompany.SQLite.Loader</Name>
+      <Name>CoffeeCompany.SQLite.Manager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
