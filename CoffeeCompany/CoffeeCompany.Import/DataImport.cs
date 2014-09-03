@@ -12,9 +12,9 @@
 
     public class DataImport
     {
-        private const string DefaultMongoDbConnectionString = "mongodb://wyvern:coffee@kahana.mongohq.com:10019/CoffeeWyvern";
+        //private const string DefaultMongoDbConnectionString = "mongodb://wyvern:coffee@kahana.mongohq.com:10019/CoffeeWyvern";
         //private const string DefaultMongoDbConnectionString = "mongodb://wyvern:coffee@ds051368.mongolab.com:51368/coffeewyvern";
-        //private const string DefaultMongoDbConnectionString = "mongodb://localhost/";
+        private const string DefaultMongoDbConnectionString = "mongodb://localhost/";
         private const string DefaultMongoDbName = "CoffeeWyvern";
 
         private const string DefaultZipToUnpack = @"..\..\..\..\dbData\ExcelData.zip";
