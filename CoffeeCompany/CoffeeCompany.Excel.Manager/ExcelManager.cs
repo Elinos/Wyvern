@@ -9,6 +9,7 @@ namespace CoffeeCompany.Excel.Manager
     using CoffeeCompany.SQLite.Loader;
     using OfficeOpenXml;
     using OfficeOpenXml.Style;
+    using System.Drawing;
 
     public class ExcelManager
     {
@@ -30,10 +31,10 @@ namespace CoffeeCompany.Excel.Manager
                                            TotalDiscount = r.TotalRevenue * (decimal)(di.DiscountPercent / 100.00)
                                        };
             var file = CreateDirAndFile();
-            LoadReportDataToFile(file, reportsWithDiscounts);
+            WriteReportDataToFile(file, reportsWithDiscounts);
         }
 
-        private void LoadReportDataToFile(FileInfo file, IEnumerable<DiscountedReport> reportsWithDiscounts)
+        private void WriteReportDataToFile(FileInfo file, IEnumerable<DiscountedReport> reportsWithDiscounts)
         {
             int currentRow = 2;
             using (ExcelPackage pck = new ExcelPackage(file))
@@ -52,8 +53,12 @@ namespace CoffeeCompany.Excel.Manager
                 {
                     titles.Style.Font.Bold = true;
                     titles.Style.Font.Size = 14;
+                    titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                    titles.Style.Fill.BackgroundColor.SetColor(Color.LightGray);
                     titles.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                     titles.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    var border = titles.Style.Border;
+                    border.Bottom.Style = border.Top.Style = border.Left.Style = border.Right.Style = ExcelBorderStyle.Thin;
                 }
 
                 //Load Data
@@ -73,9 +78,11 @@ namespace CoffeeCompany.Excel.Manager
                 }
 
                 //Style Data Cells
-                using (var data = ws.Cells[2, 1, currentRow, 4])
+                using (var data = ws.Cells[2, 1, currentRow - 1, 6])
                 {
                     data.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                    var border = data.Style.Border;
+                    border.Bottom.Style = border.Top.Style = border.Left.Style = border.Right.Style = ExcelBorderStyle.Thin;
                 }
 
                 ws.Column(1).AutoFit();
