@@ -9,16 +9,16 @@ namespace CoffeeCompany.MySQL.Manager
     {
         coffeecompanyreportsEntities mySQLDb = new coffeecompanyreportsEntities();
 
-        public void AddReport(int companyID, string companyName, string productName, decimal price, int numberOfOrders, decimal totalRevenue)
+        public void AddReport(OrderInfo orderInfo)
         {
             var report = new Report
             {
-                CompanyID = companyID,
-                CompanyName = companyName,
-                ProductName = productName,
-                Price = price,
-                NumberOfOrders = numberOfOrders,
-                TotalRevenue = totalRevenue
+                CompanyID = orderInfo.CompanyID,
+                CompanyName = orderInfo.CompanyName,
+                ProductName = orderInfo.ProductName,
+                Price = orderInfo.Price,
+                NumberOfOrders = orderInfo.NumberOfOrders,
+                TotalRevenue = orderInfo.TotalRevenue
             };
             mySQLDb.Reports1.Add(report);
             mySQLDb.SaveChanges();
