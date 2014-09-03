@@ -1,23 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using CoffeeCompany.SQLite.Models;
 using CoffeeCompany.SQLite.Data;
+using CoffeeCompany.SQLite.Models;
 
 namespace CoffeeCompany.SQLite.Loader
 {
     public class SQLiteLoader
     {
+        SQLiteContext sqLiteDb = new SQLiteContext();
 
         public void LoadData()
         {
-            var sqLiteDb = new SQLiteContext();
             DeleteAllEntities(sqLiteDb, "Discounts");
-            DeleteAllEntities(sqLiteDb, "DiscountTypes");
             
-            sqLiteDb.DiscountType.Add(new DiscountType { Name = "Regular", DiscountPercent = 0 });
-            sqLiteDb.DiscountType.Add(new DiscountType { Name = "Silver", DiscountPercent = 2 });
-            sqLiteDb.DiscountType.Add(new DiscountType { Name = "Gold", DiscountPercent = 4 });
-            sqLiteDb.DiscountType.Add(new DiscountType { Name = "Platinum", DiscountPercent = 6 });
             CreateDiscountForCompany(sqLiteDb, 5, 1);
             CreateDiscountForCompany(sqLiteDb, 1, 2);
             CreateDiscountForCompany(sqLiteDb, 2, 3);
@@ -32,7 +28,7 @@ namespace CoffeeCompany.SQLite.Loader
             context.Database.ExecuteSqlCommand(deleteAllEntitiesCommand);
             context.SaveChanges();
         }
-        private void CreateDiscountForCompany(SQLiteContext db, int companyID, int discountTypeID)
+        public void CreateDiscountForCompany(SQLiteContext db, int companyID, int discountTypeID)
         {
             var discount = new Discount
             {
@@ -41,6 +37,18 @@ namespace CoffeeCompany.SQLite.Loader
             };
             db.Discounts.Add(discount);
             db.SaveChanges();
+        }
+
+        public List<DiscountInformation> GetDiscountPercentagesPerCompany()
+        {
+            var discountPercentages = from d in sqLiteDb.Discounts
+                                      join dt in sqLiteDb.DiscountType on d.DiscountTypeID equals dt.DiscountTypeID
+                                      select new DiscountInformation
+                                      {
+                                          CompanyID = d.CompanyId,
+                                          DiscountPercent = dt.DiscountPercent
+                                      };
+            return discountPercentages.ToList();
         }
     }
 }

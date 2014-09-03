@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DiscountedReport.cs" />
     <Compile Include="ExcelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,6 +67,14 @@
     <ProjectReference Include="..\CoffeeCompany.MySQL.Models\CoffeeCompany.MySQL.Models.csproj">
       <Project>{5a2d6ee4-deb0-4ff6-a8c8-34ad48ea4de4}</Project>
       <Name>CoffeeCompany.MySQL.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.SQLite.Loader\CoffeeCompany.SQLite.Loader.csproj">
+      <Project>{3e7583c6-3b99-4aad-83ff-f860e949b3ba}</Project>
+      <Name>CoffeeCompany.SQLite.Loader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.SQLite.Models\CoffeeCompany.SQLite.Models.csproj">
+      <Project>{9556a9f7-0970-4e4f-bb7b-d7a21cc5eb78}</Project>
+      <Name>CoffeeCompany.SQLite.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
