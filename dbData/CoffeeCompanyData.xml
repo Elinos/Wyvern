@@ -5,23 +5,15 @@
 			<Name>Indian Coffee House</Name>
 			<CountryOfOrigin>India</CountryOfOrigin>
 		</ClientCompany>
-		<Products>
-			<Product>
-				<Name>Coffee Liqueurs</Name>
-				<PricePerKgInDollars>30.99</PricePerKgInDollars>
-				<TypeOfCoffee>1</TypeOfCoffee>
-			</Product>
-			<Product>
-				<Name>Kaffee Fertig</Name>
-				<PricePerKgInDollars>15.99</PricePerKgInDollars>
-				<TypeOfCoffee>2</TypeOfCoffee>
-			</Product>
-			<Product>
-				<Name>Caffe Coretto</Name>
-				<PricePerKgInDollars>19.99</PricePerKgInDollars>
-				<TypeOfCoffee>3</TypeOfCoffee>
-			</Product>
-		</Products>
+		<Product>
+			<Name>Coffee Liqueurs</Name>
+			<PricePerKgInDollars>30.99</PricePerKgInDollars>
+			<TypeOfCoffee>1</TypeOfCoffee>
+		</Product>
+		<Employee>
+			<Username>gosho</Username>
+			<Name>Georgi Georgiev</Name>
+		</Employee>
 		<QuantityInKg>230</QuantityInKg>
 		<Status>4</Status>	
 	</Order>
@@ -30,23 +22,15 @@
 			<Name>Julius Meinl</Name>
 			<CountryOfOrigin>Austria</CountryOfOrigin>
 		</ClientCompany>
-		<Products>
-			<Product>
-				<Name>Witch's Coffee</Name>
-				<PricePerKgInDollars>33.99</PricePerKgInDollars>
-				<TypeOfCoffee>1</TypeOfCoffee>
-			</Product>
-			<Product>
-				<Name>Corfu Coffee</Name>
-				<PricePerKgInDollars>31.99</PricePerKgInDollars>
-				<TypeOfCoffee>2</TypeOfCoffee>
-			</Product>
-			<Product>
-				<Name>Seville Coffee</Name>
-				<PricePerKgInDollars>20.99</PricePerKgInDollars>
-				<TypeOfCoffee>3</TypeOfCoffee>
-			</Product>
-		</Products>
+		<Product>
+			<Name>Witch's Coffee</Name>
+			<PricePerKgInDollars>33.99</PricePerKgInDollars>
+			<TypeOfCoffee>1</TypeOfCoffee>
+		</Product>
+		<Employee>
+			<Username>gosho</Username>
+			<Name>Georgi Georgiev</Name>
+		</Employee>
 		<QuantityInKg>220</QuantityInKg>
 		<Status>3</Status>
 	</Order>
@@ -55,23 +39,15 @@
 			<Name>Mikel Coffee Company</Name>
 			<CountryOfOrigin>USA</CountryOfOrigin>
 		</ClientCompany>
-		<Products>
-			<Product>
-				<Name>Cafe Mendoza</Name>
-				<PricePerKgInDollars>20.99</PricePerKgInDollars>
-				<TypeOfCoffee>1</TypeOfCoffee>
-			</Product>
-			<Product>
-				<Name>Keoke Coffee</Name>
-				<PricePerKgInDollars>27.99</PricePerKgInDollars>
-				<TypeOfCoffee>2</TypeOfCoffee>
-			</Product>
-			<Product>
-				<Name>Baileys Irish Cream Coffee</Name>
-				<PricePerKgInDollars>15.99</PricePerKgInDollars>
-				<TypeOfCoffee>3</TypeOfCoffee>
-			</Product>
-		</Products>
+		<Product>
+			<Name>Cafe Mendoza</Name>
+			<PricePerKgInDollars>20.99</PricePerKgInDollars>
+			<TypeOfCoffee>1</TypeOfCoffee>
+		</Product>
+		<Employee>
+			<Username>mariika</Username>
+			<Name>Maria Marinova</Name>
+		</Employee>
 		<QuantityInKg>222</QuantityInKg>
 		<Status>2</Status>
 	</Order>

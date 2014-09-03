@@ -25,6 +25,7 @@ namespace CoffeeCompany.Excel.Manager
                                        {
                                            CompanyName = r.CompanyName,
                                            ProductName = r.ProductName,
+                                           ApprovedByUser = r.ApprovedByUser,
                                            Price = r.Price * (decimal)(1 - (di.DiscountPercent / 100.00)),
                                            NumberOfOrders = r.NumberOfOrders,
                                            TotalRevenue = r.TotalRevenue * (decimal)(1 - (di.DiscountPercent / 100.00)),
@@ -43,10 +44,11 @@ namespace CoffeeCompany.Excel.Manager
                 ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Report");
                 ws.Cells[1, 1].Value = "Company name";
                 ws.Cells[1, 2].Value = "Product name";
-                ws.Cells[1, 3].Value = "Price";
-                ws.Cells[1, 4].Value = "Number of orders";
-                ws.Cells[1, 5].Value = "Total Revenue";
-                ws.Cells[1, 6].Value = "Total Discount";
+                ws.Cells[1, 3].Value = "Approved by";
+                ws.Cells[1, 4].Value = "Price";
+                ws.Cells[1, 5].Value = "Number of orders";
+                ws.Cells[1, 6].Value = "Total Revenue";
+                ws.Cells[1, 7].Value = "Total Discount";
 
                 //Style the titles
                 using (var titles = ws.Cells[1, 1, 1, 6])
@@ -66,19 +68,20 @@ namespace CoffeeCompany.Excel.Manager
                 {
                     ws.Cells[currentRow, 1].Value = report.ProductName;
                     ws.Cells[currentRow, 2].Value = report.CompanyName;
-                    ws.Cells[currentRow, 3].Value = report.Price;
-                    ws.Cells[currentRow, 3].Style.Numberformat.Format = "0.00";
-                    ws.Cells[currentRow, 4].Value = report.NumberOfOrders;
-                    ws.Cells[currentRow, 5].Value = report.TotalRevenue;
-                    ws.Cells[currentRow, 5].Style.Numberformat.Format = "0.00";
-                    ws.Cells[currentRow, 6].Value = report.TotalDiscount;
+                    ws.Cells[currentRow, 3].Value = report.ApprovedByUser;
+                    ws.Cells[currentRow, 4].Value = report.Price;
+                    ws.Cells[currentRow, 4].Style.Numberformat.Format = "0.00";
+                    ws.Cells[currentRow, 5].Value = report.NumberOfOrders;
+                    ws.Cells[currentRow, 6].Value = report.TotalRevenue;
                     ws.Cells[currentRow, 6].Style.Numberformat.Format = "0.00";
+                    ws.Cells[currentRow, 7].Value = report.TotalDiscount;
+                    ws.Cells[currentRow, 7].Style.Numberformat.Format = "0.00";
 
                     currentRow++;
                 }
 
                 //Style Data Cells
-                using (var data = ws.Cells[2, 1, currentRow - 1, 6])
+                using (var data = ws.Cells[2, 1, currentRow - 1, 7])
                 {
                     data.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
                     var border = data.Style.Border;
@@ -91,6 +94,7 @@ namespace CoffeeCompany.Excel.Manager
                 ws.Column(4).AutoFit();
                 ws.Column(5).AutoFit();
                 ws.Column(6).AutoFit();
+                ws.Column(7).AutoFit();
 
                 pck.Save();
             }
@@ -170,6 +174,58 @@ namespace CoffeeCompany.Excel.Manager
                                     PricePerKgInDollars = decimal.Parse(currentWorksheet.Cells[i, 2].Value.ToString()),
                                     TypeOfCoffee = (CoffeeTypes)int.Parse(currentWorksheet.Cells[i, 3].Value.ToString())
                                 });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("File {0} doesn't exist", filePath);
+                Console.WriteLine(e.Message);
+            }
+
+            return listOfData;
+        }
+
+        public IEnumerable<Order> ReadOrderExcelFile(string filePath)
+        {
+            var listOfData = new List<Order>();
+
+            try
+            {
+                var existingFile = new FileInfo(filePath);
+
+                using (var package = new ExcelPackage(existingFile))
+                {
+                    ExcelWorkbook workBook = package.Workbook;
+
+                    if (workBook != null)
+                    {
+                        if (workBook.Worksheets.Count > 0)
+                        {
+                            ExcelWorksheet currentWorksheet = workBook.Worksheets.First();
+
+                            for (var i = 2; i < currentWorksheet.Dimension.End.Row; i++)
+                            {
+                                var product = new Product
+                                    {
+                                        Name = currentWorksheet.Cells[i, 2].Value.ToString()
+                                    };
+
+                                var currentCompany = new ClientCompany
+                                    {
+                                        Name = currentWorksheet.Cells[i, 1].Value.ToString(),
+                                    };
+
+                                var currentOrder = new Order
+                                {
+                                    ClientCompany = currentCompany,
+                                    Product = product,
+                                    QuantityInKg = int.Parse(currentWorksheet.Cells[i, 4].Value.ToString())
+                                };
+
+                                listOfData.Add(currentOrder);
                             }
                         }
                     }

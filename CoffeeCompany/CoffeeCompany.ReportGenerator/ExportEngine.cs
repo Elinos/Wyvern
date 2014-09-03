@@ -68,7 +68,7 @@
                      o.ID,
                      o.QuantityInKg,
                      o.Status,
-                     Products = o.Products.Select(p => p.Name),
+                     Product = o.Employee,
                  }).ToList();
 
             var formattedOrderd = new List<List<string>>();
@@ -78,7 +78,7 @@
                     orders[i].ID.ToString(),
                     orders[i].QuantityInKg.ToString(),
                     orders[i].Status.ToString(),
-                    string.Join(", ", orders[i].Products),
+                    string.Join(", ", orders[i].Product),
                 });
             }
 
@@ -119,6 +119,13 @@
             var cellsTitles = new List<string> { "Order ID", "Quantoty in kg", "Status", "Products" };
 
             this.ExportXml.ExportDocument(products, title, cellsTitles, path);
+        }
+
+        public void GetJSONProductReport() 
+        {
+            var products = from p in this.Data.Products.All()
+                           select p;
+            ExportJson.ExportAllProductReports(products.ToList());       
         }
     }
 }

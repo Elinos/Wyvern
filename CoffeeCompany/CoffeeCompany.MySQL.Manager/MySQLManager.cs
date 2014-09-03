@@ -19,6 +19,7 @@ namespace CoffeeCompany.MySQL.Manager
                 Price = orderInfo.Price,
                 NumberOfOrders = orderInfo.NumberOfOrders,
                 TotalRevenue = orderInfo.TotalRevenue
+
             };
             mySQLDb.Reports1.Add(report);
             mySQLDb.SaveChanges();

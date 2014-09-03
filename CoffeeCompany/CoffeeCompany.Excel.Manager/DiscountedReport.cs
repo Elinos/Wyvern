@@ -10,6 +10,8 @@ namespace CoffeeCompany.Excel.Manager
         public string CompanyName { get; set; }
 
         public string ProductName { get; set; }
+
+        public string ApprovedByUser { get; set; }
         public decimal Price { get; set; }
         public int NumberOfOrders { get; set; }
         public decimal TotalRevenue { get; set; }

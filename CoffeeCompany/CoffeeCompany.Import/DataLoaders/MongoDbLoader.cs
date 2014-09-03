@@ -12,6 +12,9 @@
     internal class MongoDbLoader : IDataLoader
     {
         private const string OrderCollectionName = "Orders";
+        private const string ClientCompanyCollectionName = "Companies";
+        private const string ProductCollectionName = "Products";
+        private const string EmployeeCollectionName = "Employees";
 
         private string dbName;
         private MongoDatabase mongoDb;
@@ -42,17 +45,37 @@
 
         public ICollection<ClientCompany> retrieveCompaniesData()
         {
-            throw new NotImplementedException();
+            var clientCompanyCollection = this.mongoDb.GetCollection<ClientCompany>(ClientCompanyCollectionName);
+
+            var clientCompanies = clientCompanyCollection.FindAll().ToList();
+
+            return clientCompanies;
         }
 
         public ICollection<Product> retrieveProductsData()
         {
-            throw new NotImplementedException();
+            var productCollection = this.mongoDb.GetCollection<Product>(ProductCollectionName);
+
+            var produtcs = productCollection.FindAll().ToList();
+
+            return produtcs;
+        }
+
+        public ICollection<Employee> retrieveEmployeesData()
+        {
+            var employeeCollection = this.mongoDb.GetCollection<Employee>(EmployeeCollectionName);
+
+            var employees = employeeCollection.FindAll().ToList();
+
+            return employees;
         }
 
         public void MongoDbSeed()
         {
             var orderCollection = this.mongoDb.GetCollection<Order>(OrderCollectionName);
+            var clientCompanyCollection = this.mongoDb.GetCollection<ClientCompany>(ClientCompanyCollectionName);
+            var productCollection = this.mongoDb.GetCollection<Product>(ProductCollectionName);
+            var employeeCollection = this.mongoDb.GetCollection<Employee>(EmployeeCollectionName);
 
             var company1 = new
             {
@@ -114,7 +137,7 @@
 
             var product5 = new
             {
-                Name = "Special",
+                Name = "Special III",
                 PricePerKgInDollars = 19.30m,
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
@@ -126,58 +149,106 @@
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
 
+            var employee1 = new
+            {
+                Username = "gosho",
+                Name = "Georgi Georgiev"
+            };
+
+            var employee2 = new
+            {
+                Username = "pesho",
+                Name = "Peter Georgiev"
+            };
+
+            var employee3 = new
+            {
+                Username = "ivo",
+                Name = "Ivaylo Kenov"
+            };
+
+            var employee4 = new
+            {
+                Username = "doncho",
+                Name = "Doncho Minkov"
+            };
+
+            var employee5 = new
+            {
+                Username = "niki",
+                Name = "Nikolay Kostov"
+            };
+
             var order1 = new
             {
                 ClientCompany = company1,
-                Products = new HashSet<object>(),
+                Products = product1,
                 QuantityInKg = 100,
-                Status = OrderStatus.Pending
+                Status = OrderStatus.Pending,
+                Employee = employee1
             };
 
             var order2 = new
             {
                 ClientCompany = company2,
-                Products = new HashSet<object>(),
+                Products = product2,
                 QuantityInKg = 500,
-                Status = OrderStatus.Processed
+                Status = OrderStatus.Processed,
+                Employee = employee2
             };
 
             var order3 = new
             {
                 ClientCompany = company3,
-                Products = new HashSet<object>(),
+                Products = product3,
                 QuantityInKg = 240,
-                Status = OrderStatus.Shipped
+                Status = OrderStatus.Shipped,
+                Employee = employee2
             };
 
             var order4 = new
             {
                 ClientCompany = company4,
-                Products = new HashSet<object>(),
+                Products = product4,
                 QuantityInKg = 410,
-                Status = OrderStatus.Returned
+                Status = OrderStatus.Returned,
+                Employee = employee3
             };
 
             var order5 = new
             {
                 ClientCompany = company5,
-                Products = new HashSet<object>(),
+                Products = product4,
                 QuantityInKg = 220,
-                Status = OrderStatus.Returned
+                Status = OrderStatus.Returned,
+                Employee = employee4
             };
-
-            order1.Products.Add(product1);
-            order1.Products.Add(product2);
-            order2.Products.Add(product3);
-            order3.Products.Add(product4);
-            order4.Products.Add(product5);
-            order5.Products.Add(product6);
 
             orderCollection.Insert(order1);
             orderCollection.Insert(order2);
             orderCollection.Insert(order3);
             orderCollection.Insert(order4);
             orderCollection.Insert(order5);
+
+            clientCompanyCollection.Insert(company1);
+            clientCompanyCollection.Insert(company2);
+            clientCompanyCollection.Insert(company3);
+            clientCompanyCollection.Insert(company4);
+            clientCompanyCollection.Insert(company5);
+
+            employeeCollection.Insert(employee1);
+            employeeCollection.Insert(employee2);
+            employeeCollection.Insert(employee3);
+            employeeCollection.Insert(employee4);
+            employeeCollection.Insert(employee5);
+
+            productCollection.Insert(product1);
+            productCollection.Insert(product2);
+            productCollection.Insert(product3);
+            productCollection.Insert(product4);
+            productCollection.Insert(product5);
+            productCollection.Insert(product6);
         }
+
     }
 }

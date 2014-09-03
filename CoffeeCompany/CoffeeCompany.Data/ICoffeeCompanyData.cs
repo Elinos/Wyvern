@@ -10,6 +10,8 @@
 
         IGenericRepository<Product> Products { get; }
 
+        IGenericRepository<Employee> Employees { get; }
+
         void SaveChanges();
     }
 }

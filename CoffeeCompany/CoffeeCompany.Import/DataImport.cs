@@ -17,8 +17,8 @@
         private const string DefaultMongoDbConnectionString = "mongodb://localhost/";
         private const string DefaultMongoDbName = "CoffeeWyvern";
 
-        private const string DefaultZipToUnpack = @"..\..\..\..\dbData\ExcelData.zip";
-        private const string DefaultUnpackDirectory = @"..\..\..\..\dbData\ExcelData";
+        private const string DefaultZipToUnpack = @"..\..\..\..\dbData\ExcelReports.zip";
+        private const string DefaultUnpackDirectory = @"..\..\..\..\dbData\ExcelReports";
 
         private const string DefaultXMLDataFileName = @"..\..\..\..\dbData\CoffeeCompanyData.xml";
 
@@ -42,23 +42,23 @@
             {
                 var mongoDbLoader = new MongoDbLoader(connectionString, dbName);
 
-                var orders = mongoDbLoader.retrieveOrdersData();
+                //var orders = mongoDbLoader.retrieveOrdersData();
+                var companies = mongoDbLoader.retrieveCompaniesData();
+                var products = mongoDbLoader.retrieveProductsData();
+                var employees = mongoDbLoader.retrieveEmployeesData();
 
                 //Seed to mongodb database, if there're no data
-                if (orders.Count == 0)
+                if (companies.Count == 0 && products.Count == 0 && employees.Count == 0)
                 {
                     mongoDbLoader.MongoDbSeed();
-                    orders = mongoDbLoader.retrieveOrdersData();
+                    companies = mongoDbLoader.retrieveCompaniesData();
+                    products = mongoDbLoader.retrieveProductsData();
+                    employees = mongoDbLoader.retrieveEmployeesData();
                 }
 
-                foreach (var order in orders)
-                {
-                    var mergedOrder = this.MergeWithExistingOrders(order);
-
-                    this.context.Orders.Add(mergedOrder);
-                }
-
-                this.context.SaveChanges();
+                this.ImportCompanies(companies);
+                this.ImportProducts(products);
+                this.ImportEmployees(employees);
             }
             catch (MongoConnectionException e)
             {
@@ -74,30 +74,9 @@
             {
                 var excelLoader = new ExcelLoader(zipToUnpack, unpackDirectory);
 
-                var companies = excelLoader.retrieveCompaniesData();
-                var products = excelLoader.retrieveProductsData();
+                var orders = excelLoader.retrieveOrdersData();
 
-                foreach (var company in companies)
-                {
-                    if (this.context.ClientCompanies.Any(c => c.Name == company.Name))
-                    {
-                        continue;
-                    }
-
-                    this.context.ClientCompanies.Add(company);
-                }
-
-                foreach (var product in products)
-                {
-                    if (context.Products.Any(p => p.Name == product.Name))
-                    {
-                        continue;
-                    }
-
-                    this.context.Products.Add(product);
-                }
-
-                this.context.SaveChanges();
+                ImportOrders(orders);
             }
             catch (Exception e)
             {
@@ -114,14 +93,7 @@
 
                 var orders = xmlLoader.retrieveOrdersData();
 
-                foreach (var order in orders)
-                {
-                    var mergedOrder = this.MergeWithExistingOrders(order);
-
-                    this.context.Orders.Add(mergedOrder);
-                }
-
-                this.context.SaveChanges();
+                this.ImportOrders(orders);
             }
             catch (Exception e)
             {
@@ -129,26 +101,97 @@
             }
         }
 
-        private Order MergeWithExistingOrders(Order order)
+        private void ImportCompanies(ICollection<ClientCompany> clientCompanies)
         {
-            var mergedCompany = this.MergeWithExistingClientCompanies(order.ClientCompany);
+            foreach (var company in clientCompanies)
+            {
+                if (this.context.ClientCompanies.Any(c => c.Name == company.Name))
+                {
+                    continue;
+                }
 
-            var mergedOrder = new Order
+                this.context.ClientCompanies.Add(company);
+            }
+
+            this.context.SaveChanges();
+        }
+
+        private void ImportProducts(ICollection<Product> products)
+        {
+            foreach (var product in products)
+            {
+                if (context.Products.Any(p => p.Name == product.Name))
+                {
+                    continue;
+                }
+
+                this.context.Products.Add(product);
+            }
+
+            this.context.SaveChanges();
+        }
+
+        private void ImportEmployees(ICollection<Employee> employees)
+        {
+            foreach (var employee in employees)
+            {
+                var mergedEmployee = this.MergeWithExistingEmployees(employee);
+
+                this.context.Employees.Add(mergedEmployee);
+            }
+
+            this.context.SaveChanges();
+        }
+
+        private void ImportOrders(ICollection<Order> orders)
+        {
+            foreach (var order in orders)
+            {
+                bool isExist;
+
+                var mergedOrder = this.MergeWithExistingOrders(order, out isExist);
+
+                if (isExist)
+                {
+                    continue;
+                }
+
+                this.context.Orders.Add(mergedOrder);
+            }
+
+            this.context.SaveChanges();
+        }
+
+        private Order MergeWithExistingOrders(Order order, out bool isExist)
+        {
+            var mergedOrder = this.context.Orders.Where(o => o.ClientCompany.Name == order.ClientCompany.Name &&
+                                                    o.Employee.Username == order.Employee.Username &&
+                                                    o.Status == order.Status &&
+                                                    o.QuantityInKg == order.QuantityInKg).FirstOrDefault();
+            if (mergedOrder != null)
+            {
+                isExist = true;
+                return mergedOrder;
+            }
+            else
+            {
+                var mergedCompany = this.MergeWithExistingClientCompanies(order.ClientCompany);
+                var mergedProduct = this.MergeWithExistingProducts(order.Product);
+                var mergedEmployee = this.MergeWithExistingEmployees(order.Employee);
+
+                mergedOrder = new Order
                 {
                     ClientCompany = mergedCompany,
                     ClientCompanyId = mergedCompany.ID,
                     QuantityInKg = order.QuantityInKg,
                     Status = order.Status,
-                    Products = new HashSet<Product>()
+                    Product = mergedProduct,
+                    Employee = mergedEmployee
                 };
 
-            foreach(var product in order.Products)
-            {
-                var mergedProduct = this.MergeWithExistingProducts(product);
-                mergedOrder.Products.Add(mergedProduct);
+                isExist = false;
+                return mergedOrder;
             }
-
-            return mergedOrder;
         }
 
         private ClientCompany MergeWithExistingClientCompanies(ClientCompany clientCompany)
@@ -173,6 +216,18 @@
             }
 
             return product;
+        }
+
+        private Employee MergeWithExistingEmployees(Employee employee)
+        {
+            var mergedEmployee = this.context.Employees.Where(e => e.Username == employee.Username).FirstOrDefault();
+
+            if (mergedEmployee != null)
+            {
+                return mergedEmployee;
+            }
+
+            return employee;
         }
     }
 }

@@ -38,16 +38,15 @@
         public virtual ClientCompany ClientCompany { get; set; }
 
         [Required]
-        public virtual ICollection<Product> Products
-        {
-            get
-            {
-                return this.products;
-            }
-            set
-            {
-                this.products = value;
-            }
-        }
+        public int ProductId { get; set; }
+
+        [Required]
+        public virtual Product Product { get; set; }
+
+        [Required]
+        public int EmployeeId { get; set; }
+
+        [Required]
+        public virtual Employee Employee { get; set; }
     }
 }

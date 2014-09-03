@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ClientCompany.cs" />
     <Compile Include="CoffeeTypes.cs" />
+    <Compile Include="Employees.cs" />
     <Compile Include="Orders.cs" />
     <Compile Include="OrderStatus.cs" />
     <Compile Include="Products.cs" />
