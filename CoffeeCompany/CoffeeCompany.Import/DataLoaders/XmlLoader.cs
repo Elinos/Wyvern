@@ -60,25 +60,20 @@
                 CountryOfOrigin = node["ClientCompany"]["CountryOfOrigin"].InnerText
             };
 
+            var product = new Product
+            {
+                Name = node["Product"]["Name"].InnerText,
+                PricePerKgInDollars = decimal.Parse(node["Product"]["PricePerKgInDollars"].InnerText),
+                TypeOfCoffee = (CoffeeTypes)int.Parse(node["Product"]["TypeOfCoffee"].InnerText)
+            };
+
             var order = new Order
             {
                 ClientCompany = company,
-                Products = new HashSet<Product>(),
+                Product = product,
                 QuantityInKg = int.Parse(node["QuantityInKg"].InnerText),
                 Status = (OrderStatus)int.Parse(node["Status"].InnerText)
             };
-
-            foreach (XmlNode rawProduct in node["Products"])
-            {
-                var product = new Product
-                {
-                    Name = rawProduct["Name"].InnerText,
-                    PricePerKgInDollars = decimal.Parse(rawProduct["PricePerKgInDollars"].InnerText),
-                    TypeOfCoffee = (CoffeeTypes)int.Parse(rawProduct["TypeOfCoffee"].InnerText)
-                };
-
-                order.Products.Add(product);
-            }
 
             return order;
         }

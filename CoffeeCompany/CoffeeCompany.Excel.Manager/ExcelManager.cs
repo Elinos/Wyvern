@@ -204,11 +204,10 @@ namespace CoffeeCompany.Excel.Manager
 
                             for (var i = 2; i < currentWorksheet.Dimension.End.Row; i++)
                             {
-                                var products = new HashSet<Product>();
-                                products.Add(new Product
+                                var product = new Product
                                     {
                                         Name = currentWorksheet.Cells[i, 2].Value.ToString()
-                                    });
+                                    };
 
                                 var currentCompany = new ClientCompany
                                     {
@@ -218,7 +217,7 @@ namespace CoffeeCompany.Excel.Manager
                                 var currentOrder = new Order
                                 {
                                     ClientCompany = currentCompany,
-                                    Products = products,
+                                    Product = product,
                                     QuantityInKg = int.Parse(currentWorksheet.Cells[i, 4].Value.ToString())
                                 };
 

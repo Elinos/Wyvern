@@ -126,7 +126,7 @@
 
             var product5 = new
             {
-                Name = "Special",
+                Name = "Special III",
                 PricePerKgInDollars = 19.30m,
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
@@ -141,7 +141,7 @@
             var order1 = new
             {
                 ClientCompany = company1,
-                Products = new HashSet<object>(),
+                Products = product1,
                 QuantityInKg = 100,
                 Status = OrderStatus.Pending
             };
@@ -149,7 +149,7 @@
             var order2 = new
             {
                 ClientCompany = company2,
-                Products = new HashSet<object>(),
+                Products = product2,
                 QuantityInKg = 500,
                 Status = OrderStatus.Processed
             };
@@ -157,7 +157,7 @@
             var order3 = new
             {
                 ClientCompany = company3,
-                Products = new HashSet<object>(),
+                Products = product3,
                 QuantityInKg = 240,
                 Status = OrderStatus.Shipped
             };
@@ -165,7 +165,7 @@
             var order4 = new
             {
                 ClientCompany = company4,
-                Products = new HashSet<object>(),
+                Products = product4,
                 QuantityInKg = 410,
                 Status = OrderStatus.Returned
             };
@@ -173,17 +173,10 @@
             var order5 = new
             {
                 ClientCompany = company5,
-                Products = new HashSet<object>(),
+                Products = product4,
                 QuantityInKg = 220,
                 Status = OrderStatus.Returned
             };
-
-            order1.Products.Add(product1);
-            order1.Products.Add(product2);
-            order2.Products.Add(product3);
-            order3.Products.Add(product4);
-            order4.Products.Add(product5);
-            order5.Products.Add(product6);
 
             orderCollection.Insert(order1);
             orderCollection.Insert(order2);

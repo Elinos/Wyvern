@@ -68,7 +68,7 @@
                      o.ID,
                      o.QuantityInKg,
                      o.Status,
-                     Products = o.Products.Select(p => p.Name),
+                     Product = o.Product,
                  }).ToList();
 
             var formattedOrderd = new List<List<string>>();
@@ -78,7 +78,7 @@
                     orders[i].ID.ToString(),
                     orders[i].QuantityInKg.ToString(),
                     orders[i].Status.ToString(),
-                    string.Join(", ", orders[i].Products),
+                    string.Join(", ", orders[i].Product),
                 });
             }
 
