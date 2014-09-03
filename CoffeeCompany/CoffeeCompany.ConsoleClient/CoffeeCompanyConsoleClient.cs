@@ -15,10 +15,13 @@
     {
         static void Main(string[] args)
         {
-            var dataImport = new DataImport();
-            dataImport.ImportFromXml();
-            dataImport.ImportFromExcel();
-            dataImport.ImportFromMongoDb();
+            CommandParser parser = new CommandParser();
+
+            parser.ReadInitialCommand();
+            //var dataImport = new DataImport();
+            //dataImport.ImportFromXml();
+           // dataImport.ImportFromExcel();
+            //dataImport.ImportFromMongoDb();
 
             //var mySQLManager = new MySQLManager();
             //mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
