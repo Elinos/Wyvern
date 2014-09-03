@@ -1,13 +1,12 @@
 ﻿namespace CoffeeCompany.ReportGenerator
 {
     using System;
-
-    using CoffeeCompany.Data;
     using System.Linq;
-    using CoffeeCompany.Models;
-    using CoffeeCompany.ReportGenerator;
     using System.Collections.Generic;
     using System.Collections;
+
+    using CoffeeCompany.Data;
+    using CoffeeCompany.Models;
 
     public class ReportsEngine
     {
@@ -72,6 +71,53 @@
             }
 
             return formattedProducts;
+        }
+
+        public DiscountInfo GetDiscountInfo(int companyId)
+        {
+            var orders =
+                from o in this.Data.Orders.All()
+                join c in this.Data.ClientCompanies.All().Where(x => x.ID == companyId)
+                on o.ClientCompanyId equals c.ID
+                join p in this.Data.Products.All()
+                on o.ProductId equals p.ID
+                select new
+                {
+                    Name = c.Name,
+                    Price = p.PricePerKgInDollars,
+                    Quantity = o.QuantityInKg
+                };
+
+            decimal totalSpending = 0;
+            DiscountType type = DiscountType.Regular;
+
+            foreach (var order in orders)
+            {
+                var orderSpending = order.Price * order.Quantity;
+
+                totalSpending += orderSpending;
+            }
+            
+            if (totalSpending >= 10000 && totalSpending < 15000)
+            {
+                type = DiscountType.Silver;
+            }
+            else if (totalSpending >= 15000 && totalSpending < 20000)
+            {
+                type = DiscountType.Gold;
+            }
+            else if (totalSpending >= 20000)
+            {
+                type = DiscountType.Platium;
+            }
+
+            var discountInfo = new DiscountInfo
+            {
+                CompanyId = companyId,
+                Type = type
+            };
+
+            return discountInfo;
         }
 
         private List<List<string>> GetOrdersForCompany(string companyName)

@@ -65,6 +65,10 @@
       <Project>{5a2d6ee4-deb0-4ff6-a8c8-34ad48ea4de4}</Project>
       <Name>CoffeeCompany.MySQL.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.ReportGenerator\CoffeeCompany.ReportGenerator.csproj">
+      <Project>{c2c1b00a-b19f-4862-bc3c-c56685421b90}</Project>
+      <Name>CoffeeCompany.ReportGenerator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,8 +18,8 @@
             //CommandParser parser = new CommandParser();
 
             //parser.InitiateCommandMenu();
-            var dataImport = new DataImport();
-            dataImport.ImportFromXml();
+            //var dataImport = new DataImport();
+            //dataImport.ImportFromXml();
            // dataImport.ImportFromExcel();
             //dataImport.ImportFromMongoDb();
 
@@ -30,8 +30,10 @@
             //var excelManager = new ExcelManager();
             //excelManager.CreateExcelReport();
 
-            //var data = new CoffeeCompanyData();
-            //var reporter = new ReportsEngine(data);
+            var data = new CoffeeCompanyData();
+            var reporter = new ReportsEngine(data);
+
+            reporter.GetDiscountInfo(6);
 
             //reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
             //reporter.GetOrderForCompany("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");

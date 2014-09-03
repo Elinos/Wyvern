@@ -7,7 +7,7 @@
     <ProjectGuid>{C2C1B00A-B19F-4862-BC3C-C56685421B90}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CoffeeCompany.ReportGeneratorNew</RootNamespace>
+    <RootNamespace>CoffeeCompany.ReportGenerator</RootNamespace>
     <AssemblyName>CoffeeCompany.ReportGeneratorNew</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DiscountInfo.cs" />
+    <Compile Include="DiscountType.cs" />
     <Compile Include="ExportEngine.cs" />
     <Compile Include="JsonExporter.cs" />
     <Compile Include="OrderInfo.cs" />

@@ -88,8 +88,8 @@
             command.ToLower();
             switch (command)
             {
-                case "revenue": this.ReportGenerator.GetTotalRevenuesXmlReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
-                case "order": this.ReportGenerator.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
+                //case "revenue": this.ReportGenerator.GetTotalRevenuesXmlReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
+                //case "order": this.ReportGenerator.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
                 case "back": ParseExportCommand(); break;
                 default: renderer.InvalidCommandMessage(); break;
 
@@ -104,7 +104,7 @@
             command.ToLower();
             switch (command)
             {
-                case "revenue": this.ReportGenerator.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
+                //case "revenue": this.ReportGenerator.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
                 case "order": this.ReportGenerator.GetOrderForCompanyPdfReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
                 case "back": ParseExportCommand(); break;
                 default: renderer.InvalidCommandMessage(); break;

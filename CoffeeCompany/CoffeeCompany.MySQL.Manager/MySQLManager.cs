@@ -2,6 +2,7 @@
 using System.Linq;
 using CoffeeCompany.MySQL.Models;
 using System.Collections.Generic;
+using CoffeeCompany.ReportGenerator;
 
 namespace CoffeeCompany.MySQL.Manager
 {
@@ -13,12 +14,12 @@ namespace CoffeeCompany.MySQL.Manager
         {
             var report = new Report
             {
-                CompanyID = orderInfo.CompanyID,
+                CompanyID = orderInfo.CompanyId,
                 CompanyName = orderInfo.CompanyName,
                 ProductName = orderInfo.ProductName,
-                Price = orderInfo.Price,
-                NumberOfOrders = orderInfo.NumberOfOrders,
-                TotalRevenue = orderInfo.TotalRevenue
+                Price = orderInfo.ProductPrice,
+                NumberOfOrders = orderInfo.Quantity,
+                TotalRevenue = orderInfo.RevenueFromOrder
 
             };
             mySQLDb.Reports1.Add(report);
