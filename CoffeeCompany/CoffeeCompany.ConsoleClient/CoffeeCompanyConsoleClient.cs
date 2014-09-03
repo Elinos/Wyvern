@@ -25,15 +25,16 @@
 
             //var mySQLManager = new MySQLManager();
             //mySQLManager.AddReport(1 , "company1", "product1", "gosho", 2.00m, 45, 5000m);
-            //var sqliteManager = new SQLiteManager();
-            //sqliteManager.LoadData();
-            //var excelManager = new ExcelManager();
-            //excelManager.CreateExcelReport();
+            var sqliteManager = new SQLiteManager();
+            sqliteManager.LoadData();
+            var excelManager = new ExcelManager();
+            excelManager.CreateExcelReport();
 
-            var data = new CoffeeCompanyData();
-            var reporter = new ReportsEngine(data);
+            //var data = new CoffeeCompanyData();
+            //var reporter = new ReportsEngine(data);
+            //var reporter = new ReportsEngine();
 
-            reporter.GetDiscountsInfo();
+            //reporter.GetDiscountInfo(6);
 
             //reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
             //reporter.GetOrderForCompany("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");
