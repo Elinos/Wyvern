@@ -32,6 +32,7 @@
 
             //var data = new CoffeeCompanyData();
             //var reporter = new ReportsEngine(data);
+            //var reporter = new ReportsEngine();
 
             //reporter.GetDiscountInfo(6);
 

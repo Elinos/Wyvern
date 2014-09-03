@@ -10,6 +10,13 @@
 
     public class ReportsEngine
     {
+        public ReportsEngine()
+            : this (new CoffeeCompanyData())
+        {
+            this.ExportPdf = new PDFExporter();
+            this.ExportXml = new XMLExporter();
+            this.ExportJson = new JsonExporter();
+        }
         public ReportsEngine(ICoffeeCompanyData data)
         {
             this.ExportPdf = new PDFExporter();
