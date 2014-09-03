@@ -16,12 +16,12 @@
         static void Main(string[] args)
         {
             var dataImport = new DataImport();
-            //dataImport.ImportFromXml();
+            dataImport.ImportFromXml();
             dataImport.ImportFromExcel();
-            //dataImport.ImportFromMongoDb();
+            dataImport.ImportFromMongoDb();
 
             //var mySQLManager = new MySQLManager();
-            //mySQLManager.AddReport(55, "NewCompany3", "ReportOne", 2.00m, 45, 5000m);
+            //mySQLManager.AddReport("ReportOne", 2.00m, 45, 5000m);
             //var sqliteLoader = new SQLiteLoader();
             //sqliteLoader.LoadData();
             //var excelManager = new ExcelManager();
@@ -31,10 +31,7 @@
             //var reporter = new ReportsEngine(data);
 
             //reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
-            //reporter.GetOrderForCompanyPdfReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");
-
-            //reporter.GetTotalRevenuesXmlReports(@"..\..\..\Reports\TotalRevenueXmlReport.xml");
-            //reporter.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersXmlReport.xml");
+            //reporter.GetOrderForCompany("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");
         }
     }
 }
