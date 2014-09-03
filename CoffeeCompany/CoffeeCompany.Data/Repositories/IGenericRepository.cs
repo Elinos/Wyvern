@@ -7,7 +7,7 @@
     {
         IQueryable<T> All();
 
-        IQueryable<T> SearchFor(Expression<Func<T, bool>> conditions);
+        IQueryable<T> Where(Expression<Func<T, bool>> conditions);
 
         bool Any(Expression<Func<T, bool>> conditions);
 

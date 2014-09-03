@@ -22,15 +22,15 @@
 
         private const string DefaultXMLDataFileName = @"..\..\..\..\dbData\CoffeeCompanyData.xml";
 
-        private ICoffeeCompanyDbContext context;
+        private ICoffeeCompanyData context;
 
-        public DataImport(ICoffeeCompanyDbContext context)
+        public DataImport(ICoffeeCompanyData context)
         {
             this.context = context;
         }
 
         public DataImport()
-            : this(new CoffeeCompanyDbContext())
+            : this(new CoffeeCompanyData())
         {
         }
 

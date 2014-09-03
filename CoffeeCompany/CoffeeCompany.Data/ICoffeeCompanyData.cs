@@ -9,5 +9,7 @@
         IGenericRepository<Order> Orders { get; }
 
         IGenericRepository<Product> Products { get; }
+
+        void SaveChanges();
     }
 }

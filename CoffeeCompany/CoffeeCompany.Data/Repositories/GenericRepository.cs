@@ -24,7 +24,7 @@
             return this.set.AsQueryable();
         }
 
-        public IQueryable<T> SearchFor(Expression<Func<T, bool>> conditions)
+        public IQueryable<T> Where(Expression<Func<T, bool>> conditions)
         {
             return this.All().Where(conditions);
         }

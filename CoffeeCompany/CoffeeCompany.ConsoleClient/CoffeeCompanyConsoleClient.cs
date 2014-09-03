@@ -16,7 +16,7 @@
         {
             var dataImport = new DataImport();
             dataImport.ImportFromXml();
-            dataImport.ImportFromExcel();
+            //dataImport.ImportFromExcel();
             //dataImport.ImportFromMongoDb();
 
             //var mySQLManager = new MySQLManager();
