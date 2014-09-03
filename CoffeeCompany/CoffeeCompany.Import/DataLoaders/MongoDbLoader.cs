@@ -14,6 +14,7 @@
         private const string OrderCollectionName = "Orders";
         private const string ClientCompanyCollectionName = "Companies";
         private const string ProductCollectionName = "Products";
+        private const string EmployeeCollectionName = "Employees";
 
         private string dbName;
         private MongoDatabase mongoDb;
@@ -60,11 +61,21 @@
             return produtcs;
         }
 
+        public ICollection<Employee> retrieveEmployeesData()
+        {
+            var employeeCollection = this.mongoDb.GetCollection<Employee>(EmployeeCollectionName);
+
+            var employees = employeeCollection.FindAll().ToList();
+
+            return employees;
+        }
+
         public void MongoDbSeed()
         {
             var orderCollection = this.mongoDb.GetCollection<Order>(OrderCollectionName);
             var clientCompanyCollection = this.mongoDb.GetCollection<ClientCompany>(ClientCompanyCollectionName);
             var productCollection = this.mongoDb.GetCollection<Product>(ProductCollectionName);
+            var employeeCollection = this.mongoDb.GetCollection<Employee>(EmployeeCollectionName);
 
             var company1 = new
             {
@@ -138,12 +149,43 @@
                 TypeOfCoffee = CoffeeTypes.Arabica
             };
 
+            var employee1 = new
+            {
+                Username = "gosho",
+                Name = "Georgi Georgiev"
+            };
+
+            var employee2 = new
+            {
+                Username = "pesho",
+                Name = "Peter Georgiev"
+            };
+
+            var employee3 = new
+            {
+                Username = "ivo",
+                Name = "Ivaylo Kenov"
+            };
+
+            var employee4 = new
+            {
+                Username = "doncho",
+                Name = "Doncho Minkov"
+            };
+
+            var employee5 = new
+            {
+                Username = "niki",
+                Name = "Nikolay Kostov"
+            };
+
             var order1 = new
             {
                 ClientCompany = company1,
                 Products = product1,
                 QuantityInKg = 100,
-                Status = OrderStatus.Pending
+                Status = OrderStatus.Pending,
+                Employee = employee1
             };
 
             var order2 = new
@@ -151,7 +193,8 @@
                 ClientCompany = company2,
                 Products = product2,
                 QuantityInKg = 500,
-                Status = OrderStatus.Processed
+                Status = OrderStatus.Processed,
+                Employee = employee2
             };
 
             var order3 = new
@@ -159,7 +202,8 @@
                 ClientCompany = company3,
                 Products = product3,
                 QuantityInKg = 240,
-                Status = OrderStatus.Shipped
+                Status = OrderStatus.Shipped,
+                Employee = employee2
             };
 
             var order4 = new
@@ -167,7 +211,8 @@
                 ClientCompany = company4,
                 Products = product4,
                 QuantityInKg = 410,
-                Status = OrderStatus.Returned
+                Status = OrderStatus.Returned,
+                Employee = employee3
             };
 
             var order5 = new
@@ -175,7 +220,8 @@
                 ClientCompany = company5,
                 Products = product4,
                 QuantityInKg = 220,
-                Status = OrderStatus.Returned
+                Status = OrderStatus.Returned,
+                Employee = employee4
             };
 
             orderCollection.Insert(order1);
@@ -190,6 +236,12 @@
             clientCompanyCollection.Insert(company4);
             clientCompanyCollection.Insert(company5);
 
+            employeeCollection.Insert(employee1);
+            employeeCollection.Insert(employee2);
+            employeeCollection.Insert(employee3);
+            employeeCollection.Insert(employee4);
+            employeeCollection.Insert(employee5);
+
             productCollection.Insert(product1);
             productCollection.Insert(product2);
             productCollection.Insert(product3);
@@ -197,5 +249,6 @@
             productCollection.Insert(product5);
             productCollection.Insert(product6);
         }
+
     }
 }

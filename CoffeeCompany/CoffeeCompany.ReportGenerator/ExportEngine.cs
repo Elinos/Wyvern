@@ -26,7 +26,25 @@
 
         private ICoffeeCompanyData Data { get; set; }
 
-        public List<List<string>> GetPendingOrdersReport()
+        public List<OrderInfo> GetOrderInfo()
+        {
+            var pendingOrders =
+                from o in this.Data.Orders.All()
+                join c in this.Data.ClientCompanies.All()
+                on o.ClientCompanyId equals c.ID
+                select new OrderInfo
+                {
+                    CompanyId = o.ClientCompanyId,
+                    CompanyName = c.Name,
+                    ProductName = o.Product.Name,
+                    ProductPrice = o.Product.PricePerKgInDollars,
+                    Quantity = o.QuantityInKg,
+                    RevenueFromOrder = o.QuantityInKg * o.Product.PricePerKgInDollars
+                };
+
+            return pendingOrders.ToList();
+        }
+        private List<List<string>> GetPendingOrdersReport()
         {
             var pendingOrders =
                 (from o in this.Data.Orders.Where(x => x.Status == 0)
@@ -56,30 +74,6 @@
             return formattedProducts;
         }
 
-        public List<OrderInfo> GetOrderInfo()
-        {
-            var pendingOrders =
-                from o in this.Data.Orders.All()
-                join c in this.Data.ClientCompanies.All()
-                on o.ClientCompanyId equals c.ID
-                select new OrderInfo
-                {
-                    CompanyId = o.ClientCompanyId,
-                    CompanyName = c.Name,
-                    ProductName = o.Product.Name,
-                    ProductPrice = o.Product.PricePerKgInDollars,
-                    Quantity = o.QuantityInKg,
-                    RevenueFromOrder = o.QuantityInKg * o.Product.PricePerKgInDollars
-                };
-           var list= pendingOrders.ToList();
-           for (int i = 0; i < list.Count; i++)
-           {
-               Console.WriteLine(list[i].CompanyName + " " + list[i].ProductName);
-           }
-
-            return pendingOrders.ToList();
-        }
-
         private List<List<string>> GetOrdersForCompany(string companyName)
         {
             var orders =
@@ -89,11 +83,7 @@
                      o.ID,
                      o.QuantityInKg,
                      o.Status,
-<<<<<<< HEAD
                      ProductName = o.Product.Name,
-=======
-                     Product = o.Employee,
->>>>>>> origin/master
                  }).ToList();
 
             var formattedOrderd = new List<List<string>>();

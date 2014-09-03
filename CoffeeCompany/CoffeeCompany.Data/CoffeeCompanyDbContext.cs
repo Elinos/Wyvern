@@ -16,6 +16,8 @@
 
         public IDbSet<Order> Orders { get; set; }
 
+        public IDbSet<Employee> Employees { get; set; }
+
         public new void SaveChanges()
         {
             base.SaveChanges();

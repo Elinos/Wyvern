@@ -8,5 +8,7 @@
         ICollection<Order> retrieveOrdersData();
         ICollection<ClientCompany> retrieveCompaniesData();
         ICollection<Product> retrieveProductsData();
+
+        ICollection<Employee> retrieveEmployeesData();
     }
 }

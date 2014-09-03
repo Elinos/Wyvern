@@ -105,7 +105,7 @@
             switch (command)
             {
                 case "revenue": this.ReportGenerator.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
-                case "order": this.ReportGenerator.GetOrderForCompanyPdfReport(("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
+                case "order": this.ReportGenerator.GetOrderForCompanyPdfReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
                 case "back": ParseExportCommand(); break;
                 default: renderer.InvalidCommandMessage(); break;
 

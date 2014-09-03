@@ -40,6 +40,14 @@
             }
         }
 
+        public IGenericRepository<Employee> Employees
+        {
+            get
+            {
+                return this.GetRepository<Employee>();
+            }
+        }
+
         public CoffeeCompanyData(ICoffeeCompanyDbContext context)
         {
             this.context = context;
