@@ -53,7 +53,7 @@
 	<Order>
 		<ClientCompany>
 			<Name>Mikel Coffee Company</Name>
-			<CountryOfOrigin></CountryOfOrigin>
+			<CountryOfOrigin>USA</CountryOfOrigin>
 		</ClientCompany>
 		<Products>
 			<Product>

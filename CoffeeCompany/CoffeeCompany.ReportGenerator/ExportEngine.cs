@@ -11,19 +11,19 @@
 
     public class ReportsEngine
     {
-        const string defaultServer = "Server=.\\SQLEXPRESS;Database=CoffeeCompanyConnection; Trusted_Connection=true;";
-        public ReportsEngine()
+        public ReportsEngine(ICoffeeCompanyData data)
         {
-            this.ExportPdf = new PDFExporter(defaultServer);
+            this.ExportPdf = new PDFExporter();
+            this.Data = data;
         }
         public PDFExporter ExportPdf { get; set; }
 
-        public void GetTotalRevenuesPdfReports(string path)
-        {
-            var data = new CoffeeCompanyData();
-            
+        private ICoffeeCompanyData Data { get; set; }
+
+        private List<List<string>> GetTotalRevenuesFromDatabase(string path)
+        {                      
             var products =
-                (from p in data.Products.All()
+                (from p in Data.Products.All()
                 from o in p.Orders
                 select new
                 {
@@ -34,19 +34,67 @@
                 }).ToList();
 
             var formattedProducts = new List<List<string>>();
+
             for (int i = 0; i < products.Count; i++)
             {
                 formattedProducts.Add(new List<string>() {
                     products[i].Name,
-                    products[i].Price,
-                    products[i].Quantity,
-                    products[i].Total,
+                    products[i].Price.ToString(),
+                    products[i].Quantity.ToString(),
+                    products[i].Total.ToString(),
                 });
             }
+
+            return formattedProducts;
+        }    
+
+        private List<List<string>> GetOrdersForCompany(string companyName)
+        {
+            int companyId = (from c in this.Data.ClientCompanies.All()
+                            where c.Name == companyName
+                            select c.ID).First();
+
+            var orders =
+                (from o in this.Data.Orders.All()
+                 where o.ClientCompanyId == companyId
+                 select new
+                 {
+                     o.ID,
+                     o.QuantityInKg,
+                     o.Status,
+                     Products = o.Products.Select(p => p.Name),
+                 }).ToList();
+
+            var formattedOrderd = new List<List<string>>();
+            for (int i = 0; i < orders.Count; i++)
+            {
+                formattedOrderd.Add(new List<string>() {
+                    orders[i].ID.ToString(),
+                    orders[i].QuantityInKg.ToString(),
+                    orders[i].Status.ToString(),
+                    string.Join(", ", orders[i].Products),
+                });
+            }
+
+            return formattedOrderd;
+        }
+
+        public void GetTotalRevenuesPdfReports(string path)
+        {
+            var products = GetTotalRevenuesFromDatabase(path);
             var title = "Total Revenue Report";
             var cellsTitles = new List<string> { "Product Name", "Product Price", "Number of orders", "Total Revenue" };
 
-            this.ExportPdf.GetPDF(formattedProducts, title, cellsTitles, path);
+            this.ExportPdf.GetPDF(products, title, cellsTitles, path);
+        }
+
+        public void GetOrderForCompany(string name, string path)
+        {
+            var products = GetOrdersForCompany(name);
+            var title = string.Format("Orders' shipment details for company \"{0}\"", name);
+            var cellsTitles = new List<string> { "Order ID", "Quantoty in kg", "Status", "Products"};
+
+            this.ExportPdf.GetPDF(products, title, cellsTitles, path);
         }
     }
 }

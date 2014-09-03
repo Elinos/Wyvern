@@ -66,6 +66,8 @@
                     PricePerKgInDollars = decimal.Parse(rawProduct["PricePerKgInDollars"].InnerText),
                     TypeOfCoffee = (CoffeeTypes)int.Parse(rawProduct["TypeOfCoffee"].InnerText)
                 };
+
+                order.Products.Add(product);
             }
 
             return order;
