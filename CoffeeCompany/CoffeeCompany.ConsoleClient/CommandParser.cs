@@ -52,7 +52,7 @@
             command.ToLower();
             switch (command)
             {
-                case "json": this.ReportGenerator.GetJSONProductReport(); break;
+                case "json": this.ReportGenerator.GetJsonOrderInfoReport(); break;
                 case "xml": ParseXmlExport(); break;
                 case "pdf": ParsePdfExport(); break;
                 case "excel": this.ExcelManager.CreateExcelReport(); break;

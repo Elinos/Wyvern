@@ -136,11 +136,10 @@
             this.ExportXml.ExportDocument(products, title, cellsTitles, path);
         }
 
-        public void GetJSONProductReport() 
+        public void GetJsonOrderInfoReport() 
         {
-            var products = from p in this.Data.Products.All()
-                           select p;
-            ExportJson.ExportAllProductReports(products.ToList());       
+            var orders = GetOrderInfo();
+            ExportJson.ExportAllProductReports(orders);       
         }
     }
 }

@@ -7,25 +7,24 @@
 
     public class JsonExporter
     {
-        public const string PATH = "Json-Reports/";
-
-        public void ExportProductReport(Product product)
+        public const string PATH = @"..\..\..\Reports\Json_Reports\";
+        public void ExportProductReport(OrderInfo orderInfo)
         {
             
-            string productJson = JsonConvert.SerializeObject(product);
-            string path = PATH + product.ID + ".json";
+            string orderInfoJson = JsonConvert.SerializeObject(orderInfo);
+            string path = PATH + orderInfo.ProductName + ".json";
             using (StreamWriter writer = new StreamWriter(path))
             {
-                writer.Write(productJson);
+                writer.Write(orderInfoJson);
             }
 
         }
 
-        public void ExportAllProductReports(List<Product> products)
+        public void ExportAllProductReports(List<OrderInfo> orders)
         {
-            foreach (var product in products)
+            foreach (var order in orders)
             {
-                ExportProductReport(product);
+                ExportProductReport(order);
             }
         }
 
