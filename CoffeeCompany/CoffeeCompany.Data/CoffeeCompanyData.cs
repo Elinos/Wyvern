@@ -71,5 +71,14 @@
 
             return (IGenericRepository<T>)this.repositories[typeOfModel];
         }
+
+
+        public System.Data.Entity.Database Database
+        {
+            get 
+            {
+                return this.context.Database;
+            }
+        }
     }
 }

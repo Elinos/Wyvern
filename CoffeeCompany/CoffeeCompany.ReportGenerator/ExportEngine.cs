@@ -73,51 +73,15 @@
             return formattedProducts;
         }
 
-        public DiscountInfo GetDiscountInfo(int companyId)
+        public ICollection<DiscountInfo> GetDiscountsInfo()
         {
-            var orders =
-                from o in this.Data.Orders.All()
-                join c in this.Data.ClientCompanies.All().Where(x => x.ID == companyId)
-                on o.ClientCompanyId equals c.ID
-                join p in this.Data.Products.All()
-                on o.ProductId equals p.ID
-                select new
-                {
-                    Name = c.Name,
-                    Price = p.PricePerKgInDollars,
-                    Quantity = o.QuantityInKg
-                };
+            var discounts = this.Data.Database.SqlQuery<DiscountInfo>("SELECT c.ID, SUM(o.QuantityInKg) * p.PricePerKgInDollars AS [TotalSum] " +
+                                                            "FROM ClientCompanies c, Products p, Orders o " +
+                                                            "WHERE c.ID = o.ClientCompanyId AND " +
+                                                            "p.ID = o.ProductId " +
+                                                            "GROUP BY c.ID, p.PricePerKgInDollars").ToList();
 
-            decimal totalSpending = 0;
-            DiscountType type = DiscountType.Regular;
-
-            foreach (var order in orders)
-            {
-                var orderSpending = order.Price * order.Quantity;
-
-                totalSpending += orderSpending;
-            }
-            
-            if (totalSpending >= 10000 && totalSpending < 15000)
-            {
-                type = DiscountType.Silver;
-            }
-            else if (totalSpending >= 15000 && totalSpending < 20000)
-            {
-                type = DiscountType.Gold;
-            }
-            else if (totalSpending >= 20000)
-            {
-                type = DiscountType.Platium;
-            }
-
-            var discountInfo = new DiscountInfo
-            {
-                CompanyId = companyId,
-                Type = type
-            };
-
-            return discountInfo;
+            return discounts;
         }
 
         private List<List<string>> GetOrdersForCompany(string companyName)

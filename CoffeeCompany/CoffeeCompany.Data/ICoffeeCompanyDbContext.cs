@@ -19,6 +19,8 @@
 
         DbEntityEntry<T> Entry<T>(T entity) where T : class;
 
+        Database Database { get; }
+
         void SaveChanges();
     }
 }
