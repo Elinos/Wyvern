@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using CoffeeCompany.Models;
-using CoffeeCompany.MySQL.Manager;
-using CoffeeCompany.MySQL.Models;
-using OfficeOpenXml;
-using OfficeOpenXml.Style;
-
-namespace CoffeeCompany.Excel.Manager
+﻿namespace CoffeeCompany.Excel.Manager
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
+    using OfficeOpenXml;
+    using OfficeOpenXml.Style;
+
+    using CoffeeCompany.Models;
+    using CoffeeCompany.MySQL.Manager;
+    using CoffeeCompany.MySQL.Models;
+
     public class ExcelManager
     {
         public void CreateExcelReport()
@@ -81,28 +83,36 @@ namespace CoffeeCompany.Excel.Manager
         {
             var listOfData = new List<ClientCompany>();
 
-            var existingFile = new FileInfo(filePath);
-
-            using (var package = new ExcelPackage(existingFile))
+            try
             {
-                ExcelWorkbook workBook = package.Workbook;
+                var existingFile = new FileInfo(filePath);
 
-                if (workBook != null)
+                using (var package = new ExcelPackage(existingFile))
                 {
-                    if (workBook.Worksheets.Count > 0)
-                    {
-                        ExcelWorksheet currentWorksheet = workBook.Worksheets.First();
+                    ExcelWorkbook workBook = package.Workbook;
 
-                        for (var i = 2; i < currentWorksheet.Dimension.End.Row; i++)
+                    if (workBook != null)
+                    {
+                        if (workBook.Worksheets.Count > 0)
                         {
-                            listOfData.Add(new ClientCompany
+                            ExcelWorksheet currentWorksheet = workBook.Worksheets.First();
+
+                            for (var i = 2; i < currentWorksheet.Dimension.End.Row; i++)
                             {
-                                Name = currentWorksheet.Cells[i, 1].Value.ToString(),
-                                CountryOfOrigin = currentWorksheet.Cells[i, 2].Value.ToString()
-                            });
+                                listOfData.Add(new ClientCompany
+                                {
+                                    Name = currentWorksheet.Cells[i, 1].Value.ToString(),
+                                    CountryOfOrigin = currentWorksheet.Cells[i, 2].Value.ToString()
+                                });
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("File {0} doesn't exist", filePath);
+                Console.WriteLine(e.Message);
             }
 
             return listOfData;
@@ -112,31 +122,39 @@ namespace CoffeeCompany.Excel.Manager
         {
             var listOfData = new List<Product>();
 
-            var existingFile = new FileInfo(filePath);
-
-            using (var package = new ExcelPackage(existingFile))
+            try
             {
-                ExcelWorkbook workBook = package.Workbook;
+                var existingFile = new FileInfo(filePath);
 
-                if (workBook != null)
+                using (var package = new ExcelPackage(existingFile))
                 {
-                    if (workBook.Worksheets.Count > 0)
-                    {
-                        ExcelWorksheet currentWorksheet = workBook.Worksheets.First();
+                    ExcelWorkbook workBook = package.Workbook;
 
-                        for (var i = 2; i < currentWorksheet.Dimension.End.Row; i++)
+                    if (workBook != null)
+                    {
+                        if (workBook.Worksheets.Count > 0)
                         {
-                            listOfData.Add(new Product
+                            ExcelWorksheet currentWorksheet = workBook.Worksheets.First();
+
+                            for (var i = 2; i < currentWorksheet.Dimension.End.Row; i++)
                             {
-                                Name = currentWorksheet.Cells[i, 1].Value.ToString(),
-                                PricePerKgInDollars = decimal.Parse(currentWorksheet.Cells[i, 2].Value.ToString()),
-                                TypeOfCoffee = (CoffeeTypes)int.Parse(currentWorksheet.Cells[i, 3].Value.ToString())
-                            });
+                                listOfData.Add(new Product
+                                {
+                                    Name = currentWorksheet.Cells[i, 1].Value.ToString(),
+                                    PricePerKgInDollars = decimal.Parse(currentWorksheet.Cells[i, 2].Value.ToString()),
+                                    TypeOfCoffee = (CoffeeTypes)int.Parse(currentWorksheet.Cells[i, 3].Value.ToString())
+                                });
+                            }
                         }
                     }
                 }
             }
-
+            catch (Exception e)
+            {
+                Console.WriteLine("File {0} doesn't exist", filePath);
+                Console.WriteLine(e.Message);
+            }
+            
             return listOfData;
         }
     }

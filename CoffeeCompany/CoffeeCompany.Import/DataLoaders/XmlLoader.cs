@@ -1,5 +1,6 @@
 ﻿namespace CoffeeCompany.Import.DataLoaders
 {
+    using System;
     using System.Collections.Generic;
     using System.Xml;
 
@@ -20,13 +21,22 @@
             ICollection<Order> orders = new HashSet<Order>();
 
             XmlDocument doc = new XmlDocument();
-            doc.Load(this.xmlFilePath);
 
-            XmlNode rootNode = doc.DocumentElement;
-
-            foreach (XmlNode node in rootNode.ChildNodes)
+            try
             {
-                orders.Add(OrderFromXMLBuilder(node));
+                doc.Load(this.xmlFilePath);
+
+                XmlNode rootNode = doc.DocumentElement;
+
+                foreach (XmlNode node in rootNode.ChildNodes)
+                {
+                    orders.Add(OrderFromXMLBuilder(node));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine("The file {0} doesn't exist");
+                System.Console.WriteLine(e.Message);
             }
 
             return orders;
