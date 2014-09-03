@@ -3,6 +3,7 @@ using System.Linq;
 using CoffeeCompany.MySQL.Models;
 using System.Collections.Generic;
 using CoffeeCompany.ReportGenerator;
+using CoffeeCompany.Data;
 
 namespace CoffeeCompany.MySQL.Manager
 {
@@ -10,32 +11,51 @@ namespace CoffeeCompany.MySQL.Manager
     {
         coffeecompanyreportsEntities mySQLDb = new coffeecompanyreportsEntities();
 
-        public void AddReport(OrderInfo orderInfo)
+        public void AddReports(List<OrderInfo> orderInfos)
         {
-            var report = new Report
+            foreach (var orderInfo in orderInfos)
             {
-                CompanyID = orderInfo.CompanyId,
-                CompanyName = orderInfo.CompanyName,
-                ProductName = orderInfo.ProductName,
-                Price = orderInfo.ProductPrice,
-                NumberOfOrders = orderInfo.Quantity,
-                TotalRevenue = orderInfo.RevenueFromOrder
+                var report = new Report
+                {
+                    CompanyID = orderInfo.CompanyId,
+                    CompanyName = orderInfo.CompanyName,
+                    ProductName = orderInfo.ProductName,
+                    Price = orderInfo.ProductPrice,
+                    Quantity = orderInfo.Quantity,
+                    TotalRevenue = orderInfo.RevenueFromOrder
+                };
 
-            };
-            mySQLDb.Reports1.Add(report);
-            mySQLDb.SaveChanges();
+                this.mySQLDb.Reports1.Add(report);
+            }
+
+            this.mySQLDb.SaveChanges();
         }
 
         public void DeleteReport(int reportID)
         {
-            var reportToDelete = mySQLDb.Reports1.Find(reportID);
-            mySQLDb.Reports1.Remove(reportToDelete);
-            mySQLDb.SaveChanges();
+            var reportToDelete = this.mySQLDb.Reports1.Find(reportID);
+            this.mySQLDb.Reports1.Remove(reportToDelete);
+            this.mySQLDb.SaveChanges();
         }
         public List<Report> GetAllReports()
         {
-            var reports = mySQLDb.Reports1.ToList();
+            var reports = this.mySQLDb.Reports1.ToList();
             return reports;
+        }
+
+        public bool LoadAllReportsDataFromSQLServer()
+        {
+            try
+            {
+                var reportEngine = new ReportsEngine(new CoffeeCompanyData());
+                var reportInfo = reportEngine.GetOrderInfo();
+                this.AddReports(reportInfo);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

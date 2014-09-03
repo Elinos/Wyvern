@@ -61,6 +61,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoffeeCompany.Data\CoffeeCompany.Data.csproj">
+      <Project>{7bdb818e-05b9-4bbf-b39c-571571950937}</Project>
+      <Name>CoffeeCompany.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoffeeCompany.MySQL.Models\CoffeeCompany.MySQL.Models.csproj">
       <Project>{5a2d6ee4-deb0-4ff6-a8c8-34ad48ea4de4}</Project>
       <Name>CoffeeCompany.MySQL.Models</Name>

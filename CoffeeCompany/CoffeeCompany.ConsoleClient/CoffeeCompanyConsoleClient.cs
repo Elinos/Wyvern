@@ -25,10 +25,10 @@
 
             //var mySQLManager = new MySQLManager();
             //mySQLManager.AddReport(1 , "company1", "product1", "gosho", 2.00m, 45, 5000m);
-            //var sqliteLoader = new SQLiteLoader();
-            //sqliteLoader.LoadData();
-            //var excelManager = new ExcelManager();
-            //excelManager.CreateExcelReport();
+            var sqliteLoader = new SQLiteLoader();
+            sqliteLoader.LoadData();
+            var excelManager = new ExcelManager();
+            excelManager.CreateExcelReport();
 
             var data = new CoffeeCompanyData();
             var reporter = new ReportsEngine(data);

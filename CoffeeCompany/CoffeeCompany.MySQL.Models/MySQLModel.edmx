@@ -14,7 +14,7 @@
           <Property Name="CompanyName" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="ProductName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="15" Scale="0" Nullable="false" />
-          <Property Name="NumberOfOrders" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="decimal" Precision="15" Scale="0" Nullable="false" />
           <Property Name="TotalRevenue" Type="decimal" Precision="15" Scale="0" Nullable="false" />
         </EntityType>
         <EntityContainer Name="coffeecompanyreportsModelStoreContainer">
@@ -31,10 +31,10 @@
           <Property Name="ReportID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" />
-          <Property Name="NumberOfOrders" Type="Int32" Nullable="false" />
           <Property Name="TotalRevenue" Type="Decimal" Nullable="false" />
           <Property Name="CompanyID" Type="Int32" Nullable="false" />
           <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" />
         </EntityType>
         <EntityContainer Name="coffeecompanyreportsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Reports1" EntityType="coffeecompanyreportsModel.Report" />
@@ -48,12 +48,12 @@
           <EntitySetMapping Name="Reports1">
             <EntityTypeMapping TypeName="coffeecompanyreportsModel.Report">
               <MappingFragment StoreEntitySet="reports">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
                 <ScalarProperty Name="ReportID" ColumnName="ReportID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="NumberOfOrders" ColumnName="NumberOfOrders" />
                 <ScalarProperty Name="TotalRevenue" ColumnName="TotalRevenue" />
               </MappingFragment>
             </EntityTypeMapping>

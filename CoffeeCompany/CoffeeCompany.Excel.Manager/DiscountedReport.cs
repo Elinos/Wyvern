@@ -12,7 +12,7 @@ namespace CoffeeCompany.Excel.Manager
         public string ProductName { get; set; }
 
         public decimal Price { get; set; }
-        public int NumberOfOrders { get; set; }
+        public decimal Quantity { get; set; }
         public decimal TotalRevenue { get; set; }
         public decimal TotalDiscount { get; set; }
     }
