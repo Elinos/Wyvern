@@ -15,9 +15,12 @@
     {
         static void Main(string[] args)
         {
-            var dataImport = new DataImport();
+            CommandParser parser = new CommandParser();
+
+            parser.ReadInitialCommand();
+            //var dataImport = new DataImport();
             //dataImport.ImportFromXml();
-            dataImport.ImportFromExcel();
+           // dataImport.ImportFromExcel();
             //dataImport.ImportFromMongoDb();
 
             //var mySQLManager = new MySQLManager();

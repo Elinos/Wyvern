@@ -56,12 +56,13 @@
         private void RenderLoadCommand()
         {
             renderer.PrintLoadLegend();
+            DataImport=new Import.DataImport();
             string command = Console.ReadLine();
             switch (command)
             {
-                case "Xml": break;
-                case "Excel": break;
-                case "Mongo": break;
+                case "Xml": DataImport.ImportFromXml(); break;
+                case "Excel": DataImport.ImportFromExcel(); break;
+                case "Mongo": DataImport.ImportFromMongoDb(); break;
                 case "Back": ReadInitialCommand(); break;
                 default: break;
 
