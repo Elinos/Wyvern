@@ -131,9 +131,12 @@
 
         private Order MergeWithExistingOrders(Order order)
         {
+            var mergedCompany = this.MergeWithExistingClientCompanies(order.ClientCompany);
+
             var mergedOrder = new Order
                 {
-                    ClientCompany = this.MergeWithExistingClientCompanies(order.ClientCompany),
+                    ClientCompany = mergedCompany,
+                    ClientCompanyId = mergedCompany.ID,
                     QuantityInKg = order.QuantityInKg,
                     Status = order.Status,
                     Products = new HashSet<Product>()
@@ -141,7 +144,7 @@
 
             foreach(var product in order.Products)
             {
-                Product mergedProduct = this.MergeWithExistingProducts(product);
+                var mergedProduct = this.MergeWithExistingProducts(product);
                 mergedOrder.Products.Add(mergedProduct);
             }
 

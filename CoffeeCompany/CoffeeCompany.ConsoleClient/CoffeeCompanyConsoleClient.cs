@@ -15,9 +15,9 @@
     {
         static void Main(string[] args)
         {
-            //var dataImport = new DataImport();
+            var dataImport = new DataImport();
             //dataImport.ImportFromXml();
-            //dataImport.ImportFromExcel();
+            dataImport.ImportFromExcel();
             //dataImport.ImportFromMongoDb();
 
             //var mySQLManager = new MySQLManager();
@@ -27,11 +27,11 @@
             //var excelManager = new ExcelManager();
             //excelManager.CreateExcelReport();
 
-            var data = new CoffeeCompanyData();
-            var reporter = new ReportsEngine(data);
+            //var data = new CoffeeCompanyData();
+            //var reporter = new ReportsEngine(data);
 
-            reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
-            reporter.GetOrderForCompany("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");
+            //reporter.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.pdf");
+            //reporter.GetOrderForCompany("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.pdf");
         }
     }
 }

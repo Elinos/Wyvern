@@ -36,7 +36,7 @@
 
         public void Add(T entity)
         {
-            var entry = AttachIfDetached(entity);
+            var entry = AddIfDetached(entity);
             entry.State = EntityState.Added;
         }
 
@@ -64,6 +64,17 @@
             if (entry.State == EntityState.Detached)
             {
                 this.set.Attach(entity);
+            }
+
+            return entry;
+        }
+
+        private DbEntityEntry AddIfDetached(T entity)
+        {
+            var entry = this.context.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                this.set.Add(entity);
             }
 
             return entry;
