@@ -17,7 +17,7 @@
         {
             CommandParser parser = new CommandParser();
 
-            parser.ReadInitialCommand();
+            parser.InitiateCommandMenu();
             //var dataImport = new DataImport();
             //dataImport.ImportFromXml();
            // dataImport.ImportFromExcel();

@@ -37,6 +37,13 @@
              "\n" +
             "\n-----to go back type *Back*";
 
-        public const string ExecutingCommand = "Executing Command";
+        public const string CustomReportLegend = 
+            "Choose Report type" +
+            "\n" +
+            "\n------to export revenue report type  *Revenue*" +
+            "\n" +
+            "\n------to export order report type *Order*" +
+             "\n" +
+            "\n-----to go back type *Back*";
     }
 }

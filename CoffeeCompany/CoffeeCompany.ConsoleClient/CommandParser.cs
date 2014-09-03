@@ -23,48 +23,81 @@
 
         private ConsoleRenderer renderer = new ConsoleRenderer();
 
-        public void ReadInitialCommand() 
+        private CoffeeCompanyData Data = new CoffeeCompanyData();
+
+        public void InitiateCommandMenu() 
         {
             renderer.PrintLegend();
             string command = Console.ReadLine();
             switch (command)
             {
-                case "Export": RenderExportCommand(); break;
-                case "Load": RenderLoadCommand(); break;
-                default: break;
+                case "Export": ParseExportCommand(); break;
+                case "Load": ParseLoadCommand(); break;
+                default: renderer.InvalidCommandMessage(); break;
             
             }
         }
 
-        private void RenderExportCommand() 
+        private void ParseExportCommand() 
         {
             renderer.PrintExportLegend();
+            this.ReportGenerator = new ReportsEngine(Data);
             string command = Console.ReadLine();
             switch (command)
             {
-                case "Json": break;
-                case "Xml": break;
-                case "Pdf": break;
+                case "Json": this.ReportGenerator.GetJSONProductReport(); break;
+                case "Xml": ParseXmlExport(); break;
+                case "Pdf": ParsePdfExport(); break;
                 case "Excel": break;
-                case "Back": ReadInitialCommand(); break;
-                default: break;
+                case "Back": InitiateCommandMenu(); break;
+                default: renderer.InvalidCommandMessage(); break;
 
             }
 
         }
 
-        private void RenderLoadCommand()
+        private void ParseLoadCommand()
         {
             renderer.PrintLoadLegend();
-            DataImport=new Import.DataImport();
+            this.DataImport = new DataImport();
             string command = Console.ReadLine();
             switch (command)
             {
-                case "Xml": DataImport.ImportFromXml(); break;
-                case "Excel": DataImport.ImportFromExcel(); break;
-                case "Mongo": DataImport.ImportFromMongoDb(); break;
-                case "Back": ReadInitialCommand(); break;
-                default: break;
+                case "Xml": this.DataImport.ImportFromXml(); break;
+                case "Excel": this.DataImport.ImportFromExcel(); break;
+                case "Mongo": this.DataImport.ImportFromMongoDb(); break;
+                case "Back": InitiateCommandMenu(); break;
+                default: renderer.InvalidCommandMessage(); break;
+
+            }
+
+        }
+
+        private void ParseXmlExport()
+        {
+            renderer.PrintCustomReportLegend();
+            string command = Console.ReadLine();
+            switch (command)
+            {
+                case "Revenue": this.ReportGenerator.GetTotalRevenuesXmlReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
+                case "Order": this.ReportGenerator.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
+                case "Back": ParseExportCommand(); break;
+                default: renderer.InvalidCommandMessage(); break;
+
+            }
+        
+        }
+
+        private void ParsePdfExport()
+        {
+            renderer.PrintCustomReportLegend();
+            string command = Console.ReadLine();
+            switch (command)
+            {
+                case "Revenue": this.ReportGenerator.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
+                case "Order": this.ReportGenerator.GetOrderForCompanyPdfReport(("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
+                case "Back": ParseExportCommand(); break;
+                default: renderer.InvalidCommandMessage(); break;
 
             }
 
