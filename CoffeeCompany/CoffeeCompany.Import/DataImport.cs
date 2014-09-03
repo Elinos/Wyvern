@@ -147,7 +147,14 @@
         {
             foreach (var order in orders)
             {
-                var mergedOrder = this.MergeWithExistingOrders(order);
+                bool isExist;
+
+                var mergedOrder = this.MergeWithExistingOrders(order, out isExist);
+
+                if (isExist)
+                {
+                    continue;
+                }
 
                 this.context.Orders.Add(mergedOrder);
             }
@@ -155,13 +162,24 @@
             this.context.SaveChanges();
         }
 
-        private Order MergeWithExistingOrders(Order order)
+        private Order MergeWithExistingOrders(Order order, out bool isExist)
         {
-            var mergedCompany = this.MergeWithExistingClientCompanies(order.ClientCompany);
-            var mergedProduct = this.MergeWithExistingProducts(order.Product);
-            var mergedEmployee = this.MergeWithExistingEmployees(order.Employee);
+            var mergedOrder = this.context.Orders.Where(o => o.ClientCompany.Name == order.ClientCompany.Name &&
+                                                    o.Employee.Username == order.Employee.Username &&
+                                                    o.Status == order.Status &&
+                                                    o.QuantityInKg == order.QuantityInKg).FirstOrDefault();
+            if (mergedOrder != null)
+            {
+                isExist = true;
+                return mergedOrder;
+            }
+            else
+            {
+                var mergedCompany = this.MergeWithExistingClientCompanies(order.ClientCompany);
+                var mergedProduct = this.MergeWithExistingProducts(order.Product);
+                var mergedEmployee = this.MergeWithExistingEmployees(order.Employee);
 
-            var mergedOrder = new Order
+                mergedOrder = new Order
                 {
                     ClientCompany = mergedCompany,
                     ClientCompanyId = mergedCompany.ID,
@@ -171,7 +189,9 @@
                     Employee = mergedEmployee
                 };
 
-            return mergedOrder;
+                isExist = false;
+                return mergedOrder;
+            }
         }
 
         private ClientCompany MergeWithExistingClientCompanies(ClientCompany clientCompany)

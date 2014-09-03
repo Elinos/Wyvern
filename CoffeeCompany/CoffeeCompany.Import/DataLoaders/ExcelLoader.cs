@@ -68,21 +68,10 @@
             return orders;
         }
 
-        private static void TranverseDir(string dirPath, string fileExtension)
-        {
-            
 
-            foreach (string subDirectory in Directory.GetDirectories(dirPath))
-            {
-                try
-                {
-                    TranverseDir(subDirectory, fileExtension);
-                }
-                catch (UnauthorizedAccessException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
+        public ICollection<Employee> retrieveEmployeesData()
+        {
+            throw new NotImplementedException();
         }
     }
 }

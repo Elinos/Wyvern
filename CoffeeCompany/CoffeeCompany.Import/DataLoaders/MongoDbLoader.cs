@@ -61,7 +61,7 @@
             return produtcs;
         }
 
-        internal ICollection<Employee> retrieveEmployeesData()
+        public ICollection<Employee> retrieveEmployeesData()
         {
             var employeeCollection = this.mongoDb.GetCollection<Employee>(EmployeeCollectionName);
 

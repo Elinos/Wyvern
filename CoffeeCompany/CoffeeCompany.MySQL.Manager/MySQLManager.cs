@@ -9,13 +9,14 @@ namespace CoffeeCompany.MySQL.Manager
     {
         coffeecompanyreportsEntities mySQLDb = new coffeecompanyreportsEntities();
 
-        public void AddReport(int companyID, string companyName, string productName, decimal price, int numberOfOrders, decimal totalRevenue)
+        public void AddReport(int companyID, string companyName, string productName, string approvedByUser, decimal price, int numberOfOrders, decimal totalRevenue)
         {
             var report = new Report
             {
                 CompanyID = companyID,
                 CompanyName = companyName,
                 ProductName = productName,
+                ApprovedByUser = approvedByUser,
                 Price = price,
                 NumberOfOrders = numberOfOrders,
                 TotalRevenue = totalRevenue

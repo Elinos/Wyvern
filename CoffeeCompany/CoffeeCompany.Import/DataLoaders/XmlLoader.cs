@@ -52,6 +52,11 @@
             throw new System.NotImplementedException();
         }
 
+        public ICollection<Employee> retrieveEmployeesData()
+        {
+            throw new NotImplementedException();
+        }
+
         private Order OrderFromXMLBuilder(XmlNode node)
         {
             var company = new ClientCompany
@@ -84,5 +89,6 @@
 
             return order;
         }
+
     }
 }
