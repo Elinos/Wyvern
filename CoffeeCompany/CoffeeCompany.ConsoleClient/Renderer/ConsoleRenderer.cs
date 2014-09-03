@@ -34,6 +34,18 @@ namespace CoffeeCompany.ConsoleClient.Renderer
             Console.WriteLine(Legend.LoadLegend);
         }
 
+        public void PrintCustomReportLegend()
+        {
+            Console.Clear();
+            Console.WriteLine(Legend.CustomReportLegend);
+        }
+
+        public void InvalidCommandMessage()
+        {
+            Console.Clear();
+            Console.WriteLine("Invalid Command");
+        }
+
 
     }
 }

@@ -9,34 +9,45 @@
             "\n" +
             "\n" +
             "\n" +
-            "\n To export reports type *Export*" +
+            "\nTo export reports type *Export*" +
             "\n" +
-            "\n To load files to the database type *Load*";
+            "\nTo load files to the database type *Load*" +
+            "\n";
 
         public const string ExportLegend =
             "Welcome to the export interface" +
             "\n" +
-            "\n-----to export as Json Object type *Json*" +
+            "\nto export as Json Object type *Json*" +
             "\n" +
-            "\n-----to export as Xml docummnet type *Xml*" +
+            "\nto export as Xml docummnet type *Xml*" +
             "\n" +
-            "\n-----to export a Pdf report type *Pdf*" +
+            "\nto export a Pdf report type *Pdf*" +
             "\n" +
-            "\n-----to export Excel report type *Excel*"+
+            "\nto export Excel report type *Excel*"+
              "\n" +
-            "\n-----to go back type *Back*";
+            "\nto go back type *Back*" +
+            "\n";
 
         public const string LoadLegend =
             "Welcom to the Loading interface" +
             "\n" +
-            "\n------to load from Excel file type *Excel*" +
+            "\nto load from Excel file type *Excel*" +
             "\n" +
-            "\n------to load from MongoDB database type *Mongo*" +
+            "\nto load from MongoDB database type *Mongo*" +
             "\n" +
-            "\n------to load from XML file type *Xml*" +
+            "\nto load from XML file type *Xml*" +
              "\n" +
-            "\n-----to go back type *Back*";
+            "\nto go back type *Back*" +
+            "\n";
 
-        public const string ExecutingCommand = "Executing Command";
+        public const string CustomReportLegend = 
+            "Choose Report type" +
+            "\n" +
+            "\nto export revenue report type  *Revenue*" +
+            "\n" +
+            "\nto export order report type *Order*" +
+             "\n" +
+            "\nto go back type *Back*"+
+            "\n" ;
     }
 }
