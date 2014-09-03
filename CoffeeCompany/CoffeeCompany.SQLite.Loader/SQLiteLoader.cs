@@ -12,31 +12,31 @@ namespace CoffeeCompany.SQLite.Loader
 
         public void LoadData()
         {
-            DeleteAllEntities(sqLiteDb, "Discounts");
+            DeleteAllEntities("Discounts");
             
-            CreateDiscountForCompany(sqLiteDb, 5, 1);
-            CreateDiscountForCompany(sqLiteDb, 1, 2);
-            CreateDiscountForCompany(sqLiteDb, 2, 3);
-            CreateDiscountForCompany(sqLiteDb, 3, 4);
+            CreateDiscountForCompany(5, 1);
+            CreateDiscountForCompany(1, 2);
+            CreateDiscountForCompany(2, 3);
+            CreateDiscountForCompany(3, 4);
 
             sqLiteDb.SaveChanges();
         }
 
-        private void DeleteAllEntities(SQLiteContext context, string tableName)
+        private void DeleteAllEntities(string tableName)
         {
             var deleteAllEntitiesCommand = "DELETE FROM " + tableName + ";";
-            context.Database.ExecuteSqlCommand(deleteAllEntitiesCommand);
-            context.SaveChanges();
+            sqLiteDb.Database.ExecuteSqlCommand(deleteAllEntitiesCommand);
+            sqLiteDb.SaveChanges();
         }
-        public void CreateDiscountForCompany(SQLiteContext db, int companyID, int discountTypeID)
+        public void CreateDiscountForCompany(int companyID, int discountTypeID)
         {
             var discount = new Discount
             {
                 CompanyId = companyID,
                 DiscountTypeID = discountTypeID
             };
-            db.Discounts.Add(discount);
-            db.SaveChanges();
+            sqLiteDb.Discounts.Add(discount);
+            sqLiteDb.SaveChanges();
         }
 
         public List<DiscountInformation> GetDiscountPercentagesPerCompany()
