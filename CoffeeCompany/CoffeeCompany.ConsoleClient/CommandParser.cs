@@ -17,22 +17,27 @@
     {
         private DataImport DataImport { get; set; }
 
-        public MySQLManager MySqlManager { get; set; }
+        private MySQLManager MySqlManager { get; set; }
 
-        public ReportsEngine ReportGenerator { get; set; }
+        private ReportsEngine ReportGenerator { get; set; }
+
+        private ExcelManager ExcelManager { get; set; }
 
         private ConsoleRenderer renderer = new ConsoleRenderer();
 
         private CoffeeCompanyData Data = new CoffeeCompanyData();
 
+        private SQLiteLoader sqliteLoader = new SQLiteLoader();
+
         public void InitiateCommandMenu() 
         {
             renderer.PrintLegend();
             string command = Console.ReadLine();
+            command.ToLower();
             switch (command)
             {
-                case "Export": ParseExportCommand(); break;
-                case "Load": ParseLoadCommand(); break;
+                case "export": ParseExportCommand(); break;
+                case "load": ParseLoadCommand(); break;
                 default: renderer.InvalidCommandMessage(); break;
             
             }
@@ -42,14 +47,16 @@
         {
             renderer.PrintExportLegend();
             this.ReportGenerator = new ReportsEngine(Data);
+            this.ExcelManager = new ExcelManager();
             string command = Console.ReadLine();
+            command.ToLower();
             switch (command)
             {
-                case "Json": this.ReportGenerator.GetJSONProductReport(); break;
-                case "Xml": ParseXmlExport(); break;
-                case "Pdf": ParsePdfExport(); break;
-                case "Excel": break;
-                case "Back": InitiateCommandMenu(); break;
+                case "json": this.ReportGenerator.GetJSONProductReport(); break;
+                case "xml": ParseXmlExport(); break;
+                case "pdf": ParsePdfExport(); break;
+                case "excel": this.ExcelManager.CreateExcelReport(); break;
+                case "back": InitiateCommandMenu(); break;
                 default: renderer.InvalidCommandMessage(); break;
 
             }
@@ -61,12 +68,13 @@
             renderer.PrintLoadLegend();
             this.DataImport = new DataImport();
             string command = Console.ReadLine();
+            command.ToLower();
             switch (command)
             {
-                case "Xml": this.DataImport.ImportFromXml(); break;
-                case "Excel": this.DataImport.ImportFromExcel(); break;
-                case "Mongo": this.DataImport.ImportFromMongoDb(); break;
-                case "Back": InitiateCommandMenu(); break;
+                case "xml": this.DataImport.ImportFromXml(); break;
+                case "excel": this.DataImport.ImportFromExcel(); break;
+                case "mongo": this.DataImport.ImportFromMongoDb(); break;
+                case "back": InitiateCommandMenu(); break;
                 default: renderer.InvalidCommandMessage(); break;
 
             }
@@ -77,11 +85,12 @@
         {
             renderer.PrintCustomReportLegend();
             string command = Console.ReadLine();
+            command.ToLower();
             switch (command)
             {
-                case "Revenue": this.ReportGenerator.GetTotalRevenuesXmlReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
-                case "Order": this.ReportGenerator.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
-                case "Back": ParseExportCommand(); break;
+                case "revenue": this.ReportGenerator.GetTotalRevenuesXmlReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
+                case "order": this.ReportGenerator.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
+                case "back": ParseExportCommand(); break;
                 default: renderer.InvalidCommandMessage(); break;
 
             }
@@ -92,11 +101,12 @@
         {
             renderer.PrintCustomReportLegend();
             string command = Console.ReadLine();
+            command.ToLower();
             switch (command)
             {
-                case "Revenue": this.ReportGenerator.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
-                case "Order": this.ReportGenerator.GetOrderForCompanyPdfReport(("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
-                case "Back": ParseExportCommand(); break;
+                case "revenue": this.ReportGenerator.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
+                case "order": this.ReportGenerator.GetOrderForCompanyPdfReport(("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
+                case "back": ParseExportCommand(); break;
                 default: renderer.InvalidCommandMessage(); break;
 
             }
