@@ -67,12 +67,19 @@
                 TypeOfCoffee = (CoffeeTypes)int.Parse(node["Product"]["TypeOfCoffee"].InnerText)
             };
 
+            var employee = new Employee
+            {
+                Username = node["Employee"]["Username"].InnerText,
+                Name = node["Employee"]["Name"].InnerText
+            };
+
             var order = new Order
             {
                 ClientCompany = company,
                 Product = product,
                 QuantityInKg = int.Parse(node["QuantityInKg"].InnerText),
-                Status = (OrderStatus)int.Parse(node["Status"].InnerText)
+                Status = (OrderStatus)int.Parse(node["Status"].InnerText),
+                Employee = employee
             };
 
             return order;

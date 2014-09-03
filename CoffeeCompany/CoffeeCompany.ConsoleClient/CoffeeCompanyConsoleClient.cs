@@ -17,10 +17,10 @@
         {
             CommandParser parser = new CommandParser();
 
-            parser.ReadInitialCommand();
-            //var dataImport = new DataImport();
-            //dataImport.ImportFromXml();
-           // dataImport.ImportFromExcel();
+            //parser.ReadInitialCommand();
+            var dataImport = new DataImport();
+            dataImport.ImportFromXml();
+            //dataImport.ImportFromExcel();
             //dataImport.ImportFromMongoDb();
 
             //var mySQLManager = new MySQLManager();

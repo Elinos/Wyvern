@@ -10,6 +10,10 @@
 			<PricePerKgInDollars>30.99</PricePerKgInDollars>
 			<TypeOfCoffee>1</TypeOfCoffee>
 		</Product>
+		<Employee>
+			<Username>gosho</Username>
+			<Name>Georgi Georgiev</Name>
+		</Employee>
 		<QuantityInKg>230</QuantityInKg>
 		<Status>4</Status>	
 	</Order>
@@ -23,6 +27,10 @@
 			<PricePerKgInDollars>33.99</PricePerKgInDollars>
 			<TypeOfCoffee>1</TypeOfCoffee>
 		</Product>
+		<Employee>
+			<Username>gosho</Username>
+			<Name>Georgi Georgiev</Name>
+		</Employee>
 		<QuantityInKg>220</QuantityInKg>
 		<Status>3</Status>
 	</Order>
@@ -36,6 +44,10 @@
 			<PricePerKgInDollars>20.99</PricePerKgInDollars>
 			<TypeOfCoffee>1</TypeOfCoffee>
 		</Product>
+		<Employee>
+			<Username>mariika</Username>
+			<Name>Maria Marinova</Name>
+		</Employee>
 		<QuantityInKg>222</QuantityInKg>
 		<Status>2</Status>
 	</Order>

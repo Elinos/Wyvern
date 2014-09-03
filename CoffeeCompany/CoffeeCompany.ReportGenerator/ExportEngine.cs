@@ -68,7 +68,7 @@
                      o.ID,
                      o.QuantityInKg,
                      o.Status,
-                     Product = o.Product,
+                     Product = o.Employee,
                  }).ToList();
 
             var formattedOrderd = new List<List<string>>();
