@@ -26,7 +26,7 @@ namespace CoffeeCompany.Excel.Manager
                                            CompanyName = r.CompanyName,
                                            ProductName = r.ProductName,
                                            Price = r.Price * (decimal)(1 - (di.DiscountPercent / 100.00)),
-                                           NumberOfOrders = r.NumberOfOrders,
+                                           Quantity = r.Quantity,
                                            TotalRevenue = r.TotalRevenue * (decimal)(1 - (di.DiscountPercent / 100.00)),
                                            TotalDiscount = r.TotalRevenue * (decimal)(di.DiscountPercent / 100.00)
                                        };
@@ -44,7 +44,7 @@ namespace CoffeeCompany.Excel.Manager
                 ws.Cells[1, 1].Value = "Company name";
                 ws.Cells[1, 2].Value = "Product name";
                 ws.Cells[1, 3].Value = "Price";
-                ws.Cells[1, 4].Value = "Number of orders";
+                ws.Cells[1, 4].Value = "Quantity";
                 ws.Cells[1, 5].Value = "Total Revenue";
                 ws.Cells[1, 6].Value = "Total Discount";
 
@@ -68,7 +68,8 @@ namespace CoffeeCompany.Excel.Manager
                     ws.Cells[currentRow, 2].Value = report.CompanyName;
                     ws.Cells[currentRow, 3].Value = report.Price;
                     ws.Cells[currentRow, 3].Style.Numberformat.Format = "0.00";
-                    ws.Cells[currentRow, 4].Value = report.NumberOfOrders;
+                    ws.Cells[currentRow, 4].Value = report.Quantity;
+                    ws.Cells[currentRow, 4].Style.Numberformat.Format = "0.00";
                     ws.Cells[currentRow, 5].Value = report.TotalRevenue;
                     ws.Cells[currentRow, 5].Style.Numberformat.Format = "0.00";
                     ws.Cells[currentRow, 6].Value = report.TotalDiscount;

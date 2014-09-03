@@ -17,9 +17,9 @@ namespace CoffeeCompany.MySQL.Models
         public int ReportID { get; set; }
         public string ProductName { get; set; }
         public decimal Price { get; set; }
-        public int NumberOfOrders { get; set; }
         public decimal TotalRevenue { get; set; }
         public int CompanyID { get; set; }
         public string CompanyName { get; set; }
+        public decimal Quantity { get; set; }
     }
 }
