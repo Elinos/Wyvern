@@ -76,8 +76,8 @@ namespace CoffeeCompany.UI.Client
 
         private void ToXMLButton_Click(object sender, RoutedEventArgs e)
         {
-            bool exportPendingOrders = PDFPendingCheckBox.IsChecked.Value;
-            bool exportCompanyOrders = PDFCompanyCheckBox.IsChecked.Value;
+            bool exportPendingOrders = XMLPendingCheckBox.IsChecked.Value;
+            bool exportCompanyOrders = XMLPendingCheckBox.IsChecked.Value;
             var companyName = XMLCompanyNameTB.Text.Trim();
             if (exportPendingOrders)
             {
