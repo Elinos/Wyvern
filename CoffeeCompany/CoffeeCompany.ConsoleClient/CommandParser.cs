@@ -33,8 +33,7 @@
         {
             renderer.PrintLegend();
             string command = Console.ReadLine();
-            command.ToLower();
-            switch (command)
+            switch (command.ToLower())
             {
                 case "export": ParseExportCommand(); break;
                 case "load": ParseLoadCommand(); break;
@@ -49,8 +48,7 @@
             this.ReportGenerator = new ReportsEngine(Data);
             this.ExcelManager = new ExcelManager();
             string command = Console.ReadLine();
-            command.ToLower();
-            switch (command)
+            switch (command.ToLower())
             {
                 case "json": this.ReportGenerator.GetJsonOrderInfoReport(); break;
                 case "xml": ParseXmlExport(); break;
@@ -68,8 +66,7 @@
             renderer.PrintLoadLegend();
             this.DataImport = new DataImport();
             string command = Console.ReadLine();
-            command.ToLower();
-            switch (command)
+            switch (command.ToLower())
             {
                 case "xml": this.DataImport.ImportFromXml(); break;
                 case "excel": this.DataImport.ImportFromExcel(); break;
@@ -85,8 +82,7 @@
         {
             renderer.PrintCustomReportLegend();
             string command = Console.ReadLine();
-            command.ToLower();
-            switch (command)
+            switch (command.ToLower())
             {
                 case "pending": this.ReportGenerator.GetPendingOrdersXmlReport(@"..\..\..\Reports\PendingOrdersXmlReport.xml"); break;
                 case "order": this.ReportGenerator.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
@@ -101,8 +97,7 @@
         {
             renderer.PrintCustomReportLegend();
             string command = Console.ReadLine();
-            command.ToLower();
-            switch (command)
+            switch (command.ToLower())
             {
                 case "pending": this.ReportGenerator.GetPendingOrdersPdfReport(@"..\..\..\Reports\PendingOrdersPdfReport.xml"); break;
                 case "order": this.ReportGenerator.GetOrderForCompanyPdfReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
