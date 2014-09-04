@@ -104,11 +104,13 @@ namespace CoffeeCompany.UI.Client
         {
             bool result;
             var mySqlManager = new MySQLManager();
+            mySqlManager.ClearMySqlDb();
             result = mySqlManager.LoadAllReportsDataFromSQLServer();
             var sqLiteManager = new SQLiteManager();
             sqLiteManager.DeleteAllEntities("Discounts");
             var reportsEngine = new ReportsEngine();
             var discounts = reportsEngine.GetDiscountsInfo();
+
             foreach (var discount in discounts)
             {
                 result = sqLiteManager.CreateDiscountForCompany(discount.CompanyId, discount.TypeID);
