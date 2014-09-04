@@ -15,13 +15,14 @@
     {
         static void Main(string[] args)
         {
-            CommandParser parser = new CommandParser();
+            //CommandParser parser = new CommandParser();
 
-            parser.InitiateCommandMenu();
-            //var dataImport = new DataImport();
+            //parser.InitiateCommandMenu();
+
+            var dataImport = new DataImport();
             //dataImport.ImportFromXml();
-           // dataImport.ImportFromExcel();
-            //dataImport.ImportFromMongoDb();
+            dataImport.ImportFromMongoDb();
+            dataImport.ImportFromExcel();
 
             //var mySQLManager = new MySQLManager();
             //mySQLManager.AddReport(1 , "company1", "product1", "gosho", 2.00m, 45, 5000m);

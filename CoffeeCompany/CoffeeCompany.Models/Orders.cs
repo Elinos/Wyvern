@@ -25,7 +25,7 @@
         [Required]
         public int QuantityInKg { get; set; }
 
-        //[NotMapped]
+        [NotMapped]
         public decimal OrderTotalPrice { get; set; }
 
         [Required]
