@@ -25,7 +25,17 @@ namespace CoffeeCompany.UI.Client
 
         private void FromZipFileButton_Click(object sender, RoutedEventArgs e)
         {
-            dataImport.ImportFromExcel();
+            bool result = dataImport.ImportFromExcel();
+            if (result)
+            {
+                Result.Text = "Importing from Zip file has been successfully completed!";
+                Result.Foreground = Brushes.Green;
+            }
+            else
+            {
+                Result.Text = "Importing from Zip file failed!";
+                Result.Foreground = Brushes.Red;
+            }
         }
 
         private void ToExcelFileButton_Click(object sender, RoutedEventArgs e)
@@ -46,63 +56,118 @@ namespace CoffeeCompany.UI.Client
 
         private void FromMongoDBButton_Click(object sender, RoutedEventArgs e)
         {
-            dataImport.ImportFromMongoDb();
+            bool result = dataImport.ImportFromMongoDb();
+            if (result)
+            {
+                Result.Text = "Importing from MongoDB has been successfully completed!";
+                Result.Foreground = Brushes.Green;
+            }
+            else
+            {
+                Result.Text = "Importing from MongoDB failed!";
+                Result.Foreground = Brushes.Red;
+            }
         }
 
         private void ToPDFButton_Click(object sender, RoutedEventArgs e)
         {
             bool exportPendingOrders = PDFPendingCheckBox.IsChecked.Value;
             bool exportCompanyOrders = PDFCompanyCheckBox.IsChecked.Value;
+            bool result = false; 
             var companyName = PDFCompanyNameTB.Text.Trim();
             if (exportPendingOrders)
             {
-                reportGnerator.GetPendingOrdersPdfReport(@"..\..\..\..\Reports\pendingOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf");
+                result = reportGnerator.GetPendingOrdersPdfReport(@"..\..\..\..\Reports\pendingOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf");
             }
             if (exportCompanyOrders && companyName != "" & companyName != "Company Name")
             {
-                reportGnerator.GetOrderForCompanyPdfReport(companyName, @"..\..\..\..\Reports\companyOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf");
+                result = reportGnerator.GetOrderForCompanyPdfReport(companyName, @"..\..\..\..\Reports\companyOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf");
             }
             else
             {
                 Result.Text = "Enter Company Name!";
+                Result.Foreground = Brushes.Red;
+            }
+
+            if (result)
+            {
+                Result.Text = "Exporting to PDF has been successfully completed!";
+                Result.Foreground = Brushes.Green;
+            }
+            else
+            {
+                Result.Text = "Exporting to PDF failed!";
                 Result.Foreground = Brushes.Red;
             }
         }
 
         private void ToJSONButton_Click(object sender, RoutedEventArgs e)
         {
-            reportGnerator.GetJsonOrderInfoReport();
+            bool result = reportGnerator.GetJsonOrderInfoReport();
+            if (result)
+            {
+                Result.Text = "Generating JSON reports has been successfully completed!";
+                Result.Foreground = Brushes.Green;
+            }
+            else
+            {
+                Result.Text = "Generating JSON reports failed!";
+                Result.Foreground = Brushes.Red;
+            }
         }
 
         private void ToXMLButton_Click(object sender, RoutedEventArgs e)
         {
             bool exportPendingOrders = XMLPendingCheckBox.IsChecked.Value;
             bool exportCompanyOrders = XMLPendingCheckBox.IsChecked.Value;
+            bool result = false;
             var companyName = XMLCompanyNameTB.Text.Trim();
             if (exportPendingOrders)
             {
-                reportGnerator.GetPendingOrdersXmlReport(@"..\..\..\..\Reports\pendingOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml");
+                result = reportGnerator.GetPendingOrdersXmlReport(@"..\..\..\..\Reports\pendingOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml");
 
             }
             if (exportCompanyOrders && companyName != "" & companyName != "Company Name")
             {
-                reportGnerator.GetOrderForCompanyXmlReport(companyName, @"..\..\..\..\Reports\companyOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml");
+                result = reportGnerator.GetOrderForCompanyXmlReport(companyName, @"..\..\..\..\Reports\companyOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml");
             }
             else
             {
                 Result.Text = "Enter Company Name!";
                 Result.Foreground = Brushes.Red;
             }
+
+            if (result)
+            {
+                Result.Text = "Exporting to XML has been successfully completed!";
+                Result.Foreground = Brushes.Green;
+            }
+            else
+            {
+                Result.Text = "Exporting to XML failed!";
+                Result.Foreground = Brushes.Red;
+            }
         }
 
         private void FromXMLButton_Click(object sender, RoutedEventArgs e)
         {
-            dataImport.ImportFromXml();
+            bool result = dataImport.ImportFromXml();
+            if (result)
+            {
+                Result.Text = "Importing from XML has been successfully completed!";
+                Result.Foreground = Brushes.Green;
+            }
+            else
+            {
+                Result.Text = "Importing from XML failed!";
+                Result.Foreground = Brushes.Red;
+            }
+
         }
 
         private void ToMySQLButton_Click(object sender, RoutedEventArgs e)
         {
-            bool result;
+            bool result = false;
             var mySqlManager = new MySQLManager();
             mySqlManager.ClearMySqlDb();
             result = mySqlManager.LoadAllReportsDataFromSQLServer();
