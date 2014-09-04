@@ -34,7 +34,7 @@
         {
         }
 
-        public void ImportFromMongoDb(
+        public bool ImportFromMongoDb(
             string connectionString = DefaultMongoDbConnectionString,
             string dbName = DefaultMongoDbName)
         {
@@ -59,14 +59,17 @@
                 this.ImportCompanies(companies);
                 this.ImportProducts(products);
                 this.ImportEmployees(employees);
+
+                return true;
             }
             catch (MongoConnectionException e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
         }
 
-        public void ImportFromExcel(
+        public bool ImportFromExcel(
             string zipToUnpack = DefaultZipToUnpack,
             string unpackDirectory = DefaultUnpackDirectory)
         {
@@ -77,14 +80,17 @@
                 var orders = excelLoader.retrieveOrdersData();
 
                 ImportOrders(orders);
+
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
         }
 
-        public void ImportFromXml(
+        public bool ImportFromXml(
             string xmlFilePath = DefaultXMLDataFileName)
         {
             try
@@ -94,10 +100,13 @@
                 var orders = xmlLoader.retrieveOrdersData();
 
                 this.ImportOrders(orders);
+
+                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                return false;
             }
         }
 
