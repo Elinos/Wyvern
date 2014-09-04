@@ -39,8 +39,6 @@
             "\n" +
             "\nto load from XML file type *Xml*" +
             "\n" +
-            "\nto load to the SqlLIght server type *SqlLight*" +
-             "\n" +
             "\nto go back type *Back*" +
             "\n";
 
