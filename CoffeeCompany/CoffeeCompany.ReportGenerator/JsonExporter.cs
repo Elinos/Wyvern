@@ -7,7 +7,7 @@
 
     public class JsonExporter
     {
-        public const string PATH = @"..\..\..\Reports\Json_Reports\";
+        public const string PATH = @"..\..\..\..\Reports\Json_Reports\";
         public void ExportProductReport(OrderInfo orderInfo)
         {
             
