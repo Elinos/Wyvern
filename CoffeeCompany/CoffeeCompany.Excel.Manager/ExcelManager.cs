@@ -64,8 +64,8 @@ namespace CoffeeCompany.Excel.Manager
                 //Load Data
                 foreach (var report in reportsWithDiscounts)
                 {
-                    ws.Cells[currentRow, 1].Value = report.ProductName;
-                    ws.Cells[currentRow, 2].Value = report.CompanyName;
+                    ws.Cells[currentRow, 1].Value = report.CompanyName;
+                    ws.Cells[currentRow, 2].Value = report.ProductName;
                     ws.Cells[currentRow, 3].Value = report.Price;
                     ws.Cells[currentRow, 3].Style.Numberformat.Format = "0.00";
                     ws.Cells[currentRow, 4].Value = report.Quantity;
