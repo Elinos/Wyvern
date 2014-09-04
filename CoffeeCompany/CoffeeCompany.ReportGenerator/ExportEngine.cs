@@ -82,7 +82,7 @@
 
         public ICollection<DiscountInfo> GetDiscountsInfo()
         {
-            var discounts = this.Data.Database.SqlQuery<DiscountInfo>("SELECT c.ID, SUM(o.QuantityInKg) * p.PricePerKgInDollars AS [TotalSum] " +
+            var discounts = this.Data.Database.SqlQuery<DiscountInfo>("SELECT c.ID AS [CompanyId], SUM(o.QuantityInKg) * p.PricePerKgInDollars AS TotalSpending " +
                                                             "FROM ClientCompanies c, Products p, Orders o " +
                                                             "WHERE c.ID = o.ClientCompanyId AND " +
                                                             "p.ID = o.ProductId " +
