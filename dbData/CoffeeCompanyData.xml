@@ -51,4 +51,72 @@
 		<QuantityInKg>222</QuantityInKg>
 		<Status>2</Status>
 	</Order>
+	<Order>
+		<ClientCompany>
+			<Name>Coffee Wyvern Distributor I</Name>
+			<CountryOfOrigin>Bulgaria</CountryOfOrigin>
+		</ClientCompany>
+		<Product>
+			<Name>JavaScript Coffee</Name>
+			<PricePerKgInDollars>32.99</PricePerKgInDollars>
+			<TypeOfCoffee>1</TypeOfCoffee>
+		</Product>
+		<Employee>
+			<Username>adito</Username>
+			<Name>Adriana Dimanova</Name>
+		</Employee>
+		<QuantityInKg>700</QuantityInKg>
+		<Status>2</Status>	
+	</Order>
+	<Order>
+		<ClientCompany>
+			<Name>Coffee Wyvern Distributor II</Name>
+			<CountryOfOrigin>Bulgaria</CountryOfOrigin>
+		</ClientCompany>
+		<Product>
+			<Name>CoffeeScript</Name>
+			<PricePerKgInDollars>22.99</PricePerKgInDollars>
+			<TypeOfCoffee>2</TypeOfCoffee>
+		</Product>
+		<Employee>
+			<Username>kiro</Username>
+			<Name>Kiril Tsarnakliyski</Name>
+		</Employee>
+		<QuantityInKg>340</QuantityInKg>
+		<Status>2</Status>	
+	</Order>
+	<Order>
+		<ClientCompany>
+			<Name>Coffee Wyvern Distributor III</Name>
+			<CountryOfOrigin>Bulgaria</CountryOfOrigin>
+		</ClientCompany>
+		<Product>
+			<Name>Coffee Sharp</Name>
+			<PricePerKgInDollars>49.99</PricePerKgInDollars>
+			<TypeOfCoffee>2</TypeOfCoffee>
+		</Product>
+		<Employee>
+			<Username>iskra</Username>
+			<Name>Iskra Popova</Name>
+		</Employee>
+		<QuantityInKg>210</QuantityInKg>
+		<Status>2</Status>	
+	</Order>
+	<Order>
+		<ClientCompany>
+			<Name>Coffee Wyvern Distributor IV</Name>
+			<CountryOfOrigin>Bulgaria</CountryOfOrigin>
+		</ClientCompany>
+		<Product>
+			<Name>Coffee On Rails</Name>
+			<PricePerKgInDollars>49.99</PricePerKgInDollars>
+			<TypeOfCoffee>2</TypeOfCoffee>
+		</Product>
+		<Employee>
+			<Username>tl.nguyen</Username>
+			<Name>TL Nguyen</Name>
+		</Employee>
+		<QuantityInKg>255</QuantityInKg>
+		<Status>1</Status>	
+	</Order>
 </Orders>
