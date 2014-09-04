@@ -64,6 +64,10 @@
                     TotalRevenue = o.QuantityInKg * o.Product.PricePerKgInDollars
                 }).ToList();
 
+            if (pendingOrders == null || pendingOrders.Count == 0)
+            {
+                throw new ArgumentException("There are no pending orders in the database");
+            }
 
             var formattedProducts = new List<List<string>>();
 
@@ -82,7 +86,9 @@
 
         public ICollection<DiscountInfo> GetDiscountsInfo()
         {
-            var discounts = this.Data.Database.SqlQuery<DiscountInfo>("SELECT c.ID AS [CompanyId], SUM(o.QuantityInKg) * p.PricePerKgInDollars AS TotalSpending " +
+            var discounts = this.Data
+                                .Database
+                                .SqlQuery<DiscountInfo>("SELECT c.ID AS [CompanyId], SUM(o.QuantityInKg) * p.PricePerKgInDollars AS TotalSpending " +
                                                             "FROM ClientCompanies c, Products p, Orders o " +
                                                             "WHERE c.ID = o.ClientCompanyId AND " +
                                                             "p.ID = o.ProductId " +
@@ -103,7 +109,13 @@
                      ProductName = o.Product.Name,
                  }).ToList();
 
+            if (orders == null || orders.Count == 0)
+            {
+                throw new ArgumentException("Such company was not found in the database");
+            }
+
             var formattedOrderd = new List<List<string>>();
+
             for (int i = 0; i < orders.Count; i++)
             {
                 formattedOrderd.Add(new List<string>() {
