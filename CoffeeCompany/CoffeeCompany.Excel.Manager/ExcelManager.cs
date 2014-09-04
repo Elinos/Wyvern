@@ -13,25 +13,35 @@ namespace CoffeeCompany.Excel.Manager
 
     public class ExcelManager
     {
-        public void CreateExcelReport()
+        public bool CreateExcelReport()
         {
-            var mySQLManager = new MySQLManager();
-            var reports = mySQLManager.GetAllReports();
-            var sqliteManager = new SQLiteManager();
-            var discountInformations = sqliteManager.GetDiscountPercentagesPerCompany();
-            var reportsWithDiscounts = from r in reports
-                                       join di in discountInformations on r.CompanyID equals di.CompanyID
-                                       select new DiscountedReport
-                                       {
-                                           CompanyName = r.CompanyName,
-                                           ProductName = r.ProductName,
-                                           Price = r.Price * (decimal)(1 - (di.DiscountPercent / 100.00)),
-                                           Quantity = r.Quantity,
-                                           TotalRevenue = r.TotalRevenue * (decimal)(1 - (di.DiscountPercent / 100.00)),
-                                           TotalDiscount = r.TotalRevenue * (decimal)(di.DiscountPercent / 100.00)
-                                       };
-            var file = CreateDirAndFile();
-            WriteReportDataToFile(file, reportsWithDiscounts);
+            bool result;
+            try
+            {
+                var mySQLManager = new MySQLManager();
+                var reports = mySQLManager.GetAllReports();
+                var sqliteManager = new SQLiteManager();
+                var discountInformations = sqliteManager.GetDiscountPercentagesPerCompany();
+                var reportsWithDiscounts = from r in reports
+                                           join di in discountInformations on r.CompanyID equals di.CompanyID
+                                           select new DiscountedReport
+                                           {
+                                               CompanyName = r.CompanyName,
+                                               ProductName = r.ProductName,
+                                               Price = r.Price * (decimal)(1 - (di.DiscountPercent / 100.00)),
+                                               Quantity = r.Quantity,
+                                               TotalRevenue = r.TotalRevenue * (decimal)(1 - (di.DiscountPercent / 100.00)),
+                                               TotalDiscount = r.TotalRevenue * (decimal)(di.DiscountPercent / 100.00)
+                                           };
+                var file = CreateDirAndFile();
+                WriteReportDataToFile(file, reportsWithDiscounts);
+                result = true;
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            return result;
         }
 
         private void WriteReportDataToFile(FileInfo file, IEnumerable<DiscountedReport> reportsWithDiscounts)
@@ -77,15 +87,16 @@ namespace CoffeeCompany.Excel.Manager
 
                     currentRow++;
                 }
-
-                //Style Data Cells
-                using (var data = ws.Cells[2, 1, currentRow - 1, 6])
+                if (reportsWithDiscounts.Count() > 0)
                 {
-                    data.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-                    var border = data.Style.Border;
-                    border.Bottom.Style = border.Top.Style = border.Left.Style = border.Right.Style = ExcelBorderStyle.Thin;
+                    //Style Data Cells
+                    using (var data = ws.Cells[2, 1, currentRow - 1, 6])
+                    {
+                        data.Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
+                        var border = data.Style.Border;
+                        border.Bottom.Style = border.Top.Style = border.Left.Style = border.Right.Style = ExcelBorderStyle.Thin;
+                    }
                 }
-
                 ws.Column(1).AutoFit();
                 ws.Column(2).AutoFit();
                 ws.Column(3).AutoFit();

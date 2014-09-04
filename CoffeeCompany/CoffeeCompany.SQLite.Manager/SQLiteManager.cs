@@ -28,16 +28,26 @@ namespace CoffeeCompany.SQLite.Manager
             this.sqLiteDb.Database.ExecuteSqlCommand(deleteAllEntitiesCommand);
             this.sqLiteDb.SaveChanges();
         }
-        public void CreateDiscountForCompany(int companyID, int discountTypeID)
+        public bool CreateDiscountForCompany(int companyID, int discountTypeID)
         {
-            var discount = new Discount
+            bool result;
+            try
             {
-                CompanyId = companyID,
-                DiscountTypeID = discountTypeID
-            };
+                var discount = new Discount
+                    {
+                        CompanyId = companyID,
+                        DiscountTypeID = discountTypeID
+                    };
 
-            this.sqLiteDb.Discounts.Add(discount);
-            this.sqLiteDb.SaveChanges();
+                this.sqLiteDb.Discounts.Add(discount);
+                this.sqLiteDb.SaveChanges();
+                result = true;
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            return result;
         }
 
         public List<DiscountInformation> GetDiscountPercentagesPerCompany()

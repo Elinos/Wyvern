@@ -4,9 +4,9 @@ using System.Windows;
 using CoffeeCompany.Excel.Manager;
 using CoffeeCompany.Import;
 using CoffeeCompany.MySQL.Manager;
-using System.Data.SQLite;
-using CoffeeCompany.SQLite.Manager;
 using CoffeeCompany.ReportGenerator;
+using CoffeeCompany.SQLite.Manager;
+using System.Windows.Media;
 
 namespace CoffeeCompany.UI.Client
 {
@@ -30,7 +30,17 @@ namespace CoffeeCompany.UI.Client
         private void ToExcelFileButton_Click(object sender, RoutedEventArgs e)
         {
             var excelManager = new ExcelManager();
-            excelManager.CreateExcelReport();
+            bool result = excelManager.CreateExcelReport();
+            if (result)
+            {
+                Result.Text = "Generating Excel report has been successfully completed!";
+                Result.Foreground = Brushes.Green;
+            }
+            else
+            {
+                Result.Text = "Generating Excel report failed!";
+                Result.Foreground = Brushes.Red;
+            }
         }
 
         private void FromMongoDBButton_Click(object sender, RoutedEventArgs e)
@@ -60,14 +70,26 @@ namespace CoffeeCompany.UI.Client
 
         private void ToMySQLButton_Click(object sender, RoutedEventArgs e)
         {
+            bool result;
             var mySqlManager = new MySQLManager();
-            mySqlManager.LoadAllReportsDataFromSQLServer();
+            result = mySqlManager.LoadAllReportsDataFromSQLServer();
             var sqLiteManager = new SQLiteManager();
             var reportsEngine = new ReportsEngine();
             var discounts = reportsEngine.GetDiscountsInfo();
             foreach (var discount in discounts)
             {
-                sqLiteManager.CreateDiscountForCompany(discount.CompanyId, discount.TypeID);
+               result = sqLiteManager.CreateDiscountForCompany(discount.CompanyId, discount.TypeID);
+            }
+
+            if (result)
+            {
+                Result.Text = "Import to MySQL has been successfully completed!";
+                Result.Foreground = Brushes.Green;
+            }
+            else
+            {
+                Result.Text = "Import to MySQL failed!";
+                Result.Foreground = Brushes.Red;
             }
         }
     }
