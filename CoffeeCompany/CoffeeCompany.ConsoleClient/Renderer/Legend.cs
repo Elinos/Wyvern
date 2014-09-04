@@ -51,5 +51,7 @@
              "\n" +
             "\nto go back type *Back*"+
             "\n" ;
+
+        public const string Completed = "Transaction completed";
     }
 }

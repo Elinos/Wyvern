@@ -61,7 +61,8 @@
             {
                 if (file.EndsWith(".xlsx"))
                 {
-                    orders.AddRange(excelManager.ReadOrderExcelFile(file));
+                    var currentOrders = excelManager.ReadOrderExcelFile(file);
+                    orders.AddRange(currentOrders);
                 }
             }
 

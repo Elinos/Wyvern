@@ -46,6 +46,12 @@ namespace CoffeeCompany.ConsoleClient.Renderer
             Console.WriteLine("Invalid Command");
         }
 
+        public void CompletedMessage()
+        {
+            Console.Clear();
+            Console.WriteLine(Legend.Completed);
+        }
+
 
     }
 }

@@ -203,7 +203,7 @@ namespace CoffeeCompany.Excel.Manager
                         {
                             ExcelWorksheet currentWorksheet = workBook.Worksheets.First();
 
-                            for (var i = 2; i < currentWorksheet.Dimension.End.Row; i++)
+                            for (var i = 2; i < currentWorksheet.Dimension.End.Row + 1; i++)
                             {
                                 var product = new Product
                                     {
@@ -212,14 +212,20 @@ namespace CoffeeCompany.Excel.Manager
 
                                 var currentCompany = new ClientCompany
                                     {
-                                        Name = currentWorksheet.Cells[i, 1].Value.ToString(),
+                                        Name = currentWorksheet.Cells[i, 1].Value.ToString()
+                                    };
+
+                                var employee = new Employee
+                                    {
+                                        Username = currentWorksheet.Cells[i, 7].Value.ToString()
                                     };
 
                                 var currentOrder = new Order
                                 {
                                     ClientCompany = currentCompany,
                                     Product = product,
-                                    QuantityInKg = int.Parse(currentWorksheet.Cells[i, 4].Value.ToString())
+                                    QuantityInKg = int.Parse(currentWorksheet.Cells[i, 4].Value.ToString()),
+                                    Employee = employee
                                 };
 
                                 listOfData.Add(currentOrder);

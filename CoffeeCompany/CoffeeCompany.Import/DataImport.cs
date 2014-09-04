@@ -135,7 +135,14 @@
         {
             foreach (var employee in employees)
             {
-                var mergedEmployee = this.MergeWithExistingEmployees(employee);
+                bool isExist;
+
+                var mergedEmployee = this.MergeWithExistingEmployees(employee, out isExist);
+
+                if (isExist)
+                {
+                    continue;
+                }
 
                 this.context.Employees.Add(mergedEmployee);
             }
@@ -165,7 +172,7 @@
         private Order MergeWithExistingOrders(Order order, out bool isExist)
         {
             var mergedOrder = this.context.Orders.Where(o => o.ClientCompany.Name == order.ClientCompany.Name &&
-                                                    o.Employee.Username == order.Employee.Username &&
+                                                    o.Employee.Username.ToLower().Trim() == order.Employee.Username.ToLower().Trim() &&
                                                     o.Status == order.Status &&
                                                     o.QuantityInKg == order.QuantityInKg).FirstOrDefault();
             if (mergedOrder != null)
@@ -218,9 +225,27 @@
             return product;
         }
 
+        private Employee MergeWithExistingEmployees(Employee employee, out bool isExist)
+        {
+            var mergedEmployee = this.context.Employees
+                                    .Where(e => e.Username.ToLower().Trim() == employee.Username.ToLower().Trim())
+                                    .FirstOrDefault();
+
+            if (mergedEmployee != null)
+            {
+                isExist = true;
+                return mergedEmployee;
+            }
+
+            isExist = false;
+            return employee;
+        }
+
         private Employee MergeWithExistingEmployees(Employee employee)
         {
-            var mergedEmployee = this.context.Employees.Where(e => e.Username == employee.Username).FirstOrDefault();
+            var mergedEmployee = this.context.Employees
+                                    .Where(e => e.Username.ToLower().Trim() == employee.Username.ToLower().Trim())
+                                    .FirstOrDefault();
 
             if (mergedEmployee != null)
             {
