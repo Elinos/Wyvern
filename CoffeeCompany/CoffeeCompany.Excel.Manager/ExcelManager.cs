@@ -111,7 +111,7 @@ namespace CoffeeCompany.Excel.Manager
         private FileInfo CreateDirAndFile()
         {
             var fileName = "Report" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xlsx";
-            var outputDir = @"../../../../ExcelReports/";
+            var outputDir = @"../../../../Reports/ExcelReports/";
             Directory.CreateDirectory(outputDir);
             var file = new FileInfo(outputDir + fileName);
             return file;
