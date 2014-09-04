@@ -25,6 +25,8 @@
             "\n" +
             "\nto export Excel report type *Excel*"+
              "\n" +
+             "\nto export to MySQL server type *MySql*" +
+             "\n" +
             "\nto go back type *Back*" +
             "\n";
 
@@ -36,6 +38,8 @@
             "\nto load from MongoDB database type *Mongo*" +
             "\n" +
             "\nto load from XML file type *Xml*" +
+            "\n" +
+            "\nto load to the SqlLIght server type *SqlLight*" +
              "\n" +
             "\nto go back type *Back*" +
             "\n";
@@ -43,9 +47,9 @@
         public const string CustomReportLegend = 
             "Choose Report type" +
             "\n" +
-            "\nto export revenue report type  *Revenue*" +
+            "\nto export pending orders report type  *Pending*" +
             "\n" +
-            "\nto export order report type *Order*" +
+            "\nto export company order report type *Order*" +
              "\n" +
             "\nto go back type *Back*"+
             "\n" ;
