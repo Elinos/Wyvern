@@ -74,6 +74,7 @@
                 case "xml": this.DataImport.ImportFromXml(); break;
                 case "excel": this.DataImport.ImportFromExcel(); break;
                 case "mongo": this.DataImport.ImportFromMongoDb(); break;
+                case "sqllight": this.sqliteLoader.LoadData(); break;
                 case "back": InitiateCommandMenu(); break;
                 default: renderer.InvalidCommandMessage(); break;
 
