@@ -19,8 +19,9 @@ namespace CoffeeCompany.UI.Client
         {
             InitializeComponent();
         }
-        private DataImport dataImport = new DataImport();
 
+        private DataImport dataImport = new DataImport();
+        private ReportsEngine reportGnerator = new ReportsEngine();
 
         private void FromZipFileButton_Click(object sender, RoutedEventArgs e)
         {
@@ -50,17 +51,48 @@ namespace CoffeeCompany.UI.Client
 
         private void ToPDFButton_Click(object sender, RoutedEventArgs e)
         {
-
+            bool exportPendingOrders = PDFPendingCheckBox.IsChecked.Value;
+            bool exportCompanyOrders = PDFCompanyCheckBox.IsChecked.Value;
+            var companyName = PDFCompanyNameTB.Text;
+            if (exportPendingOrders)
+            {
+                reportGnerator.GetPendingOrdersPdfReport(@"..\..\Reports\pendingOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf");
+            }
+            if (exportCompanyOrders && companyName != "" & companyName != "Company Name")
+            {
+                reportGnerator.GetOrderForCompanyPdfReport(companyName, @"..\..\Reports\companyOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf");
+            }
+            else
+            {
+                Result.Text = "Enter Company Name!";
+                Result.Foreground = Brushes.Red;
+            }
         }
 
         private void ToJSONButton_Click(object sender, RoutedEventArgs e)
         {
-
+            reportGnerator.GetJsonOrderInfoReport();
         }
 
         private void ToXMLButton_Click(object sender, RoutedEventArgs e)
         {
+            bool exportPendingOrders = PDFPendingCheckBox.IsChecked.Value;
+            bool exportCompanyOrders = PDFCompanyCheckBox.IsChecked.Value;
+            var companyName = XMLCompanyNameTB.Text;
+            if (exportPendingOrders)
+            {
+                reportGnerator.GetPendingOrdersXmlReport(@"..\..\Reports\pendingOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml");
 
+            }
+            if (exportCompanyOrders && companyName != "" & companyName != "Company Name")
+            {
+                reportGnerator.GetOrderForCompanyXmlReport(companyName, @"..\..\Reports\companyOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml");
+            }
+            else
+            {
+                Result.Text = "Enter Company Name!";
+                Result.Foreground = Brushes.Red;
+            }
         }
 
         private void FromXMLButton_Click(object sender, RoutedEventArgs e)
@@ -74,11 +106,12 @@ namespace CoffeeCompany.UI.Client
             var mySqlManager = new MySQLManager();
             result = mySqlManager.LoadAllReportsDataFromSQLServer();
             var sqLiteManager = new SQLiteManager();
+            sqLiteManager.DeleteAllEntities("Discounts");
             var reportsEngine = new ReportsEngine();
             var discounts = reportsEngine.GetDiscountsInfo();
             foreach (var discount in discounts)
             {
-               result = sqLiteManager.CreateDiscountForCompany(discount.CompanyId, discount.TypeID);
+                result = sqLiteManager.CreateDiscountForCompany(discount.CompanyId, discount.TypeID);
             }
 
             if (result)
@@ -91,6 +124,15 @@ namespace CoffeeCompany.UI.Client
                 Result.Text = "Import to MySQL failed!";
                 Result.Foreground = Brushes.Red;
             }
+        }
+
+        private void PDFCompanyNameTB_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PDFCompanyNameTB.Text = "";
+        }
+        private void XMLCompanyNameTB_GotFocus(object sender, RoutedEventArgs e)
+        {
+            XMLCompanyNameTB.Text = "";
         }
     }
 }

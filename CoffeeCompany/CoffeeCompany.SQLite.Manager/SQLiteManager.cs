@@ -22,7 +22,7 @@ namespace CoffeeCompany.SQLite.Manager
             this.sqLiteDb.SaveChanges();
         }
 
-        private void DeleteAllEntities(string tableName)
+        public void DeleteAllEntities(string tableName)
         {
             var deleteAllEntitiesCommand = "DELETE FROM " + tableName + ";";
             this.sqLiteDb.Database.ExecuteSqlCommand(deleteAllEntitiesCommand);
