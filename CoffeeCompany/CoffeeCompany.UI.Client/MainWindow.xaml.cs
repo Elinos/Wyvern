@@ -53,14 +53,14 @@ namespace CoffeeCompany.UI.Client
         {
             bool exportPendingOrders = PDFPendingCheckBox.IsChecked.Value;
             bool exportCompanyOrders = PDFCompanyCheckBox.IsChecked.Value;
-            var companyName = PDFCompanyNameTB.Text;
+            var companyName = PDFCompanyNameTB.Text.Trim();
             if (exportPendingOrders)
             {
-                reportGnerator.GetPendingOrdersPdfReport(@"..\..\Reports\pendingOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf");
+                reportGnerator.GetPendingOrdersPdfReport(@"..\..\..\Reports\pendingOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf");
             }
             if (exportCompanyOrders && companyName != "" & companyName != "Company Name")
             {
-                reportGnerator.GetOrderForCompanyPdfReport(companyName, @"..\..\Reports\companyOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf");
+                reportGnerator.GetOrderForCompanyPdfReport(companyName, @"..\..\..\Reports\companyOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf");
             }
             else
             {
@@ -78,15 +78,15 @@ namespace CoffeeCompany.UI.Client
         {
             bool exportPendingOrders = PDFPendingCheckBox.IsChecked.Value;
             bool exportCompanyOrders = PDFCompanyCheckBox.IsChecked.Value;
-            var companyName = XMLCompanyNameTB.Text;
+            var companyName = XMLCompanyNameTB.Text.Trim();
             if (exportPendingOrders)
             {
-                reportGnerator.GetPendingOrdersXmlReport(@"..\..\Reports\pendingOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml");
+                reportGnerator.GetPendingOrdersXmlReport(@"..\..\..\Reports\pendingOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml");
 
             }
             if (exportCompanyOrders && companyName != "" & companyName != "Company Name")
             {
-                reportGnerator.GetOrderForCompanyXmlReport(companyName, @"..\..\Reports\companyOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml");
+                reportGnerator.GetOrderForCompanyXmlReport(companyName, @"..\..\..\Reports\companyOrdersReport" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".xml");
             }
             else
             {
