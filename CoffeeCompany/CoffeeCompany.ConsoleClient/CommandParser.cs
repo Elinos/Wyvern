@@ -33,8 +33,7 @@
         {
             renderer.PrintLegend();
             string command = Console.ReadLine();
-            command.ToLower();
-            switch (command)
+            switch (command.ToLower())
             {
                 case "export": ParseExportCommand(); break;
                 case "load": ParseLoadCommand(); break;
@@ -49,13 +48,36 @@
             this.ReportGenerator = new ReportsEngine(Data);
             this.ExcelManager = new ExcelManager();
             string command = Console.ReadLine();
-            command.ToLower();
-            switch (command)
+            switch (command.ToLower())
             {
-                case "json": this.ReportGenerator.GetJsonOrderInfoReport(); break;
-                case "xml": ParseXmlExport(); break;
-                case "excel": this.ExcelManager.CreateExcelReport(); break;
-                case "mysql": MySqlManager.LoadAllReportsDataFromSQLServer(); break;
+                case "json":
+                    {
+                        this.ReportGenerator.GetJsonOrderInfoReport();
+                        this.renderer.CompletedMessage();
+                        ParseExportCommand();
+                        break;
+                    }
+                case "xml":
+                    {
+                        ParseXmlExport();
+                        this.renderer.CompletedMessage();
+                        ParseExportCommand();
+                        break;
+                    }
+                case "excel":
+                    {
+                        this.ExcelManager.CreateExcelReport();
+                        this.renderer.CompletedMessage();
+                        ParseExportCommand();
+                        break;
+                    }
+                case "mysql":
+                    {
+                        MySqlManager.LoadAllReportsDataFromSQLServer();
+                        this.renderer.CompletedMessage();
+                        ParseExportCommand();
+                        break;
+                    }
                 case "back": InitiateCommandMenu(); break;
                 default: renderer.InvalidCommandMessage(); break;
 
@@ -68,13 +90,34 @@
             renderer.PrintLoadLegend();
             this.DataImport = new DataImport();
             string command = Console.ReadLine();
-            command.ToLower();
-            switch (command)
+            switch (command.ToLower())
             {
-                case "xml": this.DataImport.ImportFromXml(); break;
-                case "excel": this.DataImport.ImportFromExcel(); break;
-                case "mongo": this.DataImport.ImportFromMongoDb(); break;
-                case "back": InitiateCommandMenu(); break;
+                case "xml": { 
+                    this.DataImport.ImportFromXml();
+                    this.renderer.CompletedMessage();
+                    ParseLoadCommand();
+                    break; }
+                case "excel":
+                    {
+                        this.DataImport.ImportFromExcel();
+                        this.renderer.CompletedMessage();
+                        ParseLoadCommand();
+                        break;
+                    }
+                case "mongo":
+                    {
+                        this.DataImport.ImportFromMongoDb();
+                        this.renderer.CompletedMessage();
+                        ParseLoadCommand();
+                        break;
+                    }
+                case "back":
+                    {
+                        InitiateCommandMenu();
+                        this.renderer.CompletedMessage();
+                        ParseLoadCommand();
+                        break;
+                    }
                 default: renderer.InvalidCommandMessage(); break;
 
             }
@@ -85,8 +128,7 @@
         {
             renderer.PrintCustomReportLegend();
             string command = Console.ReadLine();
-            command.ToLower();
-            switch (command)
+            switch (command.ToLower())
             {
                 case "pending": this.ReportGenerator.GetPendingOrdersXmlReport(@"..\..\..\Reports\PendingOrdersXmlReport.xml"); break;
                 case "order": this.ReportGenerator.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
@@ -101,8 +143,7 @@
         {
             renderer.PrintCustomReportLegend();
             string command = Console.ReadLine();
-            command.ToLower();
-            switch (command)
+            switch (command.ToLower())
             {
                 case "pending": this.ReportGenerator.GetPendingOrdersPdfReport(@"..\..\..\Reports\PendingOrdersPdfReport.xml"); break;
                 case "order": this.ReportGenerator.GetOrderForCompanyPdfReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
@@ -112,6 +153,8 @@
             }
 
         }
+
+        
 
         //var dataImport = new DataImport();
            // dataImport.ImportFromXml();
