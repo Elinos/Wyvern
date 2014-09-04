@@ -50,10 +50,34 @@
             string command = Console.ReadLine();
             switch (command.ToLower())
             {
-                case "json": this.ReportGenerator.GetJsonOrderInfoReport(); break;
-                case "xml": ParseXmlExport(); break;
-                case "excel": this.ExcelManager.CreateExcelReport(); break;
-                case "mysql": MySqlManager.LoadAllReportsDataFromSQLServer(); break;
+                case "json":
+                    {
+                        this.ReportGenerator.GetJsonOrderInfoReport();
+                        this.renderer.CompletedMessage();
+                        ParseExportCommand();
+                        break;
+                    }
+                case "xml":
+                    {
+                        ParseXmlExport();
+                        this.renderer.CompletedMessage();
+                        ParseExportCommand();
+                        break;
+                    }
+                case "excel":
+                    {
+                        this.ExcelManager.CreateExcelReport();
+                        this.renderer.CompletedMessage();
+                        ParseExportCommand();
+                        break;
+                    }
+                case "mysql":
+                    {
+                        MySqlManager.LoadAllReportsDataFromSQLServer();
+                        this.renderer.CompletedMessage();
+                        ParseExportCommand();
+                        break;
+                    }
                 case "back": InitiateCommandMenu(); break;
                 default: renderer.InvalidCommandMessage(); break;
 
@@ -68,10 +92,32 @@
             string command = Console.ReadLine();
             switch (command.ToLower())
             {
-                case "xml": this.DataImport.ImportFromXml(); break;
-                case "excel": this.DataImport.ImportFromExcel(); break;
-                case "mongo": this.DataImport.ImportFromMongoDb(); break;
-                case "back": InitiateCommandMenu(); break;
+                case "xml": { 
+                    this.DataImport.ImportFromXml();
+                    this.renderer.CompletedMessage();
+                    ParseLoadCommand();
+                    break; }
+                case "excel":
+                    {
+                        this.DataImport.ImportFromExcel();
+                        this.renderer.CompletedMessage();
+                        ParseLoadCommand();
+                        break;
+                    }
+                case "mongo":
+                    {
+                        this.DataImport.ImportFromMongoDb();
+                        this.renderer.CompletedMessage();
+                        ParseLoadCommand();
+                        break;
+                    }
+                case "back":
+                    {
+                        InitiateCommandMenu();
+                        this.renderer.CompletedMessage();
+                        ParseLoadCommand();
+                        break;
+                    }
                 default: renderer.InvalidCommandMessage(); break;
 
             }
@@ -107,6 +153,8 @@
             }
 
         }
+
+        
 
         //var dataImport = new DataImport();
            // dataImport.ImportFromXml();
