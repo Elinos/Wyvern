@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DiscountInfo.cs" />
-    <Compile Include="DiscountType.cs" />
     <Compile Include="ExportEngine.cs" />
     <Compile Include="JsonExporter.cs" />
     <Compile Include="OrderInfo.cs" />

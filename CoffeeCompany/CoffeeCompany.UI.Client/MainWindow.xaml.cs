@@ -4,6 +4,9 @@ using System.Windows;
 using CoffeeCompany.Excel.Manager;
 using CoffeeCompany.Import;
 using CoffeeCompany.MySQL.Manager;
+using System.Data.SQLite;
+using CoffeeCompany.SQLite.Manager;
+using CoffeeCompany.ReportGenerator;
 
 namespace CoffeeCompany.UI.Client
 {
@@ -59,6 +62,13 @@ namespace CoffeeCompany.UI.Client
         {
             var mySqlManager = new MySQLManager();
             mySqlManager.LoadAllReportsDataFromSQLServer();
+            var sqLiteManager = new SQLiteManager();
+            var reportsEngine = new ReportsEngine();
+            var discounts = reportsEngine.GetDiscountsInfo();
+            foreach (var discount in discounts)
+            {
+                sqLiteManager.CreateDiscountForCompany(discount.CompanyId, discount.TypeID);
+            }
         }
     }
 }

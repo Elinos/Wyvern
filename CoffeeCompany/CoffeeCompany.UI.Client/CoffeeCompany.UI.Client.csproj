@@ -132,6 +132,14 @@
       <Project>{19924908-d38d-4d3d-bff5-735939b995a5}</Project>
       <Name>CoffeeCompany.MySQL.Manager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.ReportGenerator\CoffeeCompany.ReportGenerator.csproj">
+      <Project>{c2c1b00a-b19f-4862-bc3c-c56685421b90}</Project>
+      <Name>CoffeeCompany.ReportGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoffeeCompany.SQLite.Manager\CoffeeCompany.SQLite.Manager.csproj">
+      <Project>{3e7583c6-3b99-4aad-83ff-f860e949b3ba}</Project>
+      <Name>CoffeeCompany.SQLite.Manager</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="x64\SQLite.Interop.dll">
