@@ -144,7 +144,7 @@
             this.ExportPdf.GetPDF(products, title, cellsTitles, path);
         }
 
-        public void GetOrderForCompanyXmlReportd(string name, string path)
+        public void GetOrderForCompanyXmlReport(string name, string path)
         {
             var products = GetOrdersForCompany(name);
             var title = string.Format("Orders' shipment details for company \"{0}\"", name);

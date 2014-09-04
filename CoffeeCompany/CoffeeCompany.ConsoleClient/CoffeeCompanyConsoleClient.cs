@@ -15,9 +15,9 @@
     {
         static void Main(string[] args)
         {
-            //CommandParser parser = new CommandParser();
+            CommandParser parser = new CommandParser();
 
-            //parser.InitiateCommandMenu();
+            parser.InitiateCommandMenu();
             //var dataImport = new DataImport();
             //dataImport.ImportFromXml();
            // dataImport.ImportFromExcel();
@@ -25,10 +25,10 @@
 
             //var mySQLManager = new MySQLManager();
             //mySQLManager.AddReport(1 , "company1", "product1", "gosho", 2.00m, 45, 5000m);
-            var sqliteManager = new SQLiteManager();
-            sqliteManager.LoadData();
-            var excelManager = new ExcelManager();
-            excelManager.CreateExcelReport();
+            // var sqliteManager = new SQLiteManager();
+            //sqliteManager.LoadData();
+            //var excelManager = new ExcelManager();
+           // excelManager.CreateExcelReport();
 
             //var data = new CoffeeCompanyData();
             //var reporter = new ReportsEngine(data);

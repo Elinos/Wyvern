@@ -54,8 +54,8 @@
             {
                 case "json": this.ReportGenerator.GetJsonOrderInfoReport(); break;
                 case "xml": ParseXmlExport(); break;
-                case "pdf": ParsePdfExport(); break;
                 case "excel": this.ExcelManager.CreateExcelReport(); break;
+                case "mysql": MySqlManager.LoadAllReportsDataFromSQLServer(); break;
                 case "back": InitiateCommandMenu(); break;
                 default: renderer.InvalidCommandMessage(); break;
 
@@ -88,8 +88,8 @@
             command.ToLower();
             switch (command)
             {
-                //case "revenue": this.ReportGenerator.GetTotalRevenuesXmlReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
-                //case "order": this.ReportGenerator.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
+                case "pending": this.ReportGenerator.GetPendingOrdersXmlReport(@"..\..\..\Reports\PendingOrdersXmlReport.xml"); break;
+                case "order": this.ReportGenerator.GetOrderForCompanyXmlReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
                 case "back": ParseExportCommand(); break;
                 default: renderer.InvalidCommandMessage(); break;
 
@@ -104,7 +104,7 @@
             command.ToLower();
             switch (command)
             {
-                //case "revenue": this.ReportGenerator.GetTotalRevenuesPdfReports(@"..\..\..\Reports\TotalRevenuePdfReport.xml"); break;
+                case "pending": this.ReportGenerator.GetPendingOrdersPdfReport(@"..\..\..\Reports\PendingOrdersPdfReport.xml"); break;
                 case "order": this.ReportGenerator.GetOrderForCompanyPdfReport("Coffee King", @"..\..\..\Reports\CompanyOrdersPdfReport.xml"); break;
                 case "back": ParseExportCommand(); break;
                 default: renderer.InvalidCommandMessage(); break;

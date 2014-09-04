@@ -43,9 +43,9 @@
         public const string CustomReportLegend = 
             "Choose Report type" +
             "\n" +
-            "\nto export revenue report type  *Revenue*" +
+            "\nto export pending orders report type  *Pending*" +
             "\n" +
-            "\nto export order report type *Order*" +
+            "\nto export company order report type *Order*" +
              "\n" +
             "\nto go back type *Back*"+
             "\n" ;
