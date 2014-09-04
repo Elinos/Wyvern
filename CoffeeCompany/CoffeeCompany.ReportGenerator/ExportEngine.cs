@@ -129,46 +129,97 @@
             return formattedOrderd;
         }
 
-        public void GetPendingOrdersPdfReport(string path)
+        public bool GetPendingOrdersPdfReport(string path)
         {
-            var products = GetPendingOrdersReport();
-            var title = "Pending Orders Report";
-            var cellsTitles = new List<string> { "Order ID", "Product Name", "Company name", "Total Revenue" };
+            try
+            {
+                var products = GetPendingOrdersReport();
+                var title = "Pending Orders Report";
+                var cellsTitles = new List<string> { "Order ID", "Product Name", "Company name", "Total Revenue" };
 
-            this.ExportPdf.GetPDF(products, title, cellsTitles, path);
+                this.ExportPdf.GetPDF(products, title, cellsTitles, path);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+
+                return false;
+            }
         }
 
-        public void GetPendingOrdersXmlReport(string path)
+        public bool GetPendingOrdersXmlReport(string path)
         {
-            var products = GetPendingOrdersReport();
-            var title = "Pending Orders Report";
-            var cellsTitles = new List<string> { "Order ID", "Product Name", "Company name", "Total Revenue" };
+            try
+            {
+                var products = GetPendingOrdersReport();
+                var title = "Pending Orders Report";
+                var cellsTitles = new List<string> { "Order ID", "Product Name", "Company name", "Total Revenue" };
 
-            this.ExportXml.ExportDocument(products, title, cellsTitles, path);
+                this.ExportXml.ExportDocument(products, title, cellsTitles, path);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
 
-        public void GetOrderForCompanyPdfReport(string name, string path)
+        public bool GetOrderForCompanyPdfReport(string name, string path)
         {
-            var products = GetOrdersForCompany(name);
-            var title = string.Format("Orders' shipment details for company \"{0}\"", name);
-            var cellsTitles = new List<string> { "Order ID", "Quantity in kg", "Status", "Product Name"};
+            try
+            {
+                var products = GetOrdersForCompany(name);
+                var title = string.Format("Orders' shipment details for company \"{0}\"", name);
+                var cellsTitles = new List<string> { "Order ID", "Quantity in kg", "Status", "Product Name" };
 
-            this.ExportPdf.GetPDF(products, title, cellsTitles, path);
+                this.ExportPdf.GetPDF(products, title, cellsTitles, path);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
 
-        public void GetOrderForCompanyXmlReport(string name, string path)
+        public bool GetOrderForCompanyXmlReport(string name, string path)
         {
-            var products = GetOrdersForCompany(name);
-            var title = string.Format("Orders' shipment details for company \"{0}\"", name);
-            var cellsTitles = new List<string> { "Order ID", "Quantoty in kg", "Status", "Product Name" };
+            try
+            {
+                var products = GetOrdersForCompany(name);
+                var title = string.Format("Orders' shipment details for company \"{0}\"", name);
+                var cellsTitles = new List<string> { "Order ID", "Quantoty in kg", "Status", "Product Name" };
 
-            this.ExportXml.ExportDocument(products, title, cellsTitles, path);
+                this.ExportXml.ExportDocument(products, title, cellsTitles, path);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
 
-        public void GetJsonOrderInfoReport() 
+        public bool GetJsonOrderInfoReport() 
         {
-            var orders = GetOrderInfo();
-            ExportJson.ExportAllProductReports(orders);       
+            try
+            {
+                var orders = GetOrderInfo();
+                ExportJson.ExportAllProductReports(orders);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
     }
 }
