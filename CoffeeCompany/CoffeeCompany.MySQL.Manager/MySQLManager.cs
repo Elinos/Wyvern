@@ -43,6 +43,11 @@ namespace CoffeeCompany.MySQL.Manager
             return reports;
         }
 
+        public void ClearMySqlDb()
+        {
+            this.mySQLDb.Database.ExecuteSqlCommand("TRUNCATE TABLE reports");
+        }
+
         public bool LoadAllReportsDataFromSQLServer()
         {
             try
